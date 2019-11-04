@@ -27,5 +27,6 @@ Looking for more help?
 .. _Crate.io: http://crate.io/
 .. _CrateDB: https://crate.io/products/cratedb/
 .. _developer docs: DEVELOP.rst
+.. _live docs: https://crate.io/docs/crate/tutorials/en/latest/
 .. _Tutorials: https://crate.io/docs/crate/tutorials/en/latest/
 .. _support channels: https://crate.io/support/
