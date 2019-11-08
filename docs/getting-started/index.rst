@@ -22,7 +22,3 @@ This is a step-by-step tutorial that will show you how to:
    install-run/index
    first-use/index
    start-building/index
-
-.. _CrateDB Reference: https://crate.io/docs/crate/reference/en/latest/
-.. _CrateDB Guide: https://crate.io/docs/crate/guide/en/latest/
-.. _hosted on GitHub: https://github.com/crate/getting-started
