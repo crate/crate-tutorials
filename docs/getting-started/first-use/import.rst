@@ -1,0 +1,80 @@
+.. _import-test-data:
+
+================
+Import test data
+================
+
+Before you can really experiment with CrateDB, you need some data to play
+around with.
+
+In this document, we show you how to import test data.
+
+.. NOTE::
+
+   This document assumes that you have CrateDB :ref:`installed and running
+   <install-run>`.
+
+.. rubric:: Table of contents
+
+.. contents::
+   :local:
+
+.. _admin-ui:
+
+Introducing: The CrateDB Admin UI
+=================================
+
+CrateDB ships with a web administration user interface (UI), or `admin UI`_ for
+short.
+
+The CrateDB admin UI runs on every CrateDB node, and you can use it to inspect
+and interact with the whole CrateDB cluster in a number of ways.
+
+We will use the admin UI throughout this section.
+
+Access the admin UI in your browser using a URL like this::
+
+  http://localhost:4200/
+
+If CrateDB is not running locally, replace ``localhost`` with the hostname
+CrateDB is running on.
+
+You should see something like this:
+
+.. image:: ../../_assets/img/getting-started/admin-ui.png
+
+.. _import:
+
+Import some tweets
+==================
+
+In the admin UI, select the *Help* tab (question mark icon) from the left-hand
+navigation menu.
+
+You should see something like this:
+
+.. image:: ../../_assets/img/getting-started/admin-ui-help.png
+
+Select *IMPORT TWEETS FOR TESTING* and follow the instructions to authenticate
+your Twitter account.
+
+.. TIP::
+
+   Don't worry. This isn’t going to post anything on your behalf. All this does
+   is import a selection of recent public tweets on Twitter.
+
+Leave this running and stop it when you have enough tweets. Aim for at least
+few thousand.
+
+When you're done, select the *Tables* icon from the left-hand navigation.
+
+You should see something like this:
+
+.. image:: ../../_assets/img/getting-started/admin-ui-tweets.png
+
+Next steps
+==========
+
+Now you have some test data, :ref:`learn how to query it <query-test-data>`.
+
+.. _admin UI: https://crate.io/docs/clients/admin-ui/en/latest/
