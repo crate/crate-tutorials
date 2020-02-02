@@ -14,4 +14,3 @@ master_doc = 'index'
 site_url = 'https://crate.io/docs/crate/tutorials/en/latest/'
 
 extensions = ['sphinx_sitemap']
-

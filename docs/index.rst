@@ -23,6 +23,7 @@ massive amounts of machine data in real-time.
     :titlesonly:
 
     getting-started/index
+    generate-time-series/index
 
 
 .. _GitHub: https://github.com/crate/cloud-tutorials
