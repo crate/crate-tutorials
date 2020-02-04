@@ -4,18 +4,18 @@ Downscaling
 
 In this tutorial we:
 
-1. Create a Vanilla cluster.
-2. Downscale it!, using replicas.
-3. Downscale it!, using snapshots.
+- Create a Vanilla cluster.
+- Downscale it, using replicas.
+- Downscale it, using snapshots.
 
 
 Starting a Vanilla cluster
 --------------------------
 
 A Vanilla cluster is a three node cluster that runs on a single host. Each of the
-nodes share the file system and operating system scheduler of the host, to form a cluster.
-This rig provides parallel processing power on large scale data, when you only have one
-host, and this comes at the cost increased latency in writes.
+nodes share the file system and operating system scheduler of the host, to form a
+cluster. This rig provides parallel processing power on large scale data, when you
+only have one host, and this comes at the cost increased latency in writes.
 
 Proceed:
 
@@ -30,16 +30,19 @@ Proceed:
    - *./gradlew clean* (if you already had the clone)
    - *./gradlew distTar*.
 
-3. Create a folder somewhere, I suggest *~/workspace/DATA*. It should contain this structure:
+3. Create a folder somewhere, I suggest *~/workspace/DATA*. It should contain this
+   structure:
 
    - *dist*: **CrateDB** distributions.
-   - *conf*: **CrateDB** configurations, each node in the cluster has a folder in there, with
-     the *crate.yml* and *log4j2.properties* configuration files in it.
-   - *data*: **CrateDB** through configuration the nodes will log under *data/nodes/[0,1,2]*
+   - *conf*: **CrateDB** configurations, each node in the cluster has a folder
+     in there, with the *crate.yml* and *log4j2.properties* configuration files
+     in it.
+   - *data*: **CrateDB** through configuration the nodes will log under
+     *data/nodes/[0,1,2]*
    - *repo*: **CrateDB** repo, for snapshotting.
    - *startnode*: script to start **CrateDB** with a given config.
-   - *crate*: a symlink to a particular distribution in the *dist* folder (not the **CrateDB**,
-     executable script).
+   - *crate*: a symlink to a particular distribution in the *dist* folder (not
+     the **CrateDB**, executable script).
 
 4. *cp crate/app/build/distributions/crate-X.Y.Z-SNAPSHOT-<hash>.tar.xz ~/workspace/DATA/dist*
 
@@ -55,7 +58,7 @@ Proceed:
    - *rm -f crate*
    - *ln -s dist/crate-X.Y.Z crate*
 
-6.- Now we need the configuration for the Vanilla cluster:
+6.- Now you need the configuration for the Vanilla cluster:
 
     - *cat ~/workspace/DATA/conf/n1/crate.yml*
 
@@ -192,14 +195,13 @@ Proceed:
    - *./startnode n2*
    - *./startnode n3*
 
-   Which will form the Vanilla cluster.
+   Which will form the Vanilla cluster, electing a leader. You can interact
+   with the Vanilla cluster by opening a browser and pointing it to
+   *http://localhost:4200*.
 
 
 Adding some data to the cluster
 -------------------------------
-
-You can interact with the Vanilla cluster by opening a browser and pointing it to
-*http://localhost:4200*.
 
 Proceed:
 
@@ -213,7 +215,8 @@ Proceed:
                        status_code short NOT NULL,
                        object_size long NOT NULL);
 
-2. Produce a CSV file with some data for the logs table. You could use a script like:
+2. Produce a CSV file with some data for the logs table. You could use a *data.py*
+   script similar to:
 
   ::
 
@@ -261,7 +264,7 @@ Proceed:
         for ts in timestamp_range("2019-01-01T00:00:00Z", "2019-01-01T01:00:00Z", '%Y-%m-%dT%H:%M:%SZ'):
             print(",".join([ts, rand_ip(), rand_request(), rand_status_code(), rand_object_size()]))
 
-  to produce 3600 rows:
+  to produce 3600 rows (1 hour's worth of logs @1Hz):
 
   ::
 
@@ -271,20 +274,99 @@ Proceed:
 
    ::
 
-     COPY logs FROM 'file:///...../logs.csv';
+     COPY logs FROM 'file:///..<path>../logs.csv';
      REFRESH TABLE logs;
      SELECT count(*) FROM logs;
 
-     The three nodes would have performed the copy, so we are expecting to see 3600 * 3 rows, with "repeated"
-     data. Because we did not define a primary key, **CrateDB** created the default *_id*, which is a
-     monotonic unique long.
+   The three nodes perform the copy, so we are expecting to see 3600 * 3 rows, with
+   "repeated" data. Because we did not define a primary key, **CrateDB** created the
+   default *_id* primary key, which is a unique hash (varchar), so in effect, because
+   each row has a unique id, they are all inserted, and the net effect is that you
+   think there are duplicates.
+
+   ::
+
+     select _id, * from logs order by log_time limit 10000;
+
+
+Exploring the Data
+------------------
+
+Using the `Admin UI`_, shards view on the left:
+
+.. image:: imgs/shards-view.png
+
+We can see the three nodes, each having a number of shards, specifically:
+
+    +-------+---+---+---+---+---+---+
+    | Shard | 0 | 1 | 2 | 3 | 4 | 5 |
+    +=======+===+===+===+===+===+===+
+    |  n1   | . | . | . |   | . |   |
+    +-------+---+---+---+---+---+---+
+    |  n2   | . | . |   | . |   | . |
+    +-------+---+---+---+---+---+---+
+    |  n3   |   |   | . | . | . | . |
+    +-------+---+---+---+---+---+---+
+
+Thus in this cluster setup, one node can crash, yet the data in the cluster
+will still remain fully available because any two nodes have access to all
+the shards, when they work together to fulfill query requests. A SQL table
+is a composite of shards, six in our case. When a query is executed, the
+planner will define steps for accessing all the shards of the table.
+
+Having a look at the setup for table *logs*:
+
+::
+
+  SHOW CREATE TABLE logs;
+
+  CREATE TABLE IF NOT EXISTS "doc"."logs" (
+     "log_time" TIMESTAMP WITH TIME ZONE NOT NULL,
+     "client_ip" IP NOT NULL,
+     "request" TEXT NOT NULL,
+     "status_code" SMALLINT NOT NULL,
+     "object_size" BIGINT NOT NULL
+  )
+  CLUSTERED INTO 6 SHARDS
+  WITH (
+     ...
+     number_of_replicas = '0-1',
+     ...
+  )
+
+We have a default min number of replicas of zero, and a max of one for each
+of our six shards. A replica is simply a copy or a shard.
 
 
 Downscaling (by means of replicas)
 ----------------------------------
 
+Downscaling by means of replicas is achieved by making sure the surviving nodes
+of the cluster have access to all the shards, even when one node is missing.
 
+1.- We need to ensure that the number of replicas matches the number of nodes:
 
+::
+
+  ALTER TABLE logs SET (number_of_replicas = '1-all');
+
+In the `Admin UI`_, we can follow the progress of the replication, and when it
+is completed we can take two nodes down.
+
+At this point we just need to adjust the configuration of the surviving node,
+and then restart it:
+
+::
+
+  *cat ~/workspace/DATA/conf/n2/crate.yml*
+
+      ::
+
+        node.name: n2
+        stats.service.interval: 0
+        network.host: _local_
+        http.cors.enabled: true
+        http.cors.allow-origin: "*"
 
 
 Downscaling (by means of snapshots)
@@ -292,3 +374,4 @@ Downscaling (by means of snapshots)
 
 
 .. _GitHub: https://github.com/crate/crate.git
+.. _`Admin UI`: http://localhost:4200
