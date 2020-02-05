@@ -16,7 +16,7 @@ if [ ! -d $path_conf ]; then
     exit 1
 fi
 path_home=$(pwd)/crate
-path_data=$(pwd)/data
+path_data=$(pwd)/data/$node_name
 path_repo=$(pwd)/repo
 
 if [ -z "$CRATE_HEAP_SIZE" ]; then

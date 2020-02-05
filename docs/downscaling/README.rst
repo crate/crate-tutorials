@@ -5,7 +5,8 @@ Downscaling
 In this tutorial we:
 
 - Create a Vanilla cluster.
-- Downscale it, using replicas.
+- Add some data to it.
+- Downscale it to a single node cluster.
 
 
 Starting a Vanilla cluster
@@ -27,11 +28,13 @@ Proceed:
      git repository.
    - *conf*: **CrateDB** configurations, each node in the cluster has a folder
      in there, with the *crate.yml* and *log4j2.properties*.
-   - *data*: **CrateDB** the nodes will persist their data under *data/nodes/[0,1,2]*.
+   - *data*: **CrateDB** the nodes will persist their data under *data/ni/nodes/0*.
    - *repo*: **CrateDB** repo, for snapshotting.
    - *start-node*: script to start **CrateDB** with a given configuration.
    - *detach-node*: script to detach a node from the cluster.
-   - *bootstrap-node*: script to bootstrap a node to form a new cluster.
+   - *bootstrap-node*: script to bootstrap a node to form a new cluster. Which
+     means, recreating its cluster state so that it may be started on its own
+     forming a new cluster that has access to the data in the previous.
    - *data.py*: script produce dummy data.
 
 2. Run *./update-dist*
@@ -162,17 +165,23 @@ In the `Admin UI`_, we can follow the progress of replication.
 2. After replication is completed, we can take down all the nodes in the cluster
    (*ctrl^C* in the terminal).
 
-3. Run *./detach-node ni* to detach **n1**, **n2** and **n3** from the cluster.
+3. Run *./detach-node ni*, where i in [2,3], to detach **n2** and **n3** from the cluster.
+   We will let **n1** form a new cluster all by itself, with access to the original data.
 
-4. Change the configuration *crate.yml* of the node you want to be your single
-   node **CrateDB** cluster to:
+4. Change **n1**'s configuration *crate.yml*. The best practice is to select the node
+   that was master, as then we know it has the latest version of the cluster state. For
+   our tutorial, we are running in a single host so cluster state is more or less
+   guaranteed to be consistent across nodes, but, in principle, the cluster could be
+   running across multiple hosts, and then we would want the master node to become the
+   new single node cluster:
 
    ::
-     cluster.name: single # this has changed, it does not need to
+
+     cluster.name: simple   # don't need to change this
      node.name: n1
      stats.service.interval: 0
      network.host: _local_
-     node.max_local_storage_nodes: 1 # this has changed
+     node.max_local_storage_nodes: 1
 
      http.cors.enabled: true
      http.cors.allow-origin: "*"
@@ -187,20 +196,20 @@ In the `Admin UI`_, we can follow the progress of replication.
      #  - 127.0.0.1:4301
      #  - 127.0.0.1:4302
 
-   I want **n1** to be that node.
-
 5. Run *./bootstrap-node n1* to let **n1** join a new cluster when it starts.
 
 6. Run *./start-node n1*.
+   Panic not, the cluster state is *[YELLOW]*, we sort that out with:
 
-7. Again, we need to ensure that the number of replicas matches the number of nodes:
+   ::
 
-::
+     ALTER TABLE logs SET (number_of_replicas = '0-1');
 
-  ALTER TABLE logs SET (number_of_replicas = '0-1');
+Further reading: node-tool_.
 
 
 .. _GitHub: https://github.com/crate/crate.git
 .. _`Admin UI`: http://localhost:4200
 .. _crate-node: https://crate.io/docs/crate/reference/en/latest/cli-tools.html#cli-crate-node
 .. _CSV: https://en.wikipedia.org/wiki/Comma-separated_values
+.. _crate-node: https://crate.io/docs/crate/guide/en/latest/best-practices/crate-node.html
