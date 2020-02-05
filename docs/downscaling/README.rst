@@ -205,7 +205,7 @@ In the `Admin UI`_, we can follow the progress of replication.
 
      ALTER TABLE logs SET (number_of_replicas = '0-1');
 
-Further reading: node-tool_.
+Further reading: crate-node_.
 
 
 .. _GitHub: https://github.com/crate/crate.git
