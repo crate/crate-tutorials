@@ -8,11 +8,3 @@ http.cors.enabled: true
 http.cors.allow-origin: "*"
 
 transport.tcp.port: 4301
-gateway.expected_nodes: 3
-gateway.recover_after_nodes: 2
-discovery.seed_hosts:
-  - 127.0.0.1:4301
-  - 127.0.0.1:4302
-cluster.initial_master_nodes:
-  - 127.0.0.1:4301
-  - 127.0.0.1:4302

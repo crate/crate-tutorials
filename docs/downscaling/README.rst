@@ -157,30 +157,47 @@ of the cluster have access to all the shards, even when the other nodes are miss
 
   ALTER TABLE logs SET (number_of_replicas = '1-all');
 
-In the `Admin UI`_, we can follow the progress of the replication, and when it
-is completed we can take the nodes down (*ctrl^C* in the terminal).
+In the `Admin UI`_, we can follow the progress of replication.
 
-2. Run *./detach-node* to detach **n1** from the cluster:
+2. After replication is completed, we can take down all the nodes in the cluster
+   (*ctrl^C* in the terminal).
 
+3. Run *./detach-node ni* to detach **n1**, **n2** and **n3** from the cluster.
 
+4. Change the configuration *crate.yml* of the node you want to be your single
+   node **CrateDB** cluster to:
 
-At this point we just need to adjust the configuration of the surviving node,
-and then restart it:
+   ::
+     cluster.name: single # this has changed, it does not need to
+     node.name: n1
+     stats.service.interval: 0
+     network.host: _local_
+     node.max_local_storage_nodes: 1 # this has changed
+
+     http.cors.enabled: true
+     http.cors.allow-origin: "*"
+
+     transport.tcp.port: 4301
+     #gateway.expected_nodes: 3
+     #gateway.recover_after_nodes: 2
+     #discovery.seed_hosts:
+     #  - 127.0.0.1:4301
+     #  - 127.0.0.1:4302
+     #cluster.initial_master_nodes:
+     #  - 127.0.0.1:4301
+     #  - 127.0.0.1:4302
+
+   I want **n1** to be that node.
+
+5. Run *./bootstrap-node n1* to let **n1** join a new cluster when it starts.
+
+6. Run *./start-node n1*.
+
+7. Again, we need to ensure that the number of replicas matches the number of nodes:
 
 ::
 
-  *cat ~/workspace/DATA/conf/n2/crate.yml*
-
-      ::
-
-        node.name: n2
-        stats.service.interval: 0
-        network.host: _local_
-        http.cors.enabled: true
-        http.cors.allow-origin: "*"
-
-
-
+  ALTER TABLE logs SET (number_of_replicas = '0-1');
 
 
 .. _GitHub: https://github.com/crate/crate.git
