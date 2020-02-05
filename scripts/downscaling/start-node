@@ -1,0 +1,9 @@
+#!/bin/sh
+
+source common.sh
+
+./crate/bin/crate \
+    -Cpath.home=$(pwd)/crate \
+    -Cpath.conf=$path_conf \
+    -Cpath.data=$path_data \
+    -Cpath.repo=$path_repo

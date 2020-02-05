@@ -1,0 +1,26 @@
+#!/bin/sh
+
+if [ ! -d dist ]; then
+    mkdir dist
+fi
+
+if [ ! -d dist/crate-clone ]; then
+    git clone https://github.com/crate/crate.git dist/crate-clone
+fi
+
+cd dist/crate-clone
+git pull
+./gradlew clean
+./gradlew disTar
+
+latest_tar_ball=$(find ./app/build/distributions -name 'crate-*.tar.gz')
+cp $latest_tar_ball ..
+cd ..
+name=$(basename $latest_tar_ball)
+tar -xzvf $name
+rm -f $name
+name=${name/.tar.gz/}
+cd ..
+rm -f crate
+ln -s dist/$name crate
+echo "Crate $name has been installed."

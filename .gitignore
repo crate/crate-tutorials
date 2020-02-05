@@ -3,3 +3,8 @@
 .env
 .style
 *.lint
+scripts/downscaling/crate
+scripts/downscaling/dist/*
+scripts/downscaling/data/*
+scripts/downscaling/repo/*
+scripts/downscaling/logs.csv
