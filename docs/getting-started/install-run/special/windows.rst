@@ -9,7 +9,7 @@ Windows.
 
 .. NOTE::
 
-   CrateDB requires `Java 11`_. We recommend using `Oracle's Java`_ on
+   CrateDB requires Java 11. We recommend using `Oracle's Java`_ on
    Microsoft Windows.
 
 .. SEEALSO::
@@ -58,8 +58,7 @@ Now you have CrateDB up and running, it's time to :ref:`import some test data
 .. _change into the expanded tarball folder: https://docs.microsoft.com/en-us/powershell/scripting/getting-started/cookbooks/managing-current-location?view=powershell-6
 .. _CrateDB Guide: https://crate.io/docs/crate/guide/en/latest/
 .. _deploying: https://crate.io/docs/crate/guide/en/latest/deployment/index.html
-.. _Java 11: https://www.oracle.com/technetwork/java/javase/downloads/index.html
-.. _Oracle's Java: http://www.java.com/en/download/help/mac_install.xml
+.. _Oracle's Java: https://www.oracle.com/technetwork/java/javase/downloads/index.html
 .. _PowerShell: https://docs.microsoft.com/en-us/powershell/
 .. _scaling: https://crate.io/docs/crate/guide/en/latest/scaling/index.html
 .. _Start PowerShell: https://docs.microsoft.com/en-us/powershell/scripting/setup/starting-windows-powershell?view=powershell-6
