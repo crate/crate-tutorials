@@ -1,8 +1,8 @@
 .. _gen-ts:
 
-==========================================
-Generate time series data from system load
-==========================================
+=========================
+Generate time series data
+=========================
 
 CrateDB is purpose-built for working with massive amounts of time series data,
 like the type of data produced by smart sensors and other `Internet of Things`_
@@ -13,8 +13,8 @@ are going to need a source of time series data. Fortunately, there are many
 ways to generate time series data by sampling the systems running on your local
 computer.
 
-This collection of tutorials will show you how to sample your `system load`_
-and write time series data to CrateDB using the client of your choice.
+This collection of tutorials will show you how to generate your own time series
+data and write it to CrateDB using the client of your choice.
 
 .. rubric:: Table of contents
 
@@ -24,6 +24,7 @@ and write time series data to CrateDB using the client of your choice.
 
    cli
    python
+   javascript
 
 .. _system load: https://en.wikipedia.org/wiki/Load_(computing)
 .. _Internet of Things: https://en.wikipedia.org/wiki/Internet_of_things
