@@ -5,7 +5,8 @@ Generate time series data using Python
 ======================================
 
 This tutorial will show you how to generate some :ref:`experimental time series
-data <gen-ts>` by sampling your `system load`_ using `Python`_.
+data <gen-ts>` by consuming telemetry data from the `International Space Station`_
+using `Python`_.
 
 .. SEEALSO::
 
@@ -24,11 +25,11 @@ CrateDB must be :ref:`installed and running <install-run>`.
 
 Make sure you're running an up-to-date Python (we recommend 3.7 or higher).
 
-Then, use `Pip`_ to install the `psutil`_ and  `crate`_ libraries:
+Then, use `Pip`_ to install the `requests`_ and  `crate`_ libraries:
 
 .. code-block:: console
 
-    $ pip install psutil crate
+    $ pip install requests crate
 
 The rest of this tutorial is designed for Python's `interactive mode`_ so that
 you can experiment with the commands as you see fit. The `standard
@@ -48,22 +49,46 @@ Once installed, you can start an interactive IPython session like this:
     $ ipython
 
 
-Use Python to read your system load
-===================================
+Use Python to get to get ISS telemetry data
+===========================================
 
-Start an interactive Python session. Then, import the `psutil`_ library:
+You will be consuming telemetry data from `Open Notify`_, a service which provides
+a simple API to consume data from NASA. One of these data points is the current location
+of the International Space Station. The endpoint for these data can be found at
+`<http://api.open-notify.org/iss-now.json>`_.
 
-    >>> import psutil
+Start an interactive Python session. Then, import the `requests`_ library::
 
-Once imported, you can read the current system load averages with the
-`getloadavg`_ function:
+    >>> import requests
 
-    >>> psutil.getloadavg()
-    (4.59326171875, 4.56689453125, 5.150390625)
+Once imported, we can request the current position of the ISS::
 
-The function returns a tuple with three `floats`_ corresponding to the one
-minute average, five-minute average, and 15-minute average.
+    >>> response = requests.get('http://api.open-notify.org/iss-now.json')
+    >>> response.json()
+    {
+        'message': 'success',
+        'iss_position': {
+            'longitude': '-148.7513',
+            'latitude': '9.9132'
+        },
+        'timestamp': 1582293874
+    }
 
+The endpoint returns a JSON payload consisting of ``iss_position``, which is composed of
+``latitude`` and ``longitude``, as well as some other metadata.
+
+You can encapsulate this within a single function to return only the longitude and latitude as a `WKT`_
+string::
+
+    >>> def position():
+    ...     response = requests.get('http://api.open-notify.org/iss-now.json')
+    ...     position = response.json()["iss_position"]
+    ...     return f'POINT ({position["longitude"]} {position["latitude"]})'
+
+When you run this function, it should return your point string::
+
+    >>> position()
+    'POINT (-30.9188 42.8036)'
 
 Set up CrateDB
 ==============
@@ -90,11 +115,9 @@ Get a `cursor`_:
 Then, finally, `create a table`_ suitable for writing load averages:
 
     >>> cursor.execute(
-    ...     """CREATE TABLE load (
+    ...     """CREATE TABLE iss_position (
     ...            timestamp TIMESTAMP GENERATED ALWAYS AS CURRENT_TIMESTAMP,
-    ...            avg_1m REAL,
-    ...            avg_5m REAL,
-    ...            avg_15m REAL)"""
+    ...            position GEO_POINT)"""
     ... )
 
 In the `CrateDB Admin UI`_, you should see the new table when you navigate to
@@ -103,35 +126,31 @@ the *Tables* screen using the left-hand navigation menu:
 .. image:: ../_assets/img/generate-time-series/table.png
 
 
-Record your system load
+Record the ISS position
 =======================
 
-With the table in place, you can start recording load averages.
+With the table in place, you can start recording the position of the ISS.
 
-The following command calls `getloadavg`_ and uses the result tuple as `input
+The following command calls your ``position`` function and uses the result as `input
 values`_ for the `INSERT`_ query:
 
-    >>> cursor.execute(
-    ...     "INSERT INTO load (avg_1m, avg_5m, avg_15m) VALUES (?, ?, ?)",
-    ...     psutil.getloadavg(),
-    ... )
+    >>> cursor.execute("INSERT INTO iss_position (position) VALUES (?)", [position()])
 
 Press the up arrow on your keyboard and hit *Enter* to run the same command a
 few more times.
 
 When you're done, you can `SELECT`_ that data back out of CrateDB, like so:
 
-    >>> cursor.execute('SELECT * FROM load ORDER BY timestamp DESC')
+    >>> cursor.execute('SELECT * FROM iss_position ORDER BY timestamp DESC')
 
 Then, `fetch all`_ the result rows at once:
 
     >>> cursor.fetchall()
-    [[1580670546270, 5.4072266, 4.788086, 4.620117],
-     [1580670545367, 5.6171875, 4.8183594, 4.629883],
-     [1580670478666, 4.411621, 4.578125, 4.54541]]
+    [[1582295967721, [-8.0689, 25.8967]],
+     [1582295966383, [-8.1371, 25.967]],
+     [1582295926523, [-9.9662, 27.8032]]]
 
-Here we have recorded three sets of load averages with a corresponding
-timestamp.
+Here you have recorded three sets of ISS position coordinates.
 
 
 Automate it
@@ -139,14 +158,19 @@ Automate it
 
 Now we have the basics figured out, let's automate the data collection.
 
-Copy the commands you used into a file named ``monitor-load.py``, like this:
+Copy the commands you used into a file named ``iss-position.py``, like this:
 
 .. code-block:: python
 
     import time
 
-    import psutil
+    import requests
     from crate import client
+
+    def position():
+        response = requests.get('http://api.open-notify.org/iss-now.json')
+        position = response.json()["iss_position"]
+        return f'POINT ({position["longitude"]} {position["latitude"]})'
 
 
     def insert():
@@ -155,8 +179,8 @@ Copy the commands you used into a file named ``monitor-load.py``, like this:
         print("CONNECT OK")
         cursor = connection.cursor()
         cursor.execute(
-            "INSERT INTO load (avg_1m, avg_5m, avg_15m) VALUES (?, ?, ?)",
-            psutil.getloadavg(),
+            "INSERT INTO iss_position (position) VALUES (?)",
+            [position()],
         )
         print("INSERT OK")
 
@@ -175,7 +199,7 @@ Run it from the command line, like so:
 
 .. code-block:: console
 
-    $ python monitor-load.py
+    $ python iss-position.py
     CONNECT OK
     INSERT OK
     Sleeping for 10 seconds...
@@ -199,18 +223,18 @@ Lots of freshly generated time series data, ready for use.
 .. _create a table: https://crate.io/docs/crate/reference/en/latest/general/ddl/create-table.html
 .. _cursor: https://crate.io/docs/clients/python/en/latest/query.html#using-a-cursor
 .. _fetch all: https://crate.io/docs/clients/python/en/latest/query.html#fetchmany
-.. _floats: https://docs.python.org/3.9/tutorial/floatingpoint.html
-.. _getloadavg: https://psutil.readthedocs.io/en/latest/#psutil.getloadavg
 .. _input values: https://crate.io/docs/clients/python/en/latest/query.html#regular-inserts
 .. _INSERT: https://crate.io/docs/crate/reference/en/latest/general/dml.html#inserting-data
 .. _interactive mode: https://docs.python.org/3/tutorial/interpreter.html#interactive-mode
 .. _interactive Python session: https://docs.python.org/3/tutorial/interpreter.html#interactive-mode
+.. _international space station: https://www.nasa.gov/mission_pages/station/main/index.html
 .. _Internet of Things: https://en.wikipedia.org/wiki/Internet_of_things
 .. _IPython: https://ipython.org/
+.. _open notify: http://open-notify.org/
 .. _Pip: https://pypi.org/project/pip/
-.. _psutil: https://psutil.readthedocs.io/en/latest/
 .. _Python: https://www.python.org/
+.. _requests: https://requests.readthedocs.io/en/master/
 .. _SELECT: https://crate.io/docs/crate/reference/en/latest/general/dql/selects.html
 .. _standard Python interpreter: https://docs.python.org/3/tutorial/interpreter.html
-.. _system load: https://en.wikipedia.org/wiki/Load_(computing)
 .. _time series: https://en.wikipedia.org/wiki/Time_series
+.. _WKT: https://en.wikipedia.org/wiki/Youll-known_text_representation_of_geometry
