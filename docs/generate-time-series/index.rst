@@ -13,8 +13,9 @@ are going to need a source of time series data. Fortunately, there are many
 ways to generate time series data by sampling the systems running on your local
 computer.
 
-This collection of tutorials will show you how to generate your own time series
-data and write it to CrateDB using the client of your choice.
+This collection of tutorials will show you how to generate mock time series
+data about the `International Space Station`_ (ISS) and write it to CrateDB
+using the client of your choice.
 
 .. rubric:: Table of contents
 
@@ -27,5 +28,6 @@ data and write it to CrateDB using the client of your choice.
    javascript
    go
 
-.. _system load: https://en.wikipedia.org/wiki/Load_(computing)
+.. _International Space Station: https://www.nasa.gov/mission_pages/station/main/index.html
 .. _Internet of Things: https://en.wikipedia.org/wiki/Internet_of_things
+.. _system load: https://en.wikipedia.org/wiki/Load_(computing)

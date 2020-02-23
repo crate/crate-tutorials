@@ -26,6 +26,7 @@ massive amounts of machine data in real-time.
     install-run/index
     first-use
     generate-time-series/index
+    normalize-intervals
 
 
 .. _CrateDB How-To Guides: https://crate.io/docs/crate/howtos/en/latest/
