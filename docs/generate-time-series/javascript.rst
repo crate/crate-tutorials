@@ -4,9 +4,8 @@
 Generate time series data using Node.js
 =======================================
 
-This tutorial will show you how to generate some :ref:`experimental time series
-data <gen-ts>` from information about the `International Space Station`_
-using `Node.js`_.
+This tutorial will show you how to generate :ref:`mock time series data
+<gen-ts>` about the `International Space Station`_ (ISS) using `Node.js`_.
 
 .. SEEALSO::
 
@@ -29,13 +28,13 @@ Then, upgrade to the latest `npm`_ version:
 
 .. code-block:: console
 
-    $ npm install -g npm@latest
+    sh$ npm install -g npm@latest
 
 Install the `node-postgres`_ and `Axios`_ libraries:
 
 .. code-block:: console
 
-    $ npm install pg axios
+    sh$ npm install pg axios
 
 The ``node-postgres`` and ``axios`` libraries both use `promises`_ when
 performing network operations. Promises are a way of encapsulating the eventual
@@ -52,20 +51,20 @@ promises, you should start ``node`` with support for the `await`_ operator:
 
 .. code-block:: console
 
-    $ node --experimental-repl-await
+    sh$ node --experimental-repl-await
 
 
-Get ISS telemetry data
-======================
+Get the current position of the ISS
+====================================
 
-You can get telemetry data from `Open Notify`_, a third-party service that
-provides a simple API to consume data from NASA (specifically, the current
-location of the International Space Station). The endpoint for this data is
-`<http://api.open-notify.org/iss-now.json>`_.
+`Open Notify`_ is a third-party service that provides an API to consume data
+about the current position, or `ground point`_, of the ISS.
+
+The endpoint for this API is `<http://api.open-notify.org/iss-now.json>`_.
 
 Start an interactive Node session (as above).
 
-First, import the `Axios`_ library:
+Next, import the `Axios`_ library:
 
 .. code-block:: js
 
@@ -87,8 +86,8 @@ Notify API endpoint:
       timestamp: 1582568638
     }
 
-The endpoint returns a JSON payload, which contains an ``iss_position`` object
-with ``latitude`` and ``longitude`` data.
+As shown, the endpoint returns a JSON payload, which contains an
+``iss_position`` object with ``latitude`` and ``longitude`` data.
 
 You can encapsulate this operation with a function that returns longitude and
 latitude as a `WKT`_ string:
@@ -238,11 +237,12 @@ When you're done, you can `SELECT`_ that data back out of CrateDB:
 
 Here you have recorded three sets of ISS position coordinates.
 
+
 Automate the process
 ====================
 
-Now that you have covered the key aspects, you can automate the data collection.
-Doing this will require a change of approach.
+Now you have key components, you can automate the data collection. Doing this
+will require a change of approach.
 
 Previously, you were using a `client`_ to connect to and insert data into
 CrateDB. However, clients are ephemeral, and once closed, you need to recreate
@@ -304,7 +304,7 @@ Run the script from the command line:
 
 .. code-block:: console
 
-    $ node iss-position.js
+    sh$ node iss-position.js
     INSERT OK
     Sleeping for 10 seconds...
     INSERT OK
@@ -330,6 +330,11 @@ will open up a map view showing the current position of the ISS:
 
 .. image:: ../_assets/img/generate-time-series/map.png
 
+.. TIP::
+
+    The ISS passes over large bodies of water. If the map looks empty, try
+    zooming out.
+
 
 .. _await: https://developer.mozilla.org/en-US/docs/Youb/JavaScript/Reference/Operators/await
 .. _axios: https://www.npmjs.com/package/axios
@@ -339,6 +344,7 @@ will open up a map view showing the current position of the ISS:
 .. _CrateDB Admin UI: https://crate.io/docs/clients/admin-ui/en/latest/
 .. _create a table: https://crate.io/docs/crate/reference/en/latest/general/ddl/create-table.html
 .. _detailed guide: https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Promises
+.. _ground point: https://en.wikipedia.org/wiki/Ground_track
 .. _input values: https://node-postgres.com/features/queries#Parameterized%20query
 .. _INSERT: https://crate.io/docs/crate/reference/en/latest/general/dml.html#inserting-data
 .. _interactive REPL mode: https://www.oreilly.com/library/view/learning-node-2nd/9781491943113/ch04.html

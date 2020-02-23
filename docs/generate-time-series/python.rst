@@ -1,12 +1,11 @@
-.. _gen-ts-python:
+.. _gts-python:
 
 ======================================
 Generate time series data using Python
 ======================================
 
-This tutorial will show you how to generate some :ref:`experimental time series
-data <gen-ts>` from information about the `International Space Station`_ using
-`Python`_.
+This tutorial will show you how to generate :ref:`mock time series data
+<gen-ts>` about the `International Space Station`_ (ISS) using `Python`_.
 
 .. SEEALSO::
 
@@ -30,7 +29,7 @@ Then, use `Pip`_ to install the `requests`_ and  `crate`_ libraries:
 
 .. code-block:: console
 
-    $ pip install requests crate
+    sh$ pip install requests crate
 
 The rest of this tutorial is designed for Python's `interactive mode`_ so that
 you can experiment with the commands as you see fit. The `standard
@@ -41,26 +40,26 @@ You can install IPython with Pip:
 
 .. code-block:: console
 
-    $ pip install ipython
+    sh$ pip install ipython
 
 Once installed, you can start an interactive IPython session like this:
 
 .. code-block:: console
 
-    $ ipython
+    sh$ ipython
 
 
-Use Python to get ISS telemetry data
+Get the current position of the ISS
 ====================================
 
-You can get telemetry data from `Open Notify`_, a third-party service that
-provides a simple API to consume data from NASA (specifically, the current
-location of the International Space Station). The endpoint for this data is
-`<http://api.open-notify.org/iss-now.json>`_.
+`Open Notify`_ is a third-party service that provides an API to consume data
+about the current position, or `ground point`_, of the ISS.
+
+The endpoint for this API is `<http://api.open-notify.org/iss-now.json>`_.
 
 Start an interactive Python session (as above).
 
-First, import the `requests`_ library::
+Next, import the `requests`_ library::
 
     >>> import requests
 
@@ -73,8 +72,8 @@ Notify API endpoint, like this:
      'timestamp': 1582730500,
      'iss_position': {'latitude': '33.3581', 'longitude': '-57.3929'}}
 
-The endpoint returns a JSON payload, which contains an ``iss_position`` object
-with ``latitude`` and ``longitude`` data.
+As shown, the endpoint returns a JSON payload, which contains an
+``iss_position`` object with ``latitude`` and ``longitude`` data.
 
 You can encapsulate this operation with a function that returns longitude and
 latitude as a `WKT`_ string:
@@ -152,10 +151,10 @@ Then, `fetch all`_ the result rows at once:
 Here you have recorded three sets of ISS position coordinates.
 
 
-Automate it
-===========
+Automate the process
+====================
 
-Now you have the basics figured out, you can automate the data collection.
+Now you have key components, you can automate the data collection.
 
 Create a new file called ``iss-position.py``, like this:
 
@@ -207,7 +206,7 @@ Run the script from the command line, like so:
 
 .. code-block:: console
 
-    $ python iss-position.py
+    sh$ python iss-position.py
     CONNECT OK
     INSERT OK
     Sleeping for 10 seconds...
@@ -230,6 +229,11 @@ will open up a map view showing the current position of the ISS:
 
 .. image:: ../_assets/img/generate-time-series/map.png
 
+.. TIP::
+
+    The ISS passes over large bodies of water. If the map looks empty, try
+    zooming out.
+
 
 .. _connect: https://crate.io/docs/clients/python/en/latest/connect.html
 .. _crate: https://crate.io/docs/clients/python/en/latest/
@@ -237,9 +241,9 @@ will open up a map view showing the current position of the ISS:
 .. _create a table: https://crate.io/docs/crate/reference/en/latest/general/ddl/create-table.html
 .. _cursor: https://crate.io/docs/clients/python/en/latest/query.html#using-a-cursor
 .. _fetch all: https://crate.io/docs/clients/python/en/latest/query.html#fetchmany
+.. _ground point: https://en.wikipedia.org/wiki/Ground_track
 .. _INSERT: https://crate.io/docs/crate/reference/en/latest/general/dml.html#inserting-data
 .. _interactive mode: https://docs.python.org/3/tutorial/interpreter.html#interactive-mode
-.. _interactive Python session: https://docs.python.org/3/tutorial/interpreter.html#interactive-mode
 .. _International Space Station: https://www.nasa.gov/mission_pages/station/main/index.html
 .. _IPython: https://ipython.org/
 .. _open notify: http://open-notify.org/

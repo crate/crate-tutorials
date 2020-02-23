@@ -1,12 +1,12 @@
-.. _gen-ts-cli:
+.. _gts-cli:
 
 ===============================================
 Generate time series data from the command line
 ===============================================
 
-This tutorial will show you how to generate some :ref:`experimental time series
-data <gen-ts>` from information about the `International Space Station`_
-using the `CrateDB Shell`_ (aka *Crash*) and a little bit of `shell scripting`_.
+This tutorial will show you how to generate :ref:`mock time series data
+<gen-ts>` about the `International Space Station`_ (ISS) using the `CrateDB
+Shell`_ (aka *Crash*) and a little bit of `shell scripting`_.
 
 .. SEEALSO::
 
@@ -27,7 +27,7 @@ Crash is available as `Pip`_ package. `Install`_ it like this:
 
 .. code-block:: console
 
-    $ pip install crash
+    sh$ pip install crash
 
 We have designed the commands in this tutorial to be run directly from the
 `command line`_ so that you can experiment with them as you see fit.
@@ -41,72 +41,99 @@ You will need the `curl`_ and `jq`_ tools installed.
     issues.
 
 
-Using ``curl`` to get the current position of the ISS
-=====================================================
+Get the current position of the ISS
+====================================
 
-You can get telemetry data from `Open Notify`_, a third-party service that
-provides a simple API to consume data from NASA (specifically, the current
-location of the International Space Station). The endpoint for this data is
-`<http://api.open-notify.org/iss-now.json>`_.
+`Open Notify`_ is a third-party service that provides an API to consume data
+about the current position, or `ground point`_, of the ISS.
 
-You can query this endpoint using ``curl``, using the ``-s`` flag to keep
-the output to a minimum::
+The endpoint for this API is `<http://api.open-notify.org/iss-now.json>`_.
 
-    $ curl -s http://api.open-notify.org/iss-now.json
-    {"iss_position": {"latitude": "-51.6051", "longitude": "86.6932"}, "message": "success", "timestamp": 1583490580}
+You can query this endpoint using ``curl``:
 
-The endpoint returns a JSON payload, which contains an ``iss_position`` object
-with ``latitude`` and ``longitude`` data.
+.. code-block:: console
 
-Processing the ISS position with ``jq``
-=======================================
+    sh$ curl -s -w "\n" http://api.open-notify.org/iss-now.json
 
-The ``jq`` command is a convient tool to process JSON payloads on the command
+    {"message": "success", "iss_position": {"latitude": "23.1703", "longitude": "-105.4034"}, "timestamp": 1590394500}
+
+As shown, the endpoint returns a JSON payload, which contains an
+``iss_position`` object with ``latitude`` and ``longitude`` data.
+
+
+Parse the ISS position
+=======================
+
+The ``jq`` command is a convenient tool to parse JSON payloads on the command
 line. You can use the ``|`` character to `pipe`_ the output from ``curl`` into
 ``jq`` for processing.
 
-For example, to return the whole payload, you can do this::
+For example, to return the whole payload, do this:
 
-    $ curl -s http://api.open-notify.org/iss-now.json | jq '.'
+.. code-block:: console
+
+    sh$ curl -s http://api.open-notify.org/iss-now.json | jq '.'
+
     {
-      "iss_position": {
-        "latitude": "-50.8213",
-        "longitude": "97.9703"
-      },
       "message": "success",
-      "timestamp": 1583490695
+      "iss_position": {
+        "latitude": "21.9711",
+        "longitude": "-104.3298"
+      },
+      "timestamp": 1590394525
     }
 
-However, the most useful information is the latitude and longitude coordinates.
-You can use ``jq`` with a filter to isolate those results::
+The most useful information is the latitude and longitude coordinates. You can
+use ``jq`` with a filter to isolate those data points:
 
-    $ curl -s http://api.open-notify.org/iss-now.json | jq -r '[.iss_position.longitude, .iss_position.latitude] | @tsv'
-    111.8643    -48.0634
+.. code-block:: console
 
-You're going to want to get the position like this multiple times. You can make
-that easier for yourself by defining a `shell function`_  to do it, like so::
+    sh$ curl -s http://api.open-notify.org/iss-now.json | \
+            jq -r '[.iss_position.longitude, .iss_position.latitude] | @tsv'
 
-    $ position() {curl -s http://api.open-notify.org/iss-now.json | jq -r '[.iss_position.longitude, .iss_position.latitude] | @tsv'; }
+    -103.4015    20.9089
 
-Now, when you want the position, you can run ``position``::
+You can encapsulate this command with a `shell function`_:
 
-    $ position
-    126.5203    -42.4264
+.. code-block:: console
+
+    sh$ position () { \
+            curl -s http://api.open-notify.org/iss-now.json | \
+                jq -r '[.iss_position.longitude, .iss_position.latitude] | @tsv'; \
+        }
+
+Now, when you want the position, run ``position``:
+
+.. code-block:: console
+
+    sh$ position
+
+    -102.3230    19.6460
 
 To insert these values into an SQL query, you need to format them into a `WKT`_
-string, which you can do by using the ``echo`` command::
+string, like so:
 
-    $ echo "'POINT ($(position))'"
-    POINT ( 140.1034 -33.6746 )
+.. code-block:: console
 
-Here's a function to do that for you::
+    sh$ echo "POINT ($(position | expand -t 1))"
 
-    $ wkt_position () { echo "'POINT ($(position))'"; }
+    POINT (-101.2633 18.3756)
 
-Which you can now call using ``wkt_position``::
+Encapsulate this command with a function:
 
-    $ wkt_position
-    POINT ( 143.4071 -30.8853 )
+.. code-block:: console
+
+    sh$ wkt_position () { \
+            echo "POINT ($(position | expand -t 1))"; \
+        }
+
+Which you can now call using ``wkt_position``:
+
+.. code-block:: console
+
+    sh$ wkt_position
+
+    POINT (-96.4784 12.3053)
 
 
 Set up CrateDB
@@ -156,11 +183,11 @@ this:
 
 .. code-block:: console
 
-    $ crash --hosts localhost:4200 \
-          --command "INSERT INTO iss (position) VALUES (`wkt_position`)"
+    sh$ crash --hosts localhost:4200 \
+            --command "INSERT INTO iss (position) VALUES ('$(wkt_position)')"
 
     CONNECT OK
-    INSERT OK, 1 row affected  (0.142 sec)
+    INSERT OK, 1 row affected  (0.037 sec)
 
 .. WARNING::
 
@@ -174,36 +201,45 @@ When you're done, you can `SELECT`_ that data back out of CrateDB, like so:
 
 .. code-block:: console
 
-    $ crash --hosts localhost:4200 \
-          --command 'SELECT * FROM iss ORDER BY timestamp DESC'
-    CONNECT OK
-    +---------------+----------------------+
-    |     timestamp | position             |
-    +---------------+----------------------+
-    | 1583491623255 | [156.4084, -17.0207] |
-    | 1583491532834 | [152.7272, -21.4128] |
-    | 1583491531301 | [152.6639, -21.4852] |
-    +---------------+----------------------+
-    SELECT 3 rows in set (0.008 sec)
+    sh$ crash --hosts localhost:4200 \
+            --command 'SELECT * FROM iss ORDER BY timestamp DESC'
+
+    +---------------+---------------------+
+    |     timestamp | position            |
+    +---------------+---------------------+
+    | 1590395103748 | [-82.6328, -6.9134] |
+    | 1590395102176 | [-82.6876, -6.8376] |
+    | 1590395018584 | [-85.7139, -2.6095] |
+    +---------------+---------------------+
+    SELECT 3 rows in set (0.105 sec)
 
 Here you have recorded three sets of ISS position coordinates.
 
-Automate it
-===========
 
-Now you have the basics figured out, you can automate the data collection.
+Automate the process
+====================
 
-Copy the commands you used into a file named ``iss-position.sh``, like this:
+Now you have key components, you can automate the data collection.
+
+Create a file named ``iss-position.sh``, like this:
 
 .. code-block:: sh
 
-    position() {curl -s http://api.open-notify.org/iss-now.json | jq -r '[.iss_position.longitude, .iss_position.latitude] | @tsv'; }
+    # Exit immediately if a pipeline returns a non-zero status
+    set -e
 
-    wkt_position () { echo "'POINT ($(position))'"; }
+    position () {
+        curl -s http://api.open-notify.org/iss-now.json |
+            jq -r '[.iss_position.longitude, .iss_position.latitude] | @tsv';
+    }
+
+    wkt_position () {
+        echo "POINT ($(position | expand -t 1))";
+    }
 
     while true; do
         crash --hosts localhost:4200 \
-            --command "INSERT INTO iss (position) VALUES (`wkt_position`)"
+            --command "INSERT INTO iss (position) VALUES ('$(wkt_position)')"
         echo 'Sleeping for 10 seconds...'
         sleep 10
     done
@@ -234,6 +270,16 @@ As this runs, you should see the table filling up in the CrateDB Admin UI:
 
 Lots of freshly generated time series data, ready for use.
 
+And, for bonus points, if you select the arrow next to the location data, it
+will open up a map view showing the current position of the ISS:
+
+.. image:: ../_assets/img/generate-time-series/map.png
+
+.. TIP::
+
+    The ISS passes over large bodies of water. If the map looks empty, try
+    zooming out.
+
 
 .. _command line: https://en.wikipedia.org/wiki/Command-line_interface
 .. _CrateDB Admin UI: https://crate.io/docs/clients/admin-ui/en/latest/
@@ -241,6 +287,7 @@ Lots of freshly generated time series data, ready for use.
 .. _create a table: https://crate.io/docs/crate/reference/en/latest/general/ddl/create-table.html
 .. _curl: https://curl.haxx.se/
 .. _data sanitization: https://xkcd.com/327/
+.. _ground point: https://en.wikipedia.org/wiki/Ground_track
 .. _INSERT: https://crate.io/docs/crate/reference/en/latest/general/dml.html#inserting-data
 .. _install: https://crate.io/docs/clients/crash/en/latest/getting-started.html#installation
 .. _International Space Station: https://www.nasa.gov/mission_pages/station/main/index.html
