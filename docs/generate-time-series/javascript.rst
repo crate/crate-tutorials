@@ -242,7 +242,7 @@ Here you have recorded three sets of ISS position coordinates.
 Automate it
 ===========
 
-Now you have the basics figured out, let's automate the data collection. Doing
+Now you have the basics figured out, you can automate the data collection. Doing
 this will require a change of approach.
 
 Previously, you were using a `client`_ to connect to and insert data into
@@ -343,7 +343,7 @@ will open up a map view showing the current position of the ISS:
 .. _input values: https://node-postgres.com/features/queries#Parameterized%20query
 .. _INSERT: https://crate.io/docs/crate/reference/en/latest/general/dml.html#inserting-data
 .. _interactive REPL mode: https://www.oreilly.com/library/view/learning-node-2nd/9781491943113/ch04.html
-.. _international space station: https://www.nasa.gov/mission_pages/station/main/index.html
+.. _International Space Station: https://www.nasa.gov/mission_pages/station/main/index.html
 .. _node-postgres: https://www.npmjs.com/package/pg
 .. _Node: https://nodejs.org/en/
 .. _Node.js: https://nodejs.org/en/
@@ -353,5 +353,4 @@ will open up a map view showing the current position of the ISS:
 .. _Promise chaining: https://javascript.info/promise-chaining
 .. _Promises: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
 .. _SELECT: https://crate.io/docs/crate/reference/en/latest/general/dql/selects.html
-.. _time series: https://en.wikipedia.org/wiki/Time_series
 .. _WKT: https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry
