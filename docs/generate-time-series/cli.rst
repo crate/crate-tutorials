@@ -5,8 +5,8 @@ Generate time series data from the command line
 ===============================================
 
 This tutorial will show you how to generate some :ref:`experimental time series
-data <gen-ts>` by sampling your `system load`_ using the `CrateDB Shell`_ (aka
-*Crash*) and a little bit of `shell scripting`_.
+data <gen-ts>` from information about the `International Space Station`_
+using the `CrateDB Shell`_ (aka *Crash*) and a little bit of `shell scripting`_.
 
 .. SEEALSO::
 
@@ -29,8 +29,10 @@ Crash is available as `Pip`_ package. `Install`_ it like this:
 
     $ pip install crash
 
-We designed the commands in this tutorial to be run directly from the `command
-line`_ so that you can experiment with them as you see fit.
+We have designed the commands in this tutorial to be run directly from the
+`command line`_ so that you can experiment with them as you see fit.
+
+You will need the `curl`_ and `jq`_ tools installed.
 
 .. NOTE::
 
@@ -39,89 +41,72 @@ line`_ so that you can experiment with them as you see fit.
     issues.
 
 
-Process ``uptime`` to get your system load
-==========================================
+Using ``curl`` to get the current position of the ISS
+=====================================================
 
-The `uptime`_ command is a convenient way to get your current system load.
+You can get telemetry data from `Open Notify`_, a third-party service that
+provides a simple API to consume data from NASA (specifically, the current
+location of the International Space Station). The endpoint for this data is
+`<http://api.open-notify.org/iss-now.json>`_.
 
-The exact output varies a little from system to system, but the ``uptime``
-command will typically display something like this:
+You can query this endpoint using ``curl``, using the ``-s`` flag to keep
+the output to a minimum::
 
-.. code-block:: console
+    $ curl -s http://api.open-notify.org/iss-now.json
+    {"iss_position": {"latitude": "-51.6051", "longitude": "86.6932"}, "message": "success", "timestamp": 1583490580}
 
-    $ uptime
-    16:58  up 3 days,  5:45, 4 users, load averages: 3.15 4.51 5.06
+The endpoint returns a JSON payload, which contains an ``iss_position`` object
+with ``latitude`` and ``longitude`` data.
 
-We can `pipe`_ that through `sed`_ to get the load averages:
+Processing the ISS position with ``jq``
+=======================================
 
-.. code-block:: console
+The ``jq`` command is a convient tool to process JSON payloads on the command
+line. You can use the ``|`` character to `pipe`_ the output from ``curl`` into
+``jq`` for processing.
 
-    $ uptime | sed -E 's/.*load average(s)?: //' | sed 's/,//g'
-    3.06 4.46 5.04
+For example, to return the whole payload, you can do this::
 
-The result is three load values separated by a space. The values correspond to
-the one minute average, five-minute average, and 15-minute average.
+    $ curl -s http://api.open-notify.org/iss-now.json | jq '.'
+    {
+      "iss_position": {
+        "latitude": "-50.8213",
+        "longitude": "97.9703"
+      },
+      "message": "success",
+      "timestamp": 1583490695
+    }
 
-.. NOTE::
+However, the most useful information is the latitude and longitude coordinates.
+You can use ``jq`` with a filter to isolate those results::
 
-    This command should work for most output formats. Please `let us know`_ if
-    you run into issues.
+    $ curl -s http://api.open-notify.org/iss-now.json | jq -r '[.iss_position.longitude, .iss_position.latitude] | @tsv'
+    111.8643    -48.0634
 
-We're going to want to get the load averages like this multiple times, so let's
-make things easier for ourselves by defining a `shell function`_ that does it:
+You're going to want to get the position like this multiple times. You can make
+that easier for yourself by defining a `shell function`_  to do it, like so::
 
-.. code-block:: console
+    $ position() {curl -s http://api.open-notify.org/iss-now.json | jq -r '[.iss_position.longitude, .iss_position.latitude] | @tsv'; }
 
-    $ loads () { uptime | sed -E 's/.*load average(s)?: //' | sed 's/,//g'; }
+Now, when you want the position, you can run ``position``::
 
-Now, when you want the load averages, you can run ``loads``:
+    $ position
+    126.5203    -42.4264
 
-.. code-block:: console
+To insert these values into an SQL query, you need to format them into a `WKT`_
+string, which you can do by using the ``echo`` command::
 
-    $ loads
-    3.06 4.46 5.04
+    $ echo "'POINT ($(position))'"
+    POINT ( 140.1034 -33.6746 )
 
-However, we're not finished with our string processing.
+Here's a function to do that for you::
 
-To insert these values into an SQL query, we need to be able to get them
-individually. There are multiple ways to accomplish this, for example:
+    $ wkt_position () { echo "'POINT ($(position))'"; }
 
-.. code-block:: console
+Which you can now call using ``wkt_position``::
 
-    $ loads | cut -d ' ' -f1
-    3.06
-
-Here, we told `cut`_ to print the value in the first column, which in our case
-is ``3.06``. You can print the second column by changing the ``1`` to ``2``,
-and so on.
-
-Let's define another function to do this for us:
-
-.. code-block:: console
-
-    $ avg () { loads | cut -d ' ' -f$1; }
-
-Here, the ``avg`` function:
-
-  1. Calls the ``loads`` function (which prints load average values in three
-     columns)
-
-  2. Prints the value in column ``$1`` (the first argument passed to the
-     function)
-
-Now, to get the first load average, you can do this:
-
-.. code-block:: console
-
-    $ avg 1
-    3.63
-
-Or, get all three, like this:
-
-.. code-block:: console
-
-    $ echo "`avg 1` `avg 2` `avg 3`"
-    3.63 4.62 5.10
+    $ wkt_position
+    POINT ( 143.4071 -30.8853 )
 
 
 Set up CrateDB
@@ -144,11 +129,9 @@ Then, `create a table`_ suitable for writing load averages:
 
 .. code-block:: psql
 
-    cr> CREATE TABLE load (
+    cr> CREATE TABLE iss (
             timestamp TIMESTAMP GENERATED ALWAYS AS CURRENT_TIMESTAMP,
-            avg_1m REAL,
-            avg_5m REAL,
-            avg_15m REAL
+            position GEO_POINT
         );
 
     CREATE OK, 1 row affected  (0.726 sec)
@@ -159,10 +142,10 @@ the *Tables* screen using the left-hand navigation menu:
 .. image:: ../_assets/img/generate-time-series/table.png
 
 
-Record your system load
+Record the ISS position
 =======================
 
-With the table in place, you can start recording load averages.
+With the table in place, you can start recording the position of the ISS.
 
 Crash provides a non-interactive mode that you can use to execute SQL
 statements directly from the command line.
@@ -174,8 +157,7 @@ this:
 .. code-block:: console
 
     $ crash --hosts localhost:4200 \
-          --command "INSERT INTO load (avg_1m, avg_5m, avg_15m) \
-              VALUES (`avg 1`, `avg 2`, `avg 3`)"
+          --command "INSERT INTO iss (position) VALUES (`wkt_position`)"
 
     CONNECT OK
     INSERT OK, 1 row affected  (0.142 sec)
@@ -193,37 +175,35 @@ When you're done, you can `SELECT`_ that data back out of CrateDB, like so:
 .. code-block:: console
 
     $ crash --hosts localhost:4200 \
-          --command 'SELECT * FROM load ORDER BY timestamp DESC'
+          --command 'SELECT * FROM iss ORDER BY timestamp DESC'
     CONNECT OK
-    +---------------+--------+--------+---------+
-    |     timestamp | avg_1m | avg_5m | avg_15m |
-    +---------------+--------+--------+---------+
-    | 1580668593202 |   3.28 |   4.4  |    4.45 |
-    | 1580668521049 |   4.88 |   4.91 |    4.62 |
-    | 1580668509451 |   5.09 |   4.95 |    4.63 |
-    +---------------+--------+--------+---------+
+    +---------------+----------------------+
+    |     timestamp | position             |
+    +---------------+----------------------+
+    | 1583491623255 | [156.4084, -17.0207] |
+    | 1583491532834 | [152.7272, -21.4128] |
+    | 1583491531301 | [152.6639, -21.4852] |
+    +---------------+----------------------+
     SELECT 3 rows in set (0.008 sec)
 
-Here we have recorded three sets of load averages with a corresponding
-timestamp.
+Here you have recorded three sets of ISS position coordinates.
 
 Automate it
 ===========
 
-Now we have the basics figured out, let's automate the data collection.
+Now you have the basics figured out, you can automate the data collection.
 
-Copy the commands you used into a file named ``monitor-load.sh``, like this:
+Copy the commands you used into a file named ``iss-position.sh``, like this:
 
 .. code-block:: sh
 
-    loads () { uptime | sed -E 's/.*load average(s)?: //' | sed 's/,//g'; }
+    position() {curl -s http://api.open-notify.org/iss-now.json | jq -r '[.iss_position.longitude, .iss_position.latitude] | @tsv'; }
 
-    avg () { loads | cut -d ' ' -f$1; }
+    wkt_position () { echo "'POINT ($(position))'"; }
 
     while true; do
         crash --hosts localhost:4200 \
-            --command "INSERT INTO load (avg_1m, avg_5m, avg_15m) \
-                VALUES (`avg 1`, `avg 2`, `avg 3`)"
+            --command "INSERT INTO iss (position) VALUES (`wkt_position`)"
         echo 'Sleeping for 10 seconds...'
         sleep 10
     done
@@ -236,7 +216,7 @@ Run it from the command line, like so:
 
 .. code-block:: console
 
-    $ sh monitor-load.sh
+    $ sh iss-position.sh
 
     CONNECT OK
     INSERT OK, 1 row affected  (0.029 sec)
@@ -259,17 +239,17 @@ Lots of freshly generated time series data, ready for use.
 .. _CrateDB Admin UI: https://crate.io/docs/clients/admin-ui/en/latest/
 .. _CrateDB Shell: https://crate.io/docs/clients/crash/en/latest/
 .. _create a table: https://crate.io/docs/crate/reference/en/latest/general/ddl/create-table.html
-.. _cut: https://www.geeksforgeeks.org/cut-command-linux-examples/
+.. _curl: https://curl.haxx.se/
 .. _data sanitization: https://xkcd.com/327/
 .. _INSERT: https://crate.io/docs/crate/reference/en/latest/general/dml.html#inserting-data
 .. _install: https://crate.io/docs/clients/crash/en/latest/getting-started.html#installation
+.. _International Space Station: https://www.nasa.gov/mission_pages/station/main/index.html
+.. _jq: https://stedolan.github.io/jq/
 .. _let us know: https://github.com/crate/crate-tutorials/issues/new
+.. _open notify: http://open-notify.org/
 .. _Pip: https://pypi.org/project/pip/
 .. _pipe: https://www.geeksforgeeks.org/piping-in-unix-or-linux/
-.. _sed: https://www.geeksforgeeks.org/sed-command-in-linux-unix-with-examples/
 .. _SELECT: https://crate.io/docs/crate/reference/en/latest/general/dql/selects.html
 .. _shell function: https://www.gnu.org/software/bash/manual/html_node/Shell-Functions.html
 .. _shell scripting: https://en.wikipedia.org/wiki/Shell_script
-.. _STDIN: https://en.wikipedia.org/wiki/Standard_streams
-.. _system load: https://en.wikipedia.org/wiki/Load_(computing)
-.. _uptime: https://www.geeksforgeeks.org/linux-uptime-command-with-examples/
+.. _WKT: https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry
