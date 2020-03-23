@@ -9,7 +9,7 @@ massive amounts of machine data in real-time.
 
 .. SEEALSO::
 
-    Check out the `CrateDB Reference`_ or the `CrateDB Guide`_.
+    Check out the `CrateDB How-To Guides`_  or the `CrateDB Reference`_.
 
 .. NOTE::
 
@@ -26,6 +26,6 @@ massive amounts of machine data in real-time.
     generate-time-series/index
 
 
-.. _GitHub: https://github.com/crate/cloud-tutorials
+.. _CrateDB How-To Guides: https://crate.io/docs/crate/howtos/en/latest/
 .. _CrateDB Reference: https://crate.io/docs/crate/reference/en/latest/
-.. _CrateDB Guide: https://crate.io/docs/crate/guide/en/latest/
+.. _GitHub: https://github.com/crate/cloud-tutorials
