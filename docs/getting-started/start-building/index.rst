@@ -7,40 +7,77 @@ Start building
 CrateDB is happy at the heart of any application stack, with a number of
 libraries to support development.
 
-Below is a selection of development libraries that are known to work with
-CrateDB. This is split into two categories: software that is maintained by
-Crate.io, and software that is maintained by the CrateDB community.
+Below is a selection of CrateDB client libraries.
 
 Pick your library, and start building!
 
-+-----------+-------------+-------------------------------+------------------+
-| Language  | Maintainers | Drivers                       | Plugins and ORMs |
-+===========+=============+===============================+==================+
-| Java      | Crate.io    | `crate-jdbc`_                 |                  |
-+-----------+-------------+-------------------------------+------------------+
-| Python    | Crate.io    | `crate`_                      | `SQLAlchemy`_    |
-+-----------+-------------+-------------------------------+------------------+
-| PHP       | Crate.io    | `CrateDB PDO`_                | `DBAL`_          |
-+-----------+-------------+-------------------------------+------------------+
-| C# (.NET) | Crate.io    | `Npgsql`_                     |                  |
-+-----------+-------------+-------------------------------+------------------+
-| Python    | Community   | `asyncpg`_                    |                  |
-+-----------+-------------+-------------------------------+------------------+
-| Ruby      | Community   | `crate_ruby`_                 | `ActiveRecord`_  |
-+-----------+-------------+-------------------------------+------------------+
-| Scala     | Community   | `crate-scala`_                |                  |
-+-----------+-------------+-------------------------------+------------------+
-| Node.js   | Community   | `crate-connect`_, `cratejs`_, | `Loopback`_      |
-|           |             | `node-crate`_                 |                  |
-+-----------+-------------+-------------------------------+------------------+
-| Go        | Community   | `pgx`_                        |                  |
-+-----------+-------------+-------------------------------+------------------+
-| Perl      | Community   | `DBD::Crate`_                 |                  |
-+-----------+-------------+-------------------------------+------------------+
-| Erlang    | None (EOL)  | `craterl`_                    |                  |
-+-----------+-------------+-------------------------------+------------------+
+.. list-table::
+    :header-rows: 1
 
-If you would like to see something added to this page, please `get in touch`_.
+    * - Language
+      - Maintainers
+      - Official support
+      - Driver
+    * - C# (.NET)
+      - Crate.IO
+      - ✔️
+      - `Npgsql`_
+    * - Erlang
+      - Community
+      - ❌
+      - `craterl`_
+    * - Go
+      - Community
+      - ✔️
+      - `pgx`_
+    * - Java
+      - Crate.IO
+      - ✔️
+      - `crate-jdbc`_
+    * - Node.JS
+      - Community
+      - ✔️
+      - `node-postgres`_
+    * - Node.JS
+      - Community
+      - ❌
+      - `crate-connect`_
+    * - Node.JS
+      - Community
+      - ❌
+      - `cratejs`_
+    * - Node.JS
+      - Community
+      - ❌
+      - `node-crate`_
+    * - PHP
+      - Crate.IO
+      - ✔️
+      - `CrateDB PDO`_
+    * - Perl
+      - Community
+      - ❌
+      - `DBD::Crate`_
+    * - Python
+      - Crate.IO
+      - ✔️
+      - `crate-python`_
+    * - Python
+      - Community
+      - ✔️
+      - `asyncpg`_
+    * - Ruby 
+      - Community
+      - ❌
+      - `crate_ruby`_ 
+    * - Scala
+      - Community
+      - ❌
+      - `crate-scala`_
+
+
+If you would like to see something added to this page, please `get in touch`_
+or `edit this page`_ create a pull request.
 
 .. TIP::
 
@@ -65,22 +102,24 @@ If you would like to see something added to this page, please `get in touch`_.
 .. _asyncpg: https://github.com/MagicStack/asyncpg
 .. _Authenticate: https://crate.io/docs/crate/reference/en/latest/admin/auth/index.html
 .. _client compatibility notes: https://crate.io/docs/crate/reference/en/latest/interfaces/postgres.html#client-compatibility
-.. _crate_ruby: https://rubygems.org/gems/crate_ruby
-.. _crate-connect: https://www.npmjs.com/package/crate-connect
-.. _crate-jdbc: https://crate.io/docs/clients/jdbc/en/latest/
-.. _crate-scala: https://github.com/alexanderjarvis/crate-scala
-.. _crate: https://crate.io/docs/clients/python/en/latest/
 .. _Crate.Client: https://github.com/mfussenegger/crate-mono
+.. _crate-connect: https://www.npmjs.com/package/crate-connect
 .. _CrateDB PDO: https://crate.io/docs/clients/pdo/en/latest/
+.. _crate-jdbc: https://crate.io/docs/clients/jdbc/en/latest/
 .. _cratejs: https://www.npmjs.com/package/cratejs
+.. _crate-python: https://crate.io/docs/clients/python/en/latest/
 .. _craterl: https://github.com/crate/craterl
+.. _crate_ruby: https://rubygems.org/gems/crate_ruby
+.. _crate-scala: https://github.com/alexanderjarvis/crate-scala
 .. _DBAL: https://crate.io/docs/clients/dbal/en/latest/
 .. _DBD::Crate: https://github.com/mamod/DBD-Crate
+.. _edit this page: https://github.com/crate/crate-tutorials/blob/master/docs/getting-started/start-building/index.rst
 .. _get in touch: https://crate.io/contact/
 .. _implementation differences: https://crate.io/docs/crate/reference/en/latest/interfaces/postgres.html#implementation-differences
 .. _let us know: https://crate.io/contact/
 .. _Loopback: https://github.com/lovelysystems/loopback-connector-crateio
 .. _node-crate: https://www.npmjs.com/package/node-crate
+.. _node-postgres: https://node-postgres.com/
 .. _Npgsql: https://crate.io/docs/clients/npgsql/en/latest/
 .. _pgx: https://github.com/jackc/pgx
 .. _PostgreSQL wire protocol: https://crate.io/docs/crate/reference/en/latest/interfaces/postgres.html
