@@ -193,11 +193,6 @@ with CrateDB.
 
     The `client tools`_ category on our blog.
 
-Next steps
-==========
-
-Now you know how to query CrateDB manually, it's time to :ref:`find a client
-library and start building <start-building>`.
 
 .. _aggregation: https://crate.io/docs/stable/sql/aggregation.html
 .. _client tools: https://crate.io/a/category/client-tools/

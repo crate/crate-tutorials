@@ -21,4 +21,3 @@ This is a step-by-step tutorial that will show you how to:
 
    install-run/index
    first-use/index
-   start-building/index
