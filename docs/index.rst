@@ -28,4 +28,4 @@ massive amounts of machine data in real-time.
 
 .. _CrateDB How-To Guides: https://crate.io/docs/crate/howtos/en/latest/
 .. _CrateDB Reference: https://crate.io/docs/crate/reference/en/latest/
-.. _GitHub: https://github.com/crate/cloud-tutorials
+.. _GitHub: https://github.com/crate/crate-tutorials
