@@ -25,6 +25,7 @@ data and write it to CrateDB using the client of your choice.
    cli
    python
    javascript
+   go
 
 .. _system load: https://en.wikipedia.org/wiki/Load_(computing)
 .. _Internet of Things: https://en.wikipedia.org/wiki/Internet_of_things
