@@ -25,6 +25,7 @@ Windows.
 .. contents::
    :local:
 
+
 Download and run
 ================
 
@@ -47,11 +48,12 @@ CrateDB, like so:
 
    CrateDB performs a number of `bootstrap checks`_ on startup.
 
+
 Next steps
 ==========
 
-Now you have CrateDB up and running, it's time to :ref:`import some test data
-<import-test-data>`.
+Now you have CrateDB up and running, :ref:`take the guided tour <first-use>`.
+
 
 .. _7-Zip: http://www.7-zip.org/
 .. _bootstrap checks: https://crate.io/docs/crate/guide/en/latest/admin/bootstrap-checks.html

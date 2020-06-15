@@ -1,26 +1,78 @@
-.. _query-test-data:
+.. _first-use:
 
-======================
-The basics of querying
-======================
+=========
+First use
+=========
 
-CrateDB uses `regular SQL`_ for queries.
-
-In this document, we show you the basics of how to query CrateDB using SQL.
-
-.. NOTE::
-
-   This document assumes that you have CrateDB :ref:`installed and
-   running<install-run>` and that you have :ref:`imported some test data
-   <import-test-data>`.
+Once CrateDB is :ref:`installed and running <install-run>`, you can start to
+interact with the database for the first time. Follow this tutorial for a brief
+guided tour.
 
 .. rubric:: Table of contents
 
 .. contents::
    :local:
 
+.. _admin-ui:
+
+
+Admin UI
+========
+
+CrateDB ships with a web administration user interface (UI), or `admin UI`_ for
+short.
+
+The CrateDB admin UI runs on every CrateDB node, and you can use it to inspect
+and interact with the whole CrateDB cluster in a number of ways.
+
+We will use the admin UI throughout this section.
+
+Access the admin UI in your browser using a URL like this::
+
+  http://localhost:4200/
+
+If CrateDB is not running locally, replace ``localhost`` with the hostname
+CrateDB is running on.
+
+You should see something like this:
+
+.. image:: _assets/img/first-use/admin-ui.png
+
+
+.. _import:
+
+Import some tweets
+------------------
+
+In the admin UI, select the *Help* tab (question mark icon) from the left-hand
+navigation menu.
+
+You should see something like this:
+
+.. image:: _assets/img/first-use/admin-ui-help.png
+
+Select *IMPORT TWEETS FOR TESTING* and follow the instructions to authenticate
+your Twitter account.
+
+.. TIP::
+
+   Don't worry. This isn’t going to post anything on your behalf. All this does
+   is import a selection of recent public tweets on Twitter.
+
+Leave this running and stop it when you have enough tweets. Aim for at least
+few thousand.
+
+When you're done, select the *Tables* icon from the left-hand navigation.
+
+You should see something like this:
+
+.. image:: _assets/img/first-use/admin-ui-tweets.png
+
+
 Query your tweets
-=================
+-----------------
+
+CrateDB uses `regular SQL`_ for queries.
 
 One of the easiest ways to query CrateDB is with the query console in the
 CrateDB admin UI.
@@ -31,7 +83,7 @@ Select the *Console* tab from the left-hand navigation menu.
 
 You should see something like this:
 
-.. image:: ../../_assets/img/getting-started/admin-ui-console.png
+.. image:: _assets/img/first-use/admin-ui-console.png
 
 In the previous document, we imported some tweets from the public Twitter
 timeline.
@@ -59,7 +111,7 @@ Type this query into the admin UI query console. Then select *EXECUTE QUERY*.
 
 You should see something like this:
 
-.. image:: ../../_assets/img/getting-started/admin-ui-results.png
+.. image:: _assets/img/first-use/admin-ui-results.png
 
 CrateDB's SQL support includes distributed `aggregation`_, `scalar`_ functions
 and `geospatial`_ support for more complex queries and data analysis. CrateDB
@@ -70,16 +122,11 @@ also comes with `fulltext search`_.
    Consult `the CrateDB query reference`_ for documentation on the full range
    of query capabilities.
 
-Taking it further
-=================
 
-Before we take a look at client libraries for CrateDB, let's take a quick look
-at three additional ways you can query CrateDB.
+Crash
+=====
 
-The CrateDB Shell
------------------
-
-The CrateDB Shell (aka `Crash`_) is a command-line shell.
+The CrateDB shell (aka `Crash`_) is a command-line shell.
 
 First, you must `install Crash`_.
 
@@ -132,8 +179,9 @@ You should see something like this:
    +---------------------------------+
    SELECT 10 rows in set (0.003 sec)
 
+
 The CrateDB HTTP endpoint
--------------------------
+=========================
 
 CrateDB provides a `HTTP endpoint`_.
 
@@ -181,22 +229,23 @@ CrateDB will respond using ``JSON``. You should see something like this:
 
 In this example, we have a single row with a single column: ``3879``.
 
-Third-party client tools
-------------------------
 
-The admin UI and Crash are the two client tools that ship with CrateDB. But
-those are not the only client tools you can use with CrateDB. Because CrateDB
-uses the PostgreSQL wire protocol, many PostgreSQL compatible client tools work
-with CrateDB.
+Next steps
+==========
+
+Start building with `CrateDB clients and tools`_.
 
 .. SEEALSO::
 
-    The `client tools`_ category on our blog.
+    :ref:`Generate time series data <gen-ts>` (tutorials for multiple
+    languages)
 
 
+.. _admin UI: https://crate.io/docs/clients/admin-ui/en/latest/
 .. _aggregation: https://crate.io/docs/stable/sql/aggregation.html
 .. _client tools: https://crate.io/a/category/client-tools/
 .. _Crash: https://crate.io/docs/clients/crash/en/latest/
+.. _CrateDB clients and tools: https://crate.io/docs/crate/clients-tools/en/latest/
 .. _fulltext search: https://crate.io/docs/crate/reference/en/latest/general/dql/fulltext.html
 .. _geospatial: https://crate.io/docs/stable/sql/data_types.html#geo-point
 .. _HTTP endpoint: https://crate.io/docs/crate/reference/en/latest/interfaces/http.html

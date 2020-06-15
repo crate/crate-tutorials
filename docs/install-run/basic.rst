@@ -6,7 +6,6 @@
 Basic CrateDB tarball installation
 ==================================
 
-
 This page shows you how get up and running directly from the tarball on any
 `Unix-like system`_.
 
@@ -32,6 +31,7 @@ This page shows you how get up and running directly from the tarball on any
 .. contents::
    :local:
 
+
 .. _install_targz:
 
 Download
@@ -52,6 +52,7 @@ Once downloaded, unpack the tarball and change into the resulting directory:
 
    Check out the `release notes`_ for specific information about each CrateDB
    release.
+
 
 Run
 ===
@@ -77,11 +78,12 @@ address.
 
    CrateDB performs a number of `bootstrap checks`_ on startup.
 
+
 Next steps
 ==========
 
-Now you have CrateDB up and running, it's time to :ref:`import some test data
-<import-test-data>`.
+Now you have CrateDB up and running, :ref:`take the guided tour <first-use>`.
+
 
 .. _also available: https://cdn.crate.io/downloads/releases/
 .. _An introductory tutorial: https://crate.io/docs/crate/guide/tutorials/hello.html
