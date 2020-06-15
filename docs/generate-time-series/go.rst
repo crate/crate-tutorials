@@ -24,8 +24,8 @@ Prerequisites
 
 You must have CrateDB :ref:`installed and running <install-run>`.
 
-Make sure you're running an up-to-date version of `Go`_. We recommend 
-Go 1.11 or higher since we will be making use of `modules`_. 
+Make sure you're running an up-to-date version of `Go`_. Go 1.11 or higher 
+is recommended since you will be making use of `modules`_. 
 
 Most of this tutorial is designed to be run as a local Go project using Go 
 tooling since the `compilation`_ unit is the package and not a single line.
@@ -37,13 +37,23 @@ To begin, create a project directory and navigate into it:
     $ mkdir time-series-go
     $ cd time-series-go
 
-Next, choose a module path and create a `go.mod` file that declares it:
+Next, choose a module path and create a ``go.mod`` file that declares it. A 
+module is a collection of Go packages stored in a file hierarchy with a 
+``go.mod`` file at the root. This file defines the module’s module path, which 
+is also the import path for the root directory and its dependency requirements. 
+
+Without a ``go.mod`` file, your project contains a package but no module and 
+the ``go`` command will make up a fake import path based on the directory name. 
+
+Let's make the current directory the root of a module by using the 
+``go mod init`` command to create a ``go.mod`` file there:  
 
 .. code-block:: console
 
     $ go mod init example.com/time-series-go
 
-You should see a `go.mod` file in the current directory with contents similar to:
+You should see a ``go.mod`` file in the current directory with contents similar
+to:
 
 .. code-block:: console
 
@@ -51,13 +61,13 @@ You should see a `go.mod` file in the current directory with contents similar to
 
     go 1.14
 
-Next, create a file named `main.go` in the same directory:
+Next, create a file named ``main.go`` in the same directory:
 
 .. code-block:: console
 
    $ touch main.go
 
-Open up your favorite code editor. We will be editing this file a lot!
+Open up your favorite code editor. You will be editing this file a lot!
 
 
 Get ISS telemetry data
@@ -69,7 +79,7 @@ location of the International Space Station). The endpoint for this data is
 `<http://api.open-notify.org/iss-now.json>`_.
 
 
-In your `main.go` file, declare the main package at the top (to tell the 
+In your ``main.go`` file, declare the main package at the top (to tell the 
 compiler that our program is an executable), import some packages from the 
 `standard library`_ that will be used in this tutorial and declare a main 
 function which will be the entry point of our executable program:
@@ -91,9 +101,9 @@ function which will be the entry point of our executable program:
     }
 
 Then, look at the JSON data that gets returned from going to the Open
-Notify API endpoint at `<http://api.open-notify.org/iss-now.json>`_. The 
-endpoint returns a JSON payload, which contains an ``iss_position`` object
-with ``latitude`` and ``longitude`` data.
+Notify API endpoint at `<http://api.open-notify.org/iss-now.json>`_ in your
+browser. The endpoint returns a JSON payload, which contains an ``iss_position`` 
+object with ``latitude`` and ``longitude`` data.
 
 .. code-block:: js
 
@@ -108,7 +118,9 @@ with ``latitude`` and ``longitude`` data.
 
 The longitude and latitude of the International Space Station changes 
 constantly and is what you want to extract from this payload and insert into
-CrateDB. To parse this JSON, you can create a `struct`_ that can be used to 
+CrateDB. 
+
+To parse this JSON, you can create a `struct`_ that can be used to 
 `unmarshal`_ the data into. When you unmarshal JSON into a struct, the 
 function matches incoming object keys to the keys in the struct field name
 or its tag. By default, object keys which don't have a corresponding struct 
@@ -125,15 +137,6 @@ field are ignored.
 
 Now, create a function that makes an HTTP GET request to the Open Notify API 
 endpoint and returns longitude and latitude as a `geo_point`_ declaration.
-
-The Go standard library comes with great support for HTTP client and server
-implementations in the `net/http`_ package. In this example you’ll use it to 
-issue an HTTP GET request to the API endpoint. 
-
-Then you will read the response body and unmarshal the JSON into your defined 
-struct ``issInfo``. 
-
-Lastly, you will format the return string and return it. 
 
 .. code-block:: js
 
@@ -164,7 +167,17 @@ Lastly, you will format the return string and return it.
         return s, nil
     }
 
-In your main function, call your ``getISSPosition()`` function and print out the result:
+Above, the ``getISSPosition()`` function:
+- Uses the `net/http`_ package from the Go standard library to issue an 
+HTTP GET request to the API endpoint 
+- Implements some basic error handling and checks to see whether the
+response code is in the 200 range
+- Reads the response body and unmarshals the JSON into the defined 
+struct ``issInfo`` 
+- Formats the return string and returns it 
+
+Then in the main function, call the ``getISSPosition()`` function and print 
+out the result:
 
 .. code-block:: js
 
@@ -177,7 +190,7 @@ In your main function, call your ``getISSPosition()`` function and print out the
         fmt.Println(pos)
     }
 
-Save all your changes and run the code in the command line:
+Save all your changes and run the code:
 
 .. code-block:: console
 
@@ -188,6 +201,8 @@ The result should contain your geo_point string:
 .. code-block:: js
 
     (104.7298, 5.0335)
+
+You can run this multiple times to get the new position of the ISS each time. 
 
 
 Set up CrateDB
@@ -222,16 +237,18 @@ Then, in your main function, connect to CrateDB using the `Postgres Wire Protoco
         conn, err = pgx.Connect(context.Background(), "postgresql://crate@localhost:5432/doc")
         if err != nil {
             log.Fatalf("unable to connect to database: %v\n", err)
+        } else {
+            fmt.Println("CONNECT OK")
         }
 	    defer conn.Close(context.Background())
 
-        conn.Exec(context.Background(), "CREATE TABLE iss (
+        conn.Exec(context.Background(), "CREATE TABLE [ IF NOT EXISTS ] iss (
                                             timestamp TIMESTAMP GENERATED ALWAYS AS CURRENT_TIMESTAMP, 
                                             position GEO_POINT)")
     }
 
 
-Save all your changes and run the new code in the command line:
+Save all your changes and run the new code:
 
 .. code-block:: console
 
@@ -267,11 +284,13 @@ result into the ``iss`` table:
             _, err := conn.Exec(context.Background(), "INSERT INTO iss (position) VALUES ($1)", pos)
             if err != nil {
                 log.Fatalf("unable to insert data: %v\n", err)
+            } else {
+                fmt.Println("INSERT OK")
             }
         }
     }
 
-Save all your changes and run the code in the command line:
+Save all your changes and run the code:
 
 .. code-block:: console
 
@@ -299,14 +318,7 @@ In your file ``main.go``, create a function that encapsulates data insertion:
     }
 
 Then in the ``main`` function of your script, create an infinite loop that 
-gets the latest ISS position and inserts the data into the database.  You 
-also have some basic error handling, in case either the API query or the
-CrateDB operation fails.  The script sleeps for 5 seconds after each sample. 
-Accordingly, the time series data will have a *resolution* of 5 seconds. If 
-you wish to change this resolution, you may want to configure your script 
-differently.
-
-Don't forget to import the `time`_ package. 
+gets the latest ISS position and inserts the data into the database.  
 
 .. code-block:: js
 
@@ -323,6 +335,8 @@ Don't forget to import the `time`_ package.
                 err = insertData(pos)
                 if err != nil {
                     log.Fatalf("unable to insert data: %v\n", err)
+                } else {
+                    fmt.Println("INSERT OK")
                 }
             }
             fmt.Println("Sleeping for 5 seconds...")
@@ -330,18 +344,32 @@ Don't forget to import the `time`_ package.
 	    }
     }
 
+Above, the ``main()`` function:
+- retrieves the latest ISS position through the ``getISSPosition()`` function
+- inserts the ISS position into CrateDB through the ``insertData()`` function 
+- implements some basic error handling, in case either the API query or the
+CrateDB operation fails
+- sleeps for 5 seconds after each sample using the `time`_ package
+
+Accordingly, the time series data will have a *resolution* of 5 seconds. If 
+you wish to change this resolution, you may want to configure your script 
+differently.
+
 Run the script from the command line:
 
 .. code-block:: console
 
     $ go run main.go
 
+    INSERT OK
     Sleeping for 5 seconds...
+    INSERT OK
     Sleeping for 5 seconds...
+    INSERT OK
     Sleeping for 5 seconds...
 
-As the script runs, you should see the table filling up in the CrateDB Admin
-UI:
+As the script runs, you should see the table filling up in the `CrateDB Admin
+UI`_:
 
 .. image:: ../_assets/img/generate-time-series/rows.png
 
@@ -351,6 +379,8 @@ And, for bonus points, if you select the arrow next to the location data, it
 will open up a map view showing the current position of the ISS:
 
 .. image:: ../_assets/img/generate-time-series/map.png
+
+You can find the full version of the script `here`_. 
 
 
 .. _compilation: https://www.geeksforgeeks.org/difference-between-compiled-and-interpreted-language/
@@ -362,6 +392,7 @@ will open up a map view showing the current position of the ISS:
 .. _pgx: https://github.com/jackc/pgx/tree/v4
 .. _geo_point: https://crate.io/docs/crate/reference/en/latest/general/ddl/data-types.html#geo-point
 .. _Go: https://golang.org/
+.. _here: https://play.golang.org/p/iwFC5yu0JhX
 .. _modules: https://blog.golang.org/migrating-to-go-modules
 .. _net/http: https://golang.org/pkg/net/http/
 .. _open notify: http://open-notify.org/
