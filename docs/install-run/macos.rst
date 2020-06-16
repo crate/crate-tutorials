@@ -33,10 +33,6 @@ terminal application:
 If you don't already have `Java 11`_ installed, the above command will try to
 take care of that for you along with a few other housekeeping tasks.
 
-.. NOTE::
-
-   CrateDB performs a number of `bootstrap checks`_ on startup.
-
 
 Next steps
 ==========
