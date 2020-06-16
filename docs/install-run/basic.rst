@@ -74,10 +74,6 @@ address.
 
    Consult the `CrateDB reference documentation`_ for help using this command.
 
-.. NOTE::
-
-   CrateDB performs a number of `bootstrap checks`_ on startup.
-
 
 Next steps
 ==========

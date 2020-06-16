@@ -44,10 +44,6 @@ CrateDB, like so:
 
    PS> ./bin/crate
 
-.. NOTE::
-
-   CrateDB performs a number of `bootstrap checks`_ on startup.
-
 
 Next steps
 ==========
