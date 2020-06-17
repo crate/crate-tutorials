@@ -12,6 +12,7 @@ horizontally scalable architecture that lends itself well to containerization.
 .. contents::
    :local:
 
+
 One-step setup
 ==============
 
@@ -34,15 +35,16 @@ Spin up the official CrateDB Docker image, like so:
    you're ready to start using CrateDB for data that you care about, you should
    consult the `full guide to CrateDB and Docker`_.
 
+
 Next steps
 ==========
 
-Now you have CrateDB up and running, it's time to :ref:`import some test data
-<import-test-data>`.
+Now you have CrateDB up and running, :ref:`take the guided tour <first-use>`.
 
-.. _troubleshooting guide: https://crate.io/docs/crate/guide/en/latest/deployment/containers/docker.html#docker-troubleshooting
+
 .. _bootstrap check: https://crate.io/docs/crate/guide/en/latest/admin/bootstrap-checks.html
 .. _CrateDB Docker image: https://hub.docker.com/_/crate/
 .. _Docker: https://www.docker.com/
 .. _full guide to CrateDB and Docker: https://crate.io/docs/crate/guide/en/latest/deployment/containers/docker.html
 .. _resource constraints: https://crate.io/docs/crate/guide/en/latest/deployment/containers/docker.html#resource-constraints
+.. _troubleshooting guide: https://crate.io/docs/crate/guide/en/latest/deployment/containers/docker.html#docker-troubleshooting

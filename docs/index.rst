@@ -22,7 +22,9 @@ massive amounts of machine data in real-time.
     :maxdepth: 3
     :titlesonly:
 
-    getting-started/index
+
+    install-run/index
+    first-use
     generate-time-series/index
 
 

@@ -1,12 +1,12 @@
 .. _gen-ts-javascript:
 
-==========================================
-Generate time series data using JavaScript
-==========================================
+=======================================
+Generate time series data using Node.js
+=======================================
 
 This tutorial will show you how to generate some :ref:`experimental time series
 data <gen-ts>` from information about the `International Space Station`_
-using Javascript (specifically, `Node.js`_).
+using `Node.js`_.
 
 .. SEEALSO::
 
@@ -23,7 +23,7 @@ Prerequisites
 
 You must have CrateDB :ref:`installed and running <install-run>`.
 
-Make sure you're running an up-to-date version of `Node`_.
+Make sure you're running an up-to-date version of `Node.js`_.
 
 Then, upgrade to the latest `npm`_ version:
 
@@ -37,27 +37,26 @@ Install the `node-postgres`_ and `Axios`_ libraries:
 
     $ npm install pg axios
 
-The ``node-postgres`` and ``axios`` libraries both use `Promises`_ when
+The ``node-postgres`` and ``axios`` libraries both use `promises`_ when
 performing network operations. Promises are a way of encapsulating the eventual
 result of an asynchronous operation.
 
 .. seealso::
 
-    If you're not familiar with asynchronous operations and Promises, check out
+    If you're not familiar with asynchronous operations and promises, check out
     Mozilla's `detailed guide`_ on the topic.
 
 Most of this tutorial is designed for Node's `interactive REPL mode`_ so that
 you can experiment with the commands as you see fit. Since both libraries use
-Promises, you should start ``node`` with support for the `await`_ operator,
-like so:
+promises, you should start ``node`` with support for the `await`_ operator:
 
 .. code-block:: console
 
     $ node --experimental-repl-await
 
 
-Use JavaScript to get ISS telemetry data
-=========================================
+Get ISS telemetry data
+======================
 
 You can get telemetry data from `Open Notify`_, a third-party service that
 provides a simple API to consume data from NASA (specifically, the current
@@ -73,7 +72,7 @@ First, import the `Axios`_ library:
     > const axios = require('axios').default;
 
 Then, read the current position of the ISS with an HTTP GET request to the Open
-Notify API endpoint, like this:
+Notify API endpoint:
 
 .. code-block:: js
 
@@ -213,7 +212,7 @@ result into the ``iss`` table:
 Press the up arrow on your keyboard and hit *Enter* to run the same command a
 few more times.
 
-When you're done, you can `SELECT`_ that data back out of CrateDB, like so:
+When you're done, you can `SELECT`_ that data back out of CrateDB:
 
 .. code-block:: js
 
@@ -239,11 +238,11 @@ When you're done, you can `SELECT`_ that data back out of CrateDB, like so:
 
 Here you have recorded three sets of ISS position coordinates.
 
-Automate it
-===========
+Automate the process
+====================
 
-Now you have the basics figured out, you can automate the data collection. Doing
-this will require a change of approach.
+Now that you have covered the key aspects, you can automate the data collection.
+Doing this will require a change of approach.
 
 Previously, you were using a `client`_ to connect to and insert data into
 CrateDB. However, clients are ephemeral, and once closed, you need to recreate
@@ -254,7 +253,7 @@ Instead, use a `connection pool`_ to manage your connections. Connection pools
 manage a collection of connected clients that you can request, use, and return
 to the pool.
 
-Create a new file called ``iss-position.js``, like this:
+Create a new file called ``iss-position.js``:
 
 .. code-block:: javascript
 
@@ -276,7 +275,7 @@ Create a new file called ``iss-position.js``, like this:
                 "INSERT INTO iss (position) VALUES (?)", [current_position])
         })
         .then(_ => console.log("INSERT OK"))
-        .catch(err => console.error("INSERT ERORR", err))
+        .catch(err => console.error("INSERT ERROR", err))
     }
 
     // Loop indefinitely
@@ -291,7 +290,7 @@ Create a new file called ``iss-position.js``, like this:
     loop()
 
 In the above script, you have merged the ``position`` function with the
-insertion. It uses `Promise chaining`_ so that the API query and the CrateDB
+insertion. It uses `promise chaining`_ so that the API query and the CrateDB
 insertion can happen sequentially, yet asynchronously.
 
 You also have some basic error handling, in case either the API query or the
@@ -301,7 +300,7 @@ Here, the script sleeps for 10 seconds after each sample. Accordingly, the time
 series data will have a *resolution* of 10 seconds. If you wish to change this
 resolution, you may want to configure your script differently.
 
-Run the script from the command line, like so:
+Run the script from the command line:
 
 .. code-block:: console
 
@@ -315,9 +314,9 @@ Run the script from the command line, like so:
 
 .. TIP::
 
-    If you get a ``MODULE_NOT_FOUND`` error when trying to  run this script,
-    make sure you are running it from the same directory installed the npm
-    libraries.
+    If you get a ``MODULE_NOT_FOUND`` error when trying to run this script,
+    make sure you are running it from the same directory where the npm
+    libraries are installed.
 
 As the script runs, you should see the table filling up in the CrateDB Admin
 UI:
@@ -345,12 +344,11 @@ will open up a map view showing the current position of the ISS:
 .. _interactive REPL mode: https://www.oreilly.com/library/view/learning-node-2nd/9781491943113/ch04.html
 .. _International Space Station: https://www.nasa.gov/mission_pages/station/main/index.html
 .. _node-postgres: https://www.npmjs.com/package/pg
-.. _Node: https://nodejs.org/en/
 .. _Node.js: https://nodejs.org/en/
 .. _npm: https://www.npmjs.com/
 .. _open notify: http://open-notify.org/
 .. _Postgres Wire Protocol: https://crate.io/docs/crate/reference/en/latest/interfaces/postgres.html
-.. _Promise chaining: https://javascript.info/promise-chaining
-.. _Promises: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+.. _promise chaining: https://javascript.info/promise-chaining
+.. _promises: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
 .. _SELECT: https://crate.io/docs/crate/reference/en/latest/general/dql/selects.html
 .. _WKT: https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry
