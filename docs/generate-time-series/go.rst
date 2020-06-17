@@ -5,9 +5,8 @@
 Generate time series data using Go
 ==================================
 
-This tutorial will show you how to generate some :ref:`experimental time 
-series data <gen-ts>` from information about the `International Space Station`_
-using `Go`_.
+This tutorial will show you how to generate some :ref:`mock time series data <gen-ts>` 
+about the `International Space Station`_ (ISS) using `Go`_.
 
 .. SEEALSO::
 
@@ -22,35 +21,35 @@ using `Go`_.
 Prerequisites
 =============
 
-You must have CrateDB :ref:`installed and running <install-run>`.
+CrateDB must be :ref:`installed and running <install-run>`.
 
-Make sure you're running an up-to-date version of `Go`_. Go 1.11 or higher 
-is recommended since you will be making use of `modules`_. 
+Make sure you are running an up-to-date version of `Go`_. We recommend Go 1.11 
+or higher since you will be making use of `modules`_. 
 
-Most of this tutorial is designed to be run as a local Go project using Go 
+Most of this tutorial is designed to be run as a local project using Go 
 tooling since the `compilation`_ unit is the package and not a single line.
 
 To begin, create a project directory and navigate into it:
 
 .. code-block:: console
 
-    $ mkdir time-series-go
-    $ cd time-series-go
+    sh$ mkdir time-series-go
+    sh$ cd time-series-go
 
 Next, choose a module path and create a ``go.mod`` file that declares it. A 
 module is a collection of Go packages stored in a file hierarchy with a 
 ``go.mod`` file at the root. This file defines the module’s module path, which 
 is also the import path for the root directory and its dependency requirements. 
 
-Without a ``go.mod`` file, your project contains a package but no module and 
+Without a ``go.mod`` file, your project contains a package, but no module and 
 the ``go`` command will make up a fake import path based on the directory name. 
 
-Let's make the current directory the root of a module by using the 
+Make the current directory the root of a module by using the 
 ``go mod init`` command to create a ``go.mod`` file there:  
 
 .. code-block:: console
 
-    $ go mod init example.com/time-series-go
+    sh$ go mod init example.com/time-series-go
 
 You should see a ``go.mod`` file in the current directory with contents similar
 to:
@@ -65,24 +64,23 @@ Next, create a file named ``main.go`` in the same directory:
 
 .. code-block:: console
 
-   $ touch main.go
+   sh$ touch main.go
 
 Open up your favorite code editor. You will be editing this file a lot!
 
 
-Get ISS telemetry data
-======================
+Get the current position of the ISS
+===================================
 
-You can get telemetry data from `Open Notify`_, a third-party service that
-provides a simple API to consume data from NASA (specifically, the current
-location of the International Space Station). The endpoint for this data is
-`<http://api.open-notify.org/iss-now.json>`_.
+`Open Notify`_ is a third-party service that provides an API to consume data
+about the current position, or `ground point`_, of the ISS.
 
+The endpoint for this API is `<http://api.open-notify.org/iss-now.json>`_.
 
 In your ``main.go`` file, declare the main package at the top (to tell the 
-compiler that our program is an executable), import some packages from the 
-`standard library`_ that will be used in this tutorial and declare a main 
-function which will be the entry point of our executable program:
+compiler that the program is an executable) and import some packages from the 
+`standard library`_ that will be used in this tutorial. Declare a main 
+function which will be the entry point of the executable program:
 
 .. code-block:: js
 
@@ -100,10 +98,9 @@ function which will be the entry point of our executable program:
 
     }
 
-Then, look at the JSON data that gets returned from going to the Open
-Notify API endpoint at `<http://api.open-notify.org/iss-now.json>`_ in your
-browser. The endpoint returns a JSON payload, which contains an ``iss_position`` 
-object with ``latitude`` and ``longitude`` data.
+Then, read the current position of the ISS by going to the Open Notify API 
+endpoint at `<http://api.open-notify.org/iss-now.json>`_ in your
+browser. 
 
 .. code-block:: js
 
@@ -116,15 +113,17 @@ object with ``latitude`` and ``longitude`` data.
         }
     }
 
+As shown, the endpoint returns a JSON payload, which contains an
+``iss_position`` object with ``latitude`` and ``longitude`` data.
+
 The longitude and latitude of the International Space Station changes 
 constantly and is what you want to extract from this payload and insert into
 CrateDB. 
 
-To parse this JSON, you can create a `struct`_ that can be used to 
-`unmarshal`_ the data into. When you unmarshal JSON into a struct, the 
-function matches incoming object keys to the keys in the struct field name
-or its tag. By default, object keys which don't have a corresponding struct 
-field are ignored.
+To parse this JSON, you can create a `struct`_ to `unmarshal`_ the data into. 
+When you unmarshal JSON into a struct, the function matches incoming object 
+keys to the keys in the struct field name or its tag. By default, object keys 
+which don't have a corresponding struct field are ignored.
 
 .. code-block:: js
 
@@ -194,7 +193,7 @@ Save all your changes and run the code:
 
 .. code-block:: console
 
-    $ go run main.go
+    sh$ go run main.go
 
 The result should contain your geo_point string:
 
@@ -248,16 +247,17 @@ Then, in your main function, connect to CrateDB using the `Postgres Wire Protoco
     }
 
 
-Save all your changes and run the new code:
+Save all your changes and run the code:
 
 .. code-block:: console
 
-    $ go run main.go
+    sh$ go run main.go
 
 When you run the script this time, the ``go`` command will look up the module 
-containing the `pgx`_ package and add it to ``go.mod``. In the `CrateDB 
-Admin UI`_, you should see the new table when you navigate to the *Tables* 
-screen using the left-hand navigation menu:
+containing the `pgx`_ package and add it to ``go.mod``. 
+
+In the `CrateDB Admin UI`_, you should see the new table when you navigate to
+ the *Tables* screen using the left-hand navigation menu:
 
 .. image:: ../_assets/img/generate-time-series/table.png
 
@@ -294,19 +294,19 @@ Save all your changes and run the code:
 
 .. code-block:: console
 
-    $ go run main.go
+    sh$ go run main.go
 
 Press the up arrow on your keyboard and hit *Enter* to run the same command a
 few more times.
 
-When you're done, you can `SELECT`_ that data back out of CrateDB by executing
+When you are done, you can `SELECT`_ that data back out of CrateDB by executing
 ``SELECT * FROM "doc"."iss"`` in the `SQL Console`_ of the `CrateDB Admin UI`_. 
 
 
 Automate the process
 ====================
 
-Now that you have covered the key aspects, you can automate the data collection.
+Now that you have the key components, you can automate the data collection.
 
 In your file ``main.go``, create a function that encapsulates data insertion:
 
@@ -317,8 +317,8 @@ In your file ``main.go``, create a function that encapsulates data insertion:
         return err
     }
 
-Then in the ``main`` function of your script, create an infinite loop that 
-gets the latest ISS position and inserts the data into the database.  
+Then in the script's ``main`` function, create an infinite loop that gets the
+ latest ISS position and inserts the data into the database.  
 
 .. code-block:: js
 
@@ -392,6 +392,7 @@ You can find the full version of the script `here`_.
 .. _pgx: https://github.com/jackc/pgx/tree/v4
 .. _geo_point: https://crate.io/docs/crate/reference/en/latest/general/ddl/data-types.html#geo-point
 .. _Go: https://golang.org/
+.. _ground point: https://en.wikipedia.org/wiki/Ground_track
 .. _here: https://play.golang.org/p/iwFC5yu0JhX
 .. _modules: https://blog.golang.org/migrating-to-go-modules
 .. _net/http: https://golang.org/pkg/net/http/
