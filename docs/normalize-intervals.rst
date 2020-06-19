@@ -6,7 +6,7 @@ Normalize time series data intervals
 
 .. sidebar:: The ISS Orbit
 
-    .. image:: _assets/img/normalize-intervals/orbit.png
+    .. image:: _assets/img/normalize-intervals/orbit.gif
         :alt: An animated visualization of the ISS orbit
         :target: https://en.wikipedia.org/wiki/International_Space_Station#/media/File:Animation_of_International_Space_Station_trajectory.gif
 
