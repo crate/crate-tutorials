@@ -60,12 +60,12 @@ release version), please contact the `@crate/tech-writing`_ team.
 .. _configured: https://github.com/crate/crate-tutorials/blob/master/.travis.yml
 .. _fswatch: https://github.com/emcrisostomo/fswatch
 .. _Read the Docs: http://readthedocs.org
-.. _ReStructuredText: http://docbuild.sourceforge.net/rst.html
+.. _ReStructuredText: http://docutils.sourceforge.net/rst.html
 .. _Sphinx: http://sphinx-doc.org/
 
 
 .. |build| image:: https://img.shields.io/endpoint.svg?color=blue&url=https%3A%2F%2Fraw.githubusercontent.com%2Fcrate%2Fcrate-tutorials%2Fmaster%2Fdocs%2Fbuild.json
-    :alt: build version
+    :alt: Build version
     :target: https://github.com/crate/crate-tutorials/blob/master/docs/build.json
 
 .. |travis| image:: https://img.shields.io/travis/crate/crate-tutorials.svg?style=flat
