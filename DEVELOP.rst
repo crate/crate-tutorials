@@ -53,7 +53,7 @@ Please do not merge pull requests until the tests pass.
 branch is updated.
 
 To make changes to the RTD configuration (e.g., to activate or deactivate a
-release version), please contact the `@crate/docs`_ team.
+release version), please contact the `@crate/tech-writing`_ team.
 
 
 .. _@crate/docs: https://github.com/orgs/crate/teams/docs
