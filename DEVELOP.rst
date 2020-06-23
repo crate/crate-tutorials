@@ -24,7 +24,7 @@ For help, run:
 
     $ make
 
-    Crate Docs Utils
+    Crate Docs Build
 
     Run `make <TARGET>`, where <TARGET> is one of:
 
@@ -44,7 +44,7 @@ You must install `fswatch`_ to use the ``dev`` target.
 Continuous integration and deployment
 -------------------------------------
 
-|utils| |travis| |rtd|
+|build| |travis| |rtd|
 
 Travis CI is `configured`_ to run ``make check`` from the ``docs`` directory.
 Please do not merge pull requests until the tests pass.
@@ -60,13 +60,13 @@ release version), please contact the `@crate/docs`_ team.
 .. _configured: https://github.com/crate/crate-tutorials/blob/master/.travis.yml
 .. _fswatch: https://github.com/emcrisostomo/fswatch
 .. _Read the Docs: http://readthedocs.org
-.. _ReStructuredText: http://docutils.sourceforge.net/rst.html
+.. _ReStructuredText: http://docbuild.sourceforge.net/rst.html
 .. _Sphinx: http://sphinx-doc.org/
 
 
-.. |utils| image:: https://img.shields.io/endpoint.svg?color=blue&url=https%3A%2F%2Fraw.githubusercontent.com%2Fcrate%2Fcrate-tutorials%2Fmaster%2Fdocs%2Futils.json
-    :alt: Utils version
-    :target: https://github.com/crate/crate-tutorials/blob/master/docs/utils.json
+.. |build| image:: https://img.shields.io/endpoint.svg?color=blue&url=https%3A%2F%2Fraw.githubusercontent.com%2Fcrate%2Fcrate-tutorials%2Fmaster%2Fdocs%2Fbuild.json
+    :alt: build version
+    :target: https://github.com/crate/crate-tutorials/blob/master/docs/build.json
 
 .. |travis| image:: https://img.shields.io/travis/crate/crate-tutorials.svg?style=flat
     :alt: Travis CI status
