@@ -56,7 +56,7 @@ To make changes to the RTD configuration (e.g., to activate or deactivate a
 release version), please contact the `@crate/tech-writing`_ team.
 
 
-.. _@crate/docs: https://github.com/orgs/crate/teams/docs
+.. _@crate/tech-writing: https://github.com/orgs/crate/teams/tech-writing
 .. _configured: https://github.com/crate/crate-tutorials/blob/master/.travis.yml
 .. _fswatch: https://github.com/emcrisostomo/fswatch
 .. _Read the Docs: http://readthedocs.org
