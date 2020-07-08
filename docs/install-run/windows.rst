@@ -9,8 +9,15 @@ Windows.
 
 .. NOTE::
 
-   CrateDB requires Java 11. We recommend using `Oracle's Java`_ on
-   Microsoft Windows.
+   CrateDB requires a `Java virtual machine`_ to run.
+
+   Starting with CrateDB 4.2, a `Java virtual machine`_ is bundled with the
+   tarball and no extra installation is necessary.
+
+   Versions from 3.0 to 4.1 require a `Java 11`_ installation. We recommend
+   using `Oracle's Java`_ on Microsoft Windows.
+
+   Earlier versions required Java 8.
 
 .. SEEALSO::
 
@@ -56,6 +63,8 @@ Now you have CrateDB up and running, :ref:`take the guided tour <first-use>`.
 .. _change into the expanded tarball folder: https://docs.microsoft.com/en-us/powershell/scripting/getting-started/cookbooks/managing-current-location?view=powershell-6
 .. _CrateDB Guide: https://crate.io/docs/crate/guide/en/latest/
 .. _deploying: https://crate.io/docs/crate/guide/en/latest/deployment/index.html
+.. _Java 11: https://www.oracle.com/technetwork/java/javase/downloads/index.html
+.. _Java virtual machine: https://en.wikipedia.org/wiki/Java_virtual_machine
 .. _Oracle's Java: https://www.oracle.com/technetwork/java/javase/downloads/index.html
 .. _PowerShell: https://docs.microsoft.com/en-us/powershell/
 .. _scaling: https://crate.io/docs/crate/guide/en/latest/scaling/index.html

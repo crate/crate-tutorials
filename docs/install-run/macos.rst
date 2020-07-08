@@ -30,8 +30,6 @@ terminal application:
 
    sh$ bash -c "$(curl -L https://try.crate.io/)"
 
-If you don't already have `Java 11`_ installed, the above command will try to
-take care of that for you along with a few other housekeeping tasks.
 
 
 Next steps

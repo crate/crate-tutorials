@@ -11,8 +11,15 @@ This page shows you how get up and running directly from the tarball on any
 
 .. NOTE::
 
-   CrateDB requires `Java 11`_. We recommend using `Oracle's Java`_ on macOS
-   and OpenJDK_ on Linux Systems.
+   CrateDB requires a `Java virtual machine`_ to run.
+
+   Starting with CrateDB 4.2, a `Java virtual machine`_ is bundled with the
+   tarball and no extra installation is necessary.
+
+   Versions starting from 3.0 to 4.1 require a `Java 11`_ installation. We
+   recommend using `Oracle's Java`_ on macOS and OpenJDK_ on Linux Systems.
+
+   Earlier versions required Java 8.
 
 .. SEEALSO::
 
@@ -91,6 +98,7 @@ Now you have CrateDB up and running, :ref:`take the guided tour <first-use>`.
 .. _How to run CrateDB in a multi node setup: https://crate.io/docs/crate/guide/getting_started/scale/multi_node_setup.html
 .. _install section: https://crate.io/docs/crate/guide/getting_started/install/index.html
 .. _Java 11: https://www.oracle.com/technetwork/java/javase/downloads/index.html
+.. _Java virtual machine: https://en.wikipedia.org/wiki/Java_virtual_machine
 .. _OpenJDK: http://openjdk.java.net/projects/jdk/11/
 .. _Oracle's Java: http://www.java.com/en/download/help/mac_install.xml
 .. _release notes: https://crate.io/docs/crate/reference/en/latest/release_notes/index.html
