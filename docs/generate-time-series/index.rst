@@ -25,7 +25,7 @@ using the client of your choice.
 
    cli
    python
-   javascript
+   node
    go
 
 .. _International Space Station: https://www.nasa.gov/mission_pages/station/main/index.html
