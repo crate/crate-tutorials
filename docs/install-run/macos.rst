@@ -1,29 +1,20 @@
 .. _mac-install:
 
 ========================
-Install CrateDB on macOS
+Quick Install on macOS
 ========================
 
-Because CrateDB is a Java application, it runs effortlessly on macOS.
+.. CAUTION::
 
-.. SEEALSO::
-
-   These instructions are designed to get you up and running on your personal
-   computer.
-
-   For putting CrateDB into production, you can learn more about
+   These instructions are designed to get you quickly up and running on your local
+   computer. For putting CrateDB into production, you can learn more about
    `deploying`_ or `scaling`_ CrateDB in the `CrateDB Guide`_.
-
-.. rubric:: Table of contents
-
-.. contents::
-   :local:
 
 
 One-step setup
 ==============
 
-You can install and run CrateDB on macOS with one simple command in your
+Because CrateDB is a Java application, it runs effortlessly on macOS. You can install and run CrateDB on macOS with one simple command in your
 terminal application:
 
 .. code-block:: console

@@ -1,30 +1,25 @@
 .. _linux-install:
 
 ========================
-Install CrateDB on Linux
+Quick Install on Linux
 ========================
 
-CrateDB maintains packages for `Debian GNU/Linux`_, `Ubuntu`_, and `RedHat
-Linux`_.
+.. CAUTION::
+
+   These instructions are designed to get you quickly up and running on your local
+   computer. For putting CrateDB into production, you can learn more about
+   `deploying`_ or `scaling`_ CrateDB in the `CrateDB Guide`_.
 
 .. SEEALSO::
 
-   These instructions are designed to get you up and running on your personal
-   computer.
-
-   For putting CrateDB into production, you can learn more about
-   `deploying`_ or `scaling`_ CrateDB in the `CrateDB Guide`_.
-
-.. rubric:: Table of contents
-
-.. contents::
-   :local:
+   CrateDB also maintains packages for `Debian GNU/Linux`_, `Ubuntu`_, and `RedHat
+   Linux`_.
 
 
 One-step setup
 ==============
 
-You can download and run CrateDB on one of these operating systems with one
+You can download and run CrateDB on many Linux distributions with one
 simple command in your terminal application:
 
 .. code-block:: console
