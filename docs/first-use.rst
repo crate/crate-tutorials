@@ -21,12 +21,12 @@ Introducing the Admin UI
 CrateDB ships with a browser-based administration interface called
 :ref:`Admin UI <admin-ui:index>`.
 
-The CrateDB admin UI runs on every CrateDB node, and you can use it to inspect
+The CrateDB Admin UI runs on every CrateDB node, and you can use it to inspect
 and interact with the whole CrateDB cluster in a number of ways.
 
-We will use the admin UI throughout this section.
+We will use the Admin UI throughout this section.
 
-Access the admin UI in your browser using a URL like this::
+Access the Admin UI in your browser using a URL like this::
 
   http://localhost:4200/
 
