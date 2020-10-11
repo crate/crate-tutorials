@@ -25,6 +25,7 @@ massive amounts of machine data in real-time.
 
     install-run/index
     first-use
+    create-user
     generate-time-series/index
     normalize-intervals
 

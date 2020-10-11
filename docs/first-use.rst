@@ -16,23 +16,20 @@ guided tour.
 .. _admin-ui:
 
 
-Admin UI
-========
+CrateDB Admin UI
+================
 
-CrateDB ships with a web administration user interface (UI), or `admin UI`_ for
-short.
-
-The CrateDB admin UI runs on every CrateDB node, and you can use it to inspect
-and interact with the whole CrateDB cluster in a number of ways.
-
-We will use the admin UI throughout this section.
-
-Access the admin UI in your browser using a URL like this::
+CrateDB ships with a web administration user interface (UI), or `Admin UI`_ for
+short. The CrateDB Admin UI runs on every CrateDB node, and you can use it to inspect
+and interact with the whole CrateDB cluster in a number of ways. We will use the Admin UI throughout this section. Access the Admin UI in your browser using a URL like this::
 
   http://localhost:4200/
 
-If CrateDB is not running locally, replace ``localhost`` with the hostname
-CrateDB is running on.
+.. CAUTION::
+
+   If CrateDB is not running locally, replace ``localhost`` with the hostname CrateDB is running on.
+   
+   You might need to :ref:`create a user<create-user>` first to authenticate on the remote host.
 
 You should see something like this:
 
@@ -44,10 +41,8 @@ You should see something like this:
 Import some tweets
 ------------------
 
-In the admin UI, select the *Help* tab (question mark icon) from the left-hand
-navigation menu.
-
-You should see something like this:
+In the Admin UI, select the *Help* tab (question mark icon) from the left-hand
+navigation menu. You should see something like this:
 
 .. image:: _assets/img/first-use/admin-ui-help.png
 
@@ -59,10 +54,8 @@ your Twitter account.
    Don't worry. This isn’t going to post anything on your behalf. All this does
    is import a selection of recent public tweets on Twitter.
 
-Leave this running and stop it when you have enough tweets. Aim for at least
-few thousand.
-
-When you're done, select the *Tables* icon from the left-hand navigation.
+- Leave this running and stop it when you have enough tweets. Aim for at least few thousand.
+- When you're done, select the *Tables* icon from the left-hand navigation.
 
 You should see something like this:
 
@@ -72,24 +65,17 @@ You should see something like this:
 Query your tweets
 -----------------
 
-CrateDB uses `regular SQL`_ for queries.
+CrateDB uses `regular SQL`_ for queries. One of the easiest ways to query CrateDB is with the query console in the
+CrateDB Admin UI.
 
-One of the easiest ways to query CrateDB is with the query console in the
-CrateDB admin UI.
-
-:ref:`Open up the admin UI <admin-ui>`.
-
-Select the *Console* tab from the left-hand navigation menu.
-
-You should see something like this:
+- :ref:`Open up the admin UI <admin-ui>`.
+- Select the *Console* tab from the left-hand navigation menu. You should see something like this:
 
 .. image:: _assets/img/first-use/admin-ui-console.png
 
 In the previous document, we imported some tweets from the public Twitter
-timeline.
-
-If you want know more about the ``tweets`` table, select the *Tables* tab from
-the left-hand navigation menu. This screen will show you the table `schema`_.
+timeline. If you want know more about the ``tweets`` table, select the *Tables* tab from
+the left-hand navigation menu. This screen will show you the table `schema`_. 
 
 For an example query, why don't we filter those tweets so that we're only
 looking at tweets from people with more than 100 followers. We can do that with
@@ -107,9 +93,7 @@ is an `object`_, and can be queried into by specifying object attributes. In
 the query above, we're matching rows where the ``followers_count`` attribute of
 this object is more than ``100``.
 
-Type this query into the admin UI query console. Then select *EXECUTE QUERY*.
-
-You should see something like this:
+- Type this query into the Admin UI query console. Then select *EXECUTE QUERY*. You should see something like this:
 
 .. image:: _assets/img/first-use/admin-ui-results.png
 
@@ -128,22 +112,18 @@ Crash
 
 The CrateDB shell (aka `Crash`_) is a command-line shell.
 
-First, you must `install Crash`_.
+- First, you must `install Crash`_.
 
-Then, you can start the shell like so:
+- Then, you can start the shell like so:
 
 .. code-block:: console
 
    sh$ crash
 
-This will automatically connect to CrateDB running on ``localhost``.
-
-From here, you can execute queries against CrateDB by typing them and hitting
+This will automatically connect to CrateDB running on ``localhost``. From here, you can execute queries against CrateDB by typing them and hitting
 :kbd:`Enter`.
 
-Let's try something new.
-
-Type out the following query:
+Let's try something new. Type out the following query:
 
 .. code-block:: psql
 
@@ -152,12 +132,10 @@ Type out the following query:
    ORDER BY account_user['followers_count'] DESC
       LIMIT 10;
 
-As you type, you may notice that Crash comes with autocompletion.
-
-Here, we're ordering by follower count from highest to lowest, and then
+As you type, you may notice that Crash comes with autocompletion. Here, we're ordering by follower count from highest to lowest, and then
 selecting the top 10 values.
 
-Hit :kbd:`Enter`.
+- Hit :kbd:`Enter`.
 
 You should see something like this:
 
@@ -180,7 +158,7 @@ You should see something like this:
    SELECT 10 rows in set (0.003 sec)
 
 
-The CrateDB HTTP endpoint
+CrateDB HTTP endpoint
 =========================
 
 CrateDB provides a `HTTP endpoint`_.
@@ -195,9 +173,7 @@ Let's run another query:
 
    SELECT COUNT(*) FROM tweets
 
-This time, all we want to know is how many tweets we have.
-
-Using `HTTPie`_, you can run this query against CrateDB listening on
+This time, all we want to know is how many tweets we have. Using `HTTPie`_, you can run this query against CrateDB listening on
 ``localhost:4200``, like so:
 
 .. code-block:: console
@@ -241,7 +217,7 @@ Start building with `CrateDB clients and tools`_.
     languages)
 
 
-.. _admin UI: https://crate.io/docs/clients/admin-ui/en/latest/
+.. _Admin UI: https://crate.io/docs/clients/admin-ui/en/latest/
 .. _aggregation: https://crate.io/docs/stable/sql/aggregation.html
 .. _client tools: https://crate.io/a/category/client-tools/
 .. _Crash: https://crate.io/docs/clients/crash/en/latest/
