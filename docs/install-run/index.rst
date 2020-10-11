@@ -1,7 +1,7 @@
 .. _install-run:
 
 ===============
-Install and run
+Install and Run
 ===============
 
 Get up and running with CrateDB on your personal computer.

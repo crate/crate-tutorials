@@ -6,50 +6,44 @@
 .. _basic-install:
 
 ==================================
-Basic CrateDB tarball installation
+Basic tarball Installation
 ==================================
 
-This page shows you how get up and running directly from the tarball on any
-`Unix-like system`_.
+.. CAUTION::
 
-.. NOTE::
-
-   CrateDB requires a `Java virtual machine`_ to run.
-
-   Starting with CrateDB 4.2, a `Java virtual machine`_ is bundled with the
-   tarball and no extra installation is necessary.
-
-   Versions starting from 3.0 to 4.1 require a `Java 11`_ installation. We
-   recommend using `Oracle's Java`_ on macOS and OpenJDK_ on Linux Systems.
-
-   Earlier versions required Java 8.
+   These instructions are designed to get you quickly up and running on your local
+   computer. For putting CrateDB into production, you can learn more about
+   `deploying`_ or `scaling`_ CrateDB in the `CrateDB Guide`_.
 
 .. SEEALSO::
+
+   This page shows you how get up and running directly from the tarball on any
+   `Unix-like system`_.
 
    Specialised install guides are available for: :ref:`Linux <linux-install>`,
    :ref:`macOS <mac-install>`, :ref:`Microsoft Windows <windows-install>`, and
    :ref:`Docker <docker-install>`.
 
-   These instructions are designed to get you up and running on your personal
-   computer.
+Prerequisites
+=============
+CrateDB requires a `Java virtual machine`_ to run.
 
-   For putting CrateDB into production, you can learn more about
-   `deploying`_ or `scaling`_ CrateDB in the `CrateDB Guide`_.
+.. NOTE::
 
-.. rubric:: Table of contents
+   Starting with CrateDB 4.2, a `Java virtual machine`_ is bundled with the
+   tarball and no extra installation is necessary.
 
-.. contents::
-   :local:
-
+Versions starting from 3.0 to 4.1 require a `Java 11`_ installation. We
+recommend using `Oracle's Java`_ on macOS and OpenJDK_ on Linux Systems.
+Earlier versions required Java 8.
 
 .. _install_targz:
 
 Download
 ========
 
-Download `the latest CrateDB release`_.
-
-Once downloaded, unpack the tarball and change into the resulting directory:
+1. Download `the latest CrateDB release`_.
+2. Unpack the tarball and change into the resulting directory:
 
 .. code-block:: console
 
@@ -67,9 +61,7 @@ Once downloaded, unpack the tarball and change into the resulting directory:
 Run
 ===
 
-You do not have to configure or build anything.
-
-Once unpacked, CrateDB can be started in the foreground like this:
+You do not have to configure or build anything. Once unpacked, CrateDB can be started in the foreground like this:
 
 .. code-block:: console
 
@@ -77,7 +69,6 @@ Once unpacked, CrateDB can be started in the foreground like this:
 
 This command runs a single instance of CrateDB that is bound to the local IP
 address.
-
 :kbd:`Control-C` will stop the process.
 
 .. SEEALSO::

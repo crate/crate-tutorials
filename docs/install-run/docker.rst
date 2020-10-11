@@ -1,30 +1,8 @@
 .. _docker-install:
 
 =====================
-Run CrateDB on Docker
+Run on Docker
 =====================
-
-CrateDB and Docker_ are a great match thanks to CrateDB's shared-nothing,
-horizontally scalable architecture that lends itself well to containerization.
-
-.. rubric:: Table of contents
-
-.. contents::
-   :local:
-
-
-One-step setup
-==============
-
-Spin up the official CrateDB Docker image, like so:
-
-.. code-block:: console
-
-   sh$ docker run -p "4200:4200" crate
-
-.. TIP::
-
-   If this command aborts with an error, consult the `troubleshooting guide`_.
 
 .. CAUTION::
 
@@ -35,6 +13,21 @@ Spin up the official CrateDB Docker image, like so:
    you're ready to start using CrateDB for data that you care about, you should
    consult the `full guide to CrateDB and Docker`_.
 
+CrateDB and Docker_ are a great match thanks to CrateDB's shared-nothing,
+horizontally scalable architecture that lends itself well to containerization.
+
+One-step setup
+==============
+
+Spin up the official `CrateDB Docker image`_, like so:
+
+.. code-block:: console
+
+   sh$ docker run -p "4200:4200" crate
+
+.. TIP::
+
+   If this command aborts with an error, consult the `troubleshooting guide`_.
 
 Next steps
 ==========
