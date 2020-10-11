@@ -53,19 +53,3 @@ After creating the user and granting all priviliges, you should be able to conti
 .. _enterprise features: https://crate.io/enterprise/
 .. _another client: https://crate.io/docs/crate/clients-tools/en/latest/
 .. _install Crash: https://crate.io/docs/clients/crash/en/latest/getting-started.html#install
-
-
-.. _Admin UI: https://crate.io/docs/clients/admin-ui/en/latest/
-.. _aggregation: https://crate.io/docs/stable/sql/aggregation.html
-.. _client tools: https://crate.io/a/category/client-tools/
-.. _Crash: https://crate.io/docs/clients/crash/en/latest/
-.. _CrateDB clients and tools: https://crate.io/docs/crate/clients-tools/en/latest/
-.. _fulltext search: https://crate.io/docs/crate/reference/en/latest/general/dql/fulltext.html
-.. _geospatial: https://crate.io/docs/stable/sql/data_types.html#geo-point
-.. _HTTP endpoint: https://crate.io/docs/crate/reference/en/latest/interfaces/http.html
-.. _HTTPie: https://httpie.org/
-.. _object: https://crate.io/docs/crate/reference/en/latest/general/ddl/data-types.html#object
-.. _regular SQL: https://crate.io/docs/crate/reference/en/latest/appendices/sql-compliance.html
-.. _scalar: https://crate.io/docs/stable/sql/scalar.html
-.. _schema: https://crate.io/docs/crate/reference/en/latest/general/ddl/create-table.html#schemas
-.. _the CrateDB query reference: https://crate.io/docs/crate/reference/en/latest/general/dql/index.html
