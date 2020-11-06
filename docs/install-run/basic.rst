@@ -1,6 +1,3 @@
-.. meta::
-     :last-reviewed: 2020-07-09
-
 .. highlight:: sh
 
 .. _basic-install:
@@ -64,6 +61,8 @@ Once downloaded, unpack the tarball and change into the resulting directory:
    release.
 
 
+.. _run:
+
 Run
 ===
 
@@ -84,6 +83,8 @@ address.
 
    Consult the `CrateDB reference documentation`_ for help using this command.
 
+
+.. _next:
 
 Next steps
 ==========
