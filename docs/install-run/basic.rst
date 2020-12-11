@@ -1,6 +1,3 @@
-.. meta::
-     :last-reviewed: 2020-07-09
-
 .. highlight:: sh
 
 .. _basic-install:
@@ -58,6 +55,8 @@ Download
    release.
 
 
+.. _run:
+
 Run
 ===
 
@@ -75,6 +74,8 @@ address.
 
    Consult the `CrateDB reference documentation`_ for help using this command.
 
+
+.. _next:
 
 Next steps
 ==========
