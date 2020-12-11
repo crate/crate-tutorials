@@ -178,8 +178,8 @@ Crash provides a non-interactive mode that you can use to execute SQL
 statements directly from the command line.
 
 First, exit from the interactive Crash session (or open a new terminal). Then,
-use ``crash`` with the ``--command`` argument execute an `INSERT`_ query, like
-this:
+use ``crash`` with the ``--command`` argument to execute an `INSERT`_ query,
+like this:
 
 .. code-block:: console
 
