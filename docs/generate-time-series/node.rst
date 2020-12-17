@@ -60,7 +60,7 @@ Get the current position of the ISS
 `Open Notify`_ is a third-party service that provides an API to consume data
 about the current position, or `ground point`_, of the ISS.
 
-The endpoint for this API is `<http://api.open-notify.org/iss-now.json>`_.
+The endpoint for this API is `<https://api.open-notify.org/iss-now.json>`_.
 
 Start an interactive Node session (as above).
 
@@ -75,7 +75,7 @@ Notify API endpoint:
 
 .. code-block:: js
 
-    > let response = await axios.get('http://api.open-notify.org/iss-now.json')
+    > let response = await axios.get('https://api.open-notify.org/iss-now.json')
 
 .. code-block:: js
 
@@ -95,7 +95,7 @@ latitude as a `WKT`_ string:
 .. code-block:: js
 
     > async function position() {
-    ...     let response = await axios.get('http://api.open-notify.org/iss-now.json')
+    ...     let response = await axios.get('https://api.open-notify.org/iss-now.json')
     ...     return `POINT (${response.data.iss_position.longitude} ${response.data.iss_position.latitude})`
     ... }
 
@@ -266,7 +266,7 @@ Create a new file called ``iss-position.js``:
 
     // Get data from the API, and, if successful, insert it into CrateDB
     function insert() {
-        axios.get('http://api.open-notify.org/iss-now.json')
+        axios.get('https://api.open-notify.org/iss-now.json')
         .then(response => {
             longitude = response.data.iss_position.longitude
             latitude = response.data.iss_position.latitude
@@ -352,7 +352,7 @@ will open up a map view showing the current position of the ISS:
 .. _node-postgres: https://www.npmjs.com/package/pg
 .. _Node.js: https://nodejs.org/en/
 .. _npm: https://www.npmjs.com/
-.. _open notify: http://open-notify.org/
+.. _open notify: https://open-notify.org/
 .. _Postgres Wire Protocol: https://crate.io/docs/crate/reference/en/latest/interfaces/postgres.html
 .. _promise chaining: https://javascript.info/promise-chaining
 .. _promises: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
