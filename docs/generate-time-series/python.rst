@@ -246,7 +246,7 @@ will open up a map view showing the current position of the ISS:
 .. _interactive mode: https://docs.python.org/3/tutorial/interpreter.html#interactive-mode
 .. _International Space Station: https://www.nasa.gov/mission_pages/station/main/index.html
 .. _IPython: https://ipython.org/
-.. _open notify: https://open-notify.org/
+.. _open notify: http://open-notify.org/
 .. _Pip: https://pypi.org/project/pip/
 .. _Python: https://www.python.org/
 .. _requests: https://requests.readthedocs.io/en/master/
