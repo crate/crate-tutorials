@@ -425,7 +425,7 @@ will open up a map view showing the current position of the ISS:
 .. _International Space Station: https://www.nasa.gov/mission_pages/station/main/index.html
 .. _modules: https://blog.golang.org/migrating-to-go-modules
 .. _net/http: https://golang.org/pkg/net/http/
-.. _open notify: https://open-notify.org/
+.. _open notify: http://open-notify.org/
 .. _pgx: https://github.com/jackc/pgx/tree/v4
 .. _Postgres Wire Protocol: https://crate.io/docs/crate/reference/en/latest/interfaces/postgres.html
 .. _SELECT: https://crate.io/docs/crate/reference/en/latest/general/dql/selects.html

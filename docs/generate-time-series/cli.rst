@@ -293,7 +293,7 @@ will open up a map view showing the current position of the ISS:
 .. _International Space Station: https://www.nasa.gov/mission_pages/station/main/index.html
 .. _jq: https://stedolan.github.io/jq/
 .. _let us know: https://github.com/crate/crate-tutorials/issues/new
-.. _open notify: https://open-notify.org/
+.. _open notify: http://open-notify.org/
 .. _Pip: https://pypi.org/project/pip/
 .. _pipe: https://www.geeksforgeeks.org/piping-in-unix-or-linux/
 .. _SELECT: https://crate.io/docs/crate/reference/en/latest/general/dql/selects.html

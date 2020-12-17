@@ -352,7 +352,7 @@ will open up a map view showing the current position of the ISS:
 .. _node-postgres: https://www.npmjs.com/package/pg
 .. _Node.js: https://nodejs.org/en/
 .. _npm: https://www.npmjs.com/
-.. _open notify: https://open-notify.org/
+.. _open notify: http://open-notify.org/
 .. _Postgres Wire Protocol: https://crate.io/docs/crate/reference/en/latest/interfaces/postgres.html
 .. _promise chaining: https://javascript.info/promise-chaining
 .. _promises: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
