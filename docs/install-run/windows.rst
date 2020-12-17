@@ -31,7 +31,7 @@ Download and run
 
 For this specialized guide, we have adapted the :ref:`Basic tarball
 Installation <basic-install>` instructions for use with Windows
-`PowerShell`_. 
+`PowerShell`_.
 
 1. Download `the latest CrateDB release`_.
 2. Once downloaded, expand the tarball using a tool like `7-Zip`_.
@@ -48,7 +48,7 @@ Next steps
 Now you have CrateDB up and running, :ref:`take the guided tour <first-use>`.
 
 
-.. _7-Zip: http://www.7-zip.org/
+.. _7-Zip: https://www.7-zip.org/
 .. _bootstrap checks: https://crate.io/docs/crate/guide/en/latest/admin/bootstrap-checks.html
 .. _change into the expanded tarball folder: https://docs.microsoft.com/en-us/powershell/scripting/getting-started/cookbooks/managing-current-location?view=powershell-6
 .. _CrateDB Guide: https://crate.io/docs/crate/guide/en/latest/

@@ -47,13 +47,13 @@ Get the current position of the ISS
 `Open Notify`_ is a third-party service that provides an API to consume data
 about the current position, or `ground point`_, of the ISS.
 
-The endpoint for this API is `<http://api.open-notify.org/iss-now.json>`_.
+The endpoint for this API is `<https://api.open-notify.org/iss-now.json>`_.
 
 You can query this endpoint using ``curl``:
 
 .. code-block:: console
 
-    sh$ curl -s -w "\n" http://api.open-notify.org/iss-now.json
+    sh$ curl -s -w "\n" https://api.open-notify.org/iss-now.json
 
     {"message": "success", "iss_position": {"latitude": "23.1703", "longitude": "-105.4034"}, "timestamp": 1590394500}
 
@@ -72,7 +72,7 @@ For example, to return the whole payload, do this:
 
 .. code-block:: console
 
-    sh$ curl -s http://api.open-notify.org/iss-now.json | jq '.'
+    sh$ curl -s https://api.open-notify.org/iss-now.json | jq '.'
 
     {
       "message": "success",
@@ -88,7 +88,7 @@ use ``jq`` with a filter to isolate those data points:
 
 .. code-block:: console
 
-    sh$ curl -s http://api.open-notify.org/iss-now.json | \
+    sh$ curl -s https://api.open-notify.org/iss-now.json | \
             jq -r '[.iss_position.longitude, .iss_position.latitude] | @tsv'
 
     -103.4015    20.9089
@@ -98,7 +98,7 @@ You can encapsulate this command with a `shell function`_:
 .. code-block:: console
 
     sh$ position () { \
-            curl -s http://api.open-notify.org/iss-now.json | \
+            curl -s https://api.open-notify.org/iss-now.json | \
                 jq -r '[.iss_position.longitude, .iss_position.latitude] | @tsv'; \
         }
 
@@ -229,7 +229,7 @@ Create a file named ``iss-position.sh``, like this:
     set -e
 
     position () {
-        curl -s http://api.open-notify.org/iss-now.json |
+        curl -s https://api.open-notify.org/iss-now.json |
             jq -r '[.iss_position.longitude, .iss_position.latitude] | @tsv';
     }
 
@@ -293,7 +293,7 @@ will open up a map view showing the current position of the ISS:
 .. _International Space Station: https://www.nasa.gov/mission_pages/station/main/index.html
 .. _jq: https://stedolan.github.io/jq/
 .. _let us know: https://github.com/crate/crate-tutorials/issues/new
-.. _open notify: http://open-notify.org/
+.. _open notify: https://open-notify.org/
 .. _Pip: https://pypi.org/project/pip/
 .. _pipe: https://www.geeksforgeeks.org/piping-in-unix-or-linux/
 .. _SELECT: https://crate.io/docs/crate/reference/en/latest/general/dql/selects.html

@@ -37,7 +37,7 @@ Now you have CrateDB up and running, :ref:`take the guided tour <first-use>`.
 .. _CrateDB Guide: https://crate.io/docs/crate/guide/en/latest/
 .. _Debian GNU/Linux: https://crate.io/docs/crate/guide/en/latest/deployment/linux/debian.html
 .. _deploying: https://crate.io/docs/crate/guide/en/latest/deployment/index.html
-.. _OpenJDK: http://openjdk.java.net/projects/jdk8/
+.. _OpenJDK: https://openjdk.java.net/projects/jdk8/
 .. _RedHat Linux: https://crate.io/docs/crate/guide/en/latest/deployment/linux/red-hat.html
 .. _scaling: https://crate.io/docs/crate/guide/en/latest/scaling/index.html
 .. _Ubuntu: https://crate.io/docs/crate/guide/en/latest/deployment/linux/ubuntu.html

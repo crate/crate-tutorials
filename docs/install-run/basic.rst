@@ -94,8 +94,8 @@ Now you have CrateDB up and running, :ref:`take the guided tour <first-use>`.
 .. _install section: https://crate.io/docs/crate/guide/getting_started/install/index.html
 .. _Java 11: https://www.oracle.com/technetwork/java/javase/downloads/index.html
 .. _Java virtual machine: https://en.wikipedia.org/wiki/Java_virtual_machine
-.. _OpenJDK: http://openjdk.java.net/projects/jdk/11/
-.. _Oracle's Java: http://www.java.com/en/download/help/mac_install.xml
+.. _OpenJDK: https://openjdk.java.net/projects/jdk/11/
+.. _Oracle's Java: https://www.java.com/en/download/help/mac_install.xml
 .. _release notes: https://crate.io/docs/crate/reference/en/latest/release_notes/index.html
 .. _scaling: https://crate.io/docs/crate/guide/en/latest/scaling/index.html
 .. _the latest CrateDB release: https://crate.io/download/
