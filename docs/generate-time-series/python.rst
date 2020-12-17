@@ -55,7 +55,7 @@ Get the current position of the ISS
 `Open Notify`_ is a third-party service that provides an API to consume data
 about the current position, or `ground point`_, of the ISS.
 
-The endpoint for this API is `<https://api.open-notify.org/iss-now.json>`_.
+The endpoint for this API is `<http://api.open-notify.org/iss-now.json>`_.
 
 Start an interactive Python session (as above).
 
@@ -66,7 +66,7 @@ Next, import the `requests`_ library::
 Then, read the current position of the ISS with an HTTP GET request to the Open
 Notify API endpoint, like this:
 
-    >>> response = requests.get("https://api.open-notify.org/iss-now.json")
+    >>> response = requests.get("http://api.open-notify.org/iss-now.json")
     >>> response.json()
     {'message': 'success',
      'timestamp': 1582730500,
@@ -79,7 +79,7 @@ You can encapsulate this operation with a function that returns longitude and
 latitude as a `WKT`_ string:
 
     >>> def position():
-    ...     response = requests.get("https://api.open-notify.org/iss-now.json")
+    ...     response = requests.get("http://api.open-notify.org/iss-now.json")
     ...     position = response.json()["iss_position"]
     ...     return f'POINT ({position["longitude"]} {position["latitude"]})'
 
@@ -167,7 +167,7 @@ Create a new file called ``iss-position.py``, like this:
 
 
     def position():
-        response = requests.get("https://api.open-notify.org/iss-now.json")
+        response = requests.get("http://api.open-notify.org/iss-now.json")
         position = response.json()["iss_position"]
         return f'POINT ({position["longitude"]} {position["latitude"]})'
 
