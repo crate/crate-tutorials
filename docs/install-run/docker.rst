@@ -1,8 +1,8 @@
 .. _docker-install:
 
-=====================
+=============
 Run on Docker
-=====================
+=============
 
 .. CAUTION::
 
@@ -16,6 +16,7 @@ Run on Docker
 CrateDB and Docker_ are a great match thanks to CrateDB's shared-nothing,
 horizontally scalable architecture that lends itself well to containerization.
 
+
 One-step setup
 ==============
 
@@ -28,6 +29,7 @@ Spin up the official `CrateDB Docker image`_, like so:
 .. TIP::
 
    If this command aborts with an error, consult the `troubleshooting guide`_.
+
 
 Next steps
 ==========
