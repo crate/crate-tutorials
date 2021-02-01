@@ -24,7 +24,7 @@ to run. Versions from 3.0 to 4.1 require a `Java 11`_ installation. We
 recommend using `Oracle's Java`_ on Microsoft Windows. Earlier versions
 required Java 8.
 
-If you are installing on `Windows Server`_, you must install the the `Microsoft
+If you are installing on `Windows Server`_, you must install the `Microsoft
 Visual C++ 2019 Redistributable`_ package.
 
 
