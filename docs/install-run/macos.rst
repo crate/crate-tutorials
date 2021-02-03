@@ -1,4 +1,4 @@
-.. _mac-install:
+.. _install-macos:
 
 ======================
 Quick Install on macOS
@@ -10,6 +10,8 @@ Quick Install on macOS
    local computer. For putting CrateDB into production, check out the `How-To
    Guides`_.
 
+
+.. _install-macos-one-step:
 
 One-step setup
 ==============
@@ -23,10 +25,12 @@ application:
    sh$ bash -c "$(curl -L https://try.crate.io/)"
 
 
+.. _install-macos-next:
+
 Next steps
 ==========
 
-Now you have CrateDB up and running, :ref:`take the guided tour <first-use>`.
+Now you have CrateDB up and running, :ref:`take the guided tour <use>`.
 
 
 .. _bootstrap checks: https://crate.io/docs/crate/guide/en/latest/admin/bootstrap-checks.html

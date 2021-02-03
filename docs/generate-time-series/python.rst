@@ -20,7 +20,7 @@ This tutorial will show you how to generate :ref:`mock time series data
 Prerequisites
 =============
 
-CrateDB must be :ref:`installed and running <install-run>`.
+CrateDB must be :ref:`installed and running <install>`.
 
 Make sure you're running an up-to-date version of Python (we recommend 3.7 or
 higher).

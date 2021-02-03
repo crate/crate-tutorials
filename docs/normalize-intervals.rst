@@ -65,7 +65,7 @@ Prerequisites
 Mock data
 ---------
 
-You must have CrateDB :ref:`installed and running <install-run>`.
+You must have CrateDB :ref:`installed and running <install>`.
 
 This tutorial works with ISS location data. Before continuing, you should have
 generated some ISS data by following one of the tutorials in the :ref:`previous

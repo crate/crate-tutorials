@@ -1,10 +1,10 @@
-.. _first-use:
+.. _use:
 
 =========
 First use
 =========
 
-Once CrateDB is :ref:`installed and running <install-run>`, you can start to
+Once CrateDB is :ref:`installed and running <install>`, you can start to
 interact with the database for the first time.
 
 .. rubric:: Table of contents
@@ -13,7 +13,7 @@ interact with the database for the first time.
    :local:
 
 
-.. _admin-ui:
+.. _use-admin-ui:
 
 Introducing the Admin UI
 ========================
@@ -42,7 +42,7 @@ You should see something like this:
    `The CrateDB Admin UI documentation`_
 
 
-.. _more-tutorials:
+.. _use-more-tutorials:
 
 Follow more tutorials to get a sense of CrateDB
 ===============================================
@@ -57,7 +57,7 @@ time series data about the International Space Station (ISS) and write it to
 CrateDB using the client of your choice.
 
 
-.. _start-building:
+.. _use-start-building:
 
 Start building with CrateDB clients and tools
 =============================================
@@ -67,7 +67,7 @@ find `a list of available CrateDB clients and tools`_ in a different section of
 the documentation.
 
 
-.. _dive-in:
+.. _use-dive-in:
 
 Dive in to CrateDB
 ==================

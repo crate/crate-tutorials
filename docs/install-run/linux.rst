@@ -1,4 +1,4 @@
-.. _linux-install:
+.. _install-linux:
 
 ========================
 Quick Install on Linux
@@ -16,6 +16,8 @@ Quick Install on Linux
    `RedHat Linux`_.
 
 
+.. _install-install-one-step:
+
 One-step setup
 ==============
 
@@ -27,15 +29,17 @@ command in your terminal application:
    sh$ bash -c "$(curl -L https://try.crate.io/)"
 
 
+.. _install-install-next:
+
 Next steps
 ==========
 
-Now you have CrateDB up and running, :ref:`take the guided tour <first-use>`.
+Now you have CrateDB up and running, :ref:`take the guided tour <use>`.
 
 
 .. _bootstrap checks: https://crate.io/docs/crate/guide/en/latest/admin/bootstrap-checks.html
-.. _How-To Guides: https://crate.io/docs/crate/howtos/en/latest/
 .. _Debian GNU/Linux: https://crate.io/docs/crate/guide/en/latest/deployment/linux/debian.html
+.. _How-To Guides: https://crate.io/docs/crate/howtos/en/latest/
 .. _OpenJDK: https://openjdk.java.net/projects/jdk8/
 .. _RedHat Linux: https://crate.io/docs/crate/guide/en/latest/deployment/linux/red-hat.html
 .. _Ubuntu: https://crate.io/docs/crate/guide/en/latest/deployment/linux/ubuntu.html

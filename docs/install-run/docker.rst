@@ -1,4 +1,4 @@
-.. _docker-install:
+.. _install-docker:
 
 =============
 Run on Docker
@@ -17,6 +17,8 @@ CrateDB and Docker_ are a great match thanks to CrateDB's shared-nothing,
 horizontally scalable architecture that lends itself well to containerization.
 
 
+.. _install-docker-one-step:
+
 One-step setup
 ==============
 
@@ -31,10 +33,12 @@ Spin up the official `CrateDB Docker image`_, like so:
    If this command aborts with an error, consult the `troubleshooting guide`_.
 
 
+.. _install-docker-next:
+
 Next steps
 ==========
 
-Now you have CrateDB up and running, :ref:`take the guided tour <first-use>`.
+Now you have CrateDB up and running, :ref:`take the guided tour <use>`.
 
 
 .. _bootstrap check: https://crate.io/docs/crate/guide/en/latest/admin/bootstrap-checks.html

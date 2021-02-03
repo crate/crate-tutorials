@@ -1,4 +1,4 @@
-.. _windows-install:
+.. _install-windows:
 
 ========================
 Quick Install on Windows
@@ -10,6 +10,8 @@ Quick Install on Windows
    local computer. For putting CrateDB into production, check out the `How-To
    Guides`_.
 
+
+.. _install-windows-prereq:
 
 Prerequisites
 =============
@@ -28,14 +30,13 @@ If you are installing on `Windows Server`_, you must install the `Microsoft
 Visual C++ 2019 Redistributable`_ package.
 
 
-.. _Download and run:
+.. _install-windows-download-run:
 
 Download and run
 ================
 
 For this specialized guide, we have adapted the :ref:`Basic tarball
-Installation <basic-install>` instructions for use with Windows
-`PowerShell`_.
+Installation <install>` instructions for use with Windows `PowerShell`_.
 
 1. Download `the latest CrateDB release`_.
 2. Once downloaded, expand the tarball using a tool like `7-Zip`_.
@@ -47,10 +48,12 @@ Installation <basic-install>` instructions for use with Windows
        PS> ./bin/crate
 
 
+.. _install-windows-next:
+
 Next steps
 ==========
 
-Now you have CrateDB up and running, :ref:`take the guided tour <first-use>`.
+Now you have CrateDB up and running, :ref:`take the guided tour <use>`.
 
 
 .. _7-Zip: https://www.7-zip.org/
