@@ -1,6 +1,6 @@
 .. highlight:: sh
 
-.. _basic-install:
+.. _install-basic:
 
 ==================================
 Basic tarball Installation
@@ -17,10 +17,12 @@ Basic tarball Installation
    This page shows you how get up and running directly from the tarball on any
    `Unix-like system`_.
 
-   Specialised install guides are available for: :ref:`Linux <linux-install>`,
-   :ref:`macOS <mac-install>`, :ref:`Microsoft Windows <windows-install>`, and
-   :ref:`Docker <docker-install>`.
+   Specialised install guides are available for: :ref:`Linux <install-linux>`,
+   :ref:`macOS <install-macos>`, :ref:`Microsoft Windows <install-windows>`, and
+   :ref:`Docker <install-docker>`.
 
+
+.. _install-basic-prereq:
 
 Prerequisites
 =============
@@ -37,7 +39,7 @@ recommend using `Oracle's Java`_ on macOS and OpenJDK_ on Linux Systems.
 Earlier versions required Java 8.
 
 
-.. _install_targz:
+.. _install-basic-download:
 
 Download
 ========
@@ -58,7 +60,7 @@ Download
    release.
 
 
-.. _run:
+.. _install-basic-run:
 
 Run
 ===
@@ -78,21 +80,21 @@ address. :kbd:`Control-C` will stop the process.
    Consult the `CrateDB reference documentation`_ for help using this command.
 
 
-.. _next:
+.. _install-basic-next:
 
 Next steps
 ==========
 
-Now you have CrateDB up and running, :ref:`take the guided tour <first-use>`.
+Now you have CrateDB up and running, :ref:`take the guided tour <use>`.
 
 
 .. _also available: https://cdn.crate.io/downloads/releases/
 .. _An introductory tutorial: https://crate.io/docs/crate/guide/tutorials/hello.html
 .. _bootstrap checks: https://crate.io/docs/crate/guide/en/latest/admin/bootstrap-checks.html
 .. _crash: https://crate.io/docs/crate/guide/getting_started/connect/crash.html
-.. _How-To Guides: https://crate.io/docs/crate/howtos/en/latest/
 .. _CrateDB reference documentation: https://crate.io/docs/crate/reference/en/latest/run.html
 .. _How to run CrateDB in a multi node setup: https://crate.io/docs/crate/guide/getting_started/scale/multi_node_setup.html
+.. _How-To Guides: https://crate.io/docs/crate/howtos/en/latest/
 .. _install section: https://crate.io/docs/crate/guide/getting_started/install/index.html
 .. _Java 11: https://www.oracle.com/technetwork/java/javase/downloads/index.html
 .. _Java virtual machine: https://en.wikipedia.org/wiki/Java_virtual_machine

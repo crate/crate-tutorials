@@ -21,7 +21,7 @@ This tutorial will show you how to generate some :ref:`mock time series data
 Prerequisites
 =============
 
-CrateDB must be :ref:`installed and running <install-run>`.
+CrateDB must be :ref:`installed and running <install>`.
 
 Make sure you are running an up-to-date version of `Go`_. We recommend Go 1.11
 or higher since you will be making use of `modules`_.

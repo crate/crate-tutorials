@@ -20,7 +20,7 @@ This tutorial will show you how to generate :ref:`mock time series data
 Prerequisites
 =============
 
-You must have CrateDB :ref:`installed and running <install-run>`.
+You must have CrateDB :ref:`installed and running <install>`.
 
 Make sure you're running an up-to-date version of `Node.js`_.
 

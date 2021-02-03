@@ -21,7 +21,7 @@ Shell`_ (aka *Crash*) and a little bit of `shell scripting`_.
 Prerequisites
 =============
 
-CrateDB must be :ref:`installed and running <install-run>`.
+CrateDB must be :ref:`installed and running <install>`.
 
 Crash is available as `Pip`_ package. `Install`_ it like this:
 

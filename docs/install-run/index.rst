@@ -1,4 +1,4 @@
-.. _install-run:
+.. _install:
 
 ===============
 Install and Run
