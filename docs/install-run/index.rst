@@ -12,6 +12,7 @@ Get up and running with CrateDB on your personal computer.
    :maxdepth: 2
    :titlesonly:
 
+   install
    basic
    linux
    macos
