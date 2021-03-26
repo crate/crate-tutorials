@@ -285,7 +285,7 @@ will open up a map view showing the current position of the ISS:
 .. _CrateDB Admin UI: https://crate.io/docs/clients/admin-ui/en/latest/
 .. _CrateDB Shell: https://crate.io/docs/clients/crash/en/latest/
 .. _create a table: https://crate.io/docs/crate/reference/en/latest/general/ddl/create-table.html
-.. _curl: https://curl.haxx.se/
+.. _curl: https://curl.se/
 .. _data sanitization: https://xkcd.com/327/
 .. _ground point: https://en.wikipedia.org/wiki/Ground_track
 .. _INSERT: https://crate.io/docs/crate/reference/en/latest/general/dml.html#inserting-data

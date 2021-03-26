@@ -8,7 +8,7 @@ Normalize time series data intervals
 
     .. image:: _assets/img/normalize-intervals/orbit.gif
         :alt: An animated visualization of the ISS orbit
-        :target: https://en.wikipedia.org/wiki/International_Space_Station#/media/File:Animation_of_International_Space_Station_trajectory.gif
+        :target: https://en.wikipedia.org/wiki/International_Space_Station#Orbit
 
     The ISS travels at 27,724 kilometers per hour and orbits Earth
     approximately once every 90 minutes.
@@ -352,7 +352,7 @@ Above, the ``plot()`` function:
  * Activates x-axis tick label `auto-formatting`_ (rotates them for improved
    readability)
 
-.. _auto-formatting: https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.figure.Figure.html?highlight=autofmt_xdate#matplotlib.figure.Figure.autofmt_xdate
+.. _auto-formatting: https://matplotlib.org/stable/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure.autofmt_xdate
 
 .. SEEALSO::
 
@@ -774,7 +774,7 @@ This visualization resolves both original issues:
 
 .. _aggregate: https://crate.io/docs/crate/reference/en/latest/general/builtins/aggregation.html
 .. _AVG(): https://crate.io/docs/crate/reference/en/latest/general/builtins/aggregation.html?highlight=avg#avg-and-mean
-.. _axes: https://matplotlib.org/3.2.1/api/_as_gen/matplotlib.pyplot.axes.html#matplotlib.pyplot.axes
+.. _axes: https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.axes.html#matplotlib.pyplot.axes
 .. _cast: https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.astype.html
 .. _connection strings: https://crate.io/docs/python/en/latest/sqlalchemy.html#database-urls
 .. _COUNT(*): https://crate.io/docs/crate/reference/en/latest/general/builtins/aggregation.html?highlight=count#aggregation-count-star
@@ -783,13 +783,13 @@ This visualization resolves both original issues:
 .. _data binning: https://en.wikipedia.org/wiki/Data_binning
 .. _definition: https://crate.io/docs/crate/reference/en/latest/general/ddl/create-table.html
 .. _distance(): https://crate.io/docs/crate/reference/en/latest/general/builtins/scalar.html#scalar-distance
-.. _figure: https://matplotlib.org/3.2.1/api/_as_gen/matplotlib.pyplot.figure.html#matplotlib.pyplot.figure
-.. _generate_series(): https://crate.io/docs/crate/reference/en/latest/general/builtins/table-functions.html#generate-series-start-stop-step
+.. _figure: https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.figure.html#matplotlib.pyplot.figure
+.. _generate_series(): https://crate.io/docs/crate/reference/en/latest/general/builtins/table-functions.html#pg-catalog-generate-series-start-stop-step
 .. _geo_point: https://crate.io/docs/crate/reference/en/latest/general/ddl/data-types.html#geo-point
 .. _ground point: https://en.wikipedia.org/wiki/Ground_track
 .. _GROUP BY: https://crate.io/docs/crate/reference/en/latest/general/dql/selects.html#group-by
-.. _handle datetimes: https://matplotlib.org/3.2.1/api/_as_gen/matplotlib.axes.Axes.xaxis_date.html
-.. _hour: https://matplotlib.org/3.2.1/api/dates_api.html?highlight=hourlocator#matplotlib.dates.HourLocator
+.. _handle datetimes: https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.xaxis_date.html
+.. _hour: https://matplotlib.org/stable/api/dates_api.html#matplotlib.dates.HourLocator
 .. _how joins work: https://crate.io/docs/crate/reference/en/latest/concepts/joins.html
 .. _inner join: https://crate.io/docs/crate/reference/en/latest/general/dql/joins.html#inner-joins
 .. _interactive mode: https://docs.python.org/3/tutorial/interpreter.html#interactive-mode
@@ -800,10 +800,10 @@ This visualization resolves both original issues:
 .. _join condition: https://crate.io/docs/crate/reference/en/latest/sql/statements/select.html#joined-relation
 .. _Jupyter Notebook basics: https://nbviewer.jupyter.org/github/jupyter/notebook/blob/master/docs/source/examples/Notebook/Notebook%20Basics.ipynb
 .. _Jupyter Notebook: https://jupyter.org/
-.. _limits of the x-axis: https://matplotlib.org/3.2.1/api/_as_gen/matplotlib.axes.Axes.set_xlim.html
-.. _line chart: https://matplotlib.org/3.2.1/api/_as_gen/matplotlib.pyplot.plot.html
+.. _limits of the x-axis: https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_xlim.html
+.. _line chart: https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html
 .. _location: https://www.latlong.net/
-.. _Matplotlib documentation: https://matplotlib.org/3.2.1/contents.html
+.. _Matplotlib documentation: https://matplotlib.org/stable/contents.html
 .. _Matplotlib: https://matplotlib.org/
 .. _NaN: https://numpy.org/doc/1.18/reference/constants.html?highlight=nan#numpy.nan
 .. _None: https://docs.python.org/3/library/constants.html#None
@@ -812,15 +812,15 @@ This visualization resolves both original issues:
 .. _Pip: https://pypi.org/project/pip/
 .. _Python: https://www.python.org/
 .. _read_sql(): https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_sql.html
-.. _scatter diagram: https://matplotlib.org/3.2.1/api/_as_gen/matplotlib.pyplot.scatter.html
-.. _scatter: https://matplotlib.org/3.2.1/api/_as_gen/matplotlib.axes.Axes.scatter.html
+.. _scatter diagram: https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.scatter.html
+.. _scatter: https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.scatter.html
 .. _SQLAlchemy: https://www.sqlalchemy.org/
 .. _standard Python interpreter: https://docs.python.org/3/tutorial/interpreter.html
 .. _system load: https://en.wikipedia.org/wiki/Load_(computing)
 .. _table function: https://crate.io/docs/crate/reference/en/latest/general/builtins/table-functions.html
-.. _tick formatting: https://matplotlib.org/3.2.1/api/_as_gen/matplotlib.axis.XAxis.set_major_formatter.html
-.. _tick locations: https://matplotlib.org/3.2.1/api/_as_gen/matplotlib.axis.XAxis.set_major_locator.html
-.. _time string: https://matplotlib.org/3.2.1/api/dates_api.html?highlight=dateformatter#matplotlib.dates.DateFormatter
+.. _tick formatting: https://matplotlib.org/stable/api/_as_gen/matplotlib.axis.Axis.set_major_formatter.html
+.. _tick locations: https://matplotlib.org/stable/api/_as_gen/matplotlib.axis.Axis.set_major_locator.html
+.. _time string: https://matplotlib.org/stable/api/dates_api.html#matplotlib.dates.DateFormatter
 .. _trunc_date(): https://crate.io/docs/crate/reference/en/latest/general/builtins/scalar.html#date-trunc-interval-timezone-timestamp
 .. _value expression:  https://crate.io/docs/crate/reference/en/latest/sql/general/value-expressions.html
 .. _WHERE: https://crate.io/docs/crate/reference/en/latest/general/dql/selects.html#where-clause

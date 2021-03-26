@@ -336,7 +336,7 @@ will open up a map view showing the current position of the ISS:
     zooming out.
 
 
-.. _await: https://developer.mozilla.org/en-US/docs/Youb/JavaScript/Reference/Operators/await
+.. _await: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await
 .. _axios: https://www.npmjs.com/package/axios
 .. _Client: https://node-postgres.com/api/client
 .. _connect: https://node-postgres.com/features/connecting

@@ -34,7 +34,7 @@ CrateDB requires a `Java virtual machine`_ to run.
    Starting with CrateDB 4.2, a `Java virtual machine`_ is bundled with the
    tarball and no extra installation is necessary.
 
-Versions starting from 3.0 to 4.1 require a `Java 11`_ installation. We
+Versions starting from 3.0 to 4.1 require a `Java installation`_. We
 recommend using `Oracle's Java`_ on macOS and OpenJDK_ on Linux Systems.
 Earlier versions required Java 8.
 
@@ -92,15 +92,15 @@ Now you have CrateDB up and running, :ref:`take the guided tour <use>`.
 .. _An introductory tutorial: https://crate.io/docs/crate/guide/tutorials/hello.html
 .. _bootstrap checks: https://crate.io/docs/crate/guide/en/latest/admin/bootstrap-checks.html
 .. _crash: https://crate.io/docs/crate/guide/getting_started/connect/crash.html
-.. _CrateDB reference documentation: https://crate.io/docs/crate/reference/en/latest/run.html
+.. _CrateDB reference documentation: https://crate.io/docs/crate/reference/en/latest/cli-tools.html
 .. _How to run CrateDB in a multi node setup: https://crate.io/docs/crate/guide/getting_started/scale/multi_node_setup.html
 .. _How-To Guides: https://crate.io/docs/crate/howtos/en/latest/
 .. _install section: https://crate.io/docs/crate/guide/getting_started/install/index.html
-.. _Java 11: https://www.oracle.com/technetwork/java/javase/downloads/index.html
+.. _Java installation: https://www.oracle.com/java/technologies/javase-downloads.html
 .. _Java virtual machine: https://en.wikipedia.org/wiki/Java_virtual_machine
 .. _OpenJDK: https://openjdk.java.net/projects/jdk/11/
-.. _Oracle's Java: https://www.java.com/en/download/help/mac_install.xml
-.. _release notes: https://crate.io/docs/crate/reference/en/latest/release_notes/index.html
+.. _Oracle's Java: https://www.java.com/en/download/help/mac_install.html
+.. _release notes: https://crate.io/docs/crate/reference/en/latest/appendices/release-notes/index.html
 .. _the latest CrateDB release: https://crate.io/download/
 .. _Unix-like system: https://en.wikipedia.org/wiki/Unix-like
 .. _web administration interface: https://crate.io/docs/crate/guide/getting_started/connect/admin_ui.html
