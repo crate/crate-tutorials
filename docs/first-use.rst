@@ -18,8 +18,8 @@ interact with the database for the first time.
 Introducing the Admin UI
 ========================
 
-CrateDB ships with a web administration user interface (UI), or `Admin UI`_ for
-short.
+CrateDB ships with a browser-based administration interface called
+:ref:`Admin UI <admin-ui:index>`.
 
 The CrateDB admin UI runs on every CrateDB node, and you can use it to inspect
 and interact with the whole CrateDB cluster in a number of ways.
@@ -37,9 +37,17 @@ You should see something like this:
 
 .. image:: _assets/img/first-use/admin-ui.png
 
-.. SEEALSO::
 
-   `The CrateDB Admin UI documentation`_
+
+.. _use-crash:
+
+Introducing the CrateDB Shell
+=============================
+
+The CrateDB Shell (aka Crash) is an interactive command-line interface (CLI)
+program for working with CrateDB on your favorite terminal. For further
+information about it, please follow up on its documentation at
+:ref:`crash:index`.
 
 
 .. _use-more-tutorials:
@@ -69,15 +77,14 @@ the documentation.
 
 .. _use-dive-in:
 
-Dive in to CrateDB
-==================
+Dive into CrateDB
+=================
 
 Check out the `How-to Guides`_ for goal oriented topics. Alternatively, check
 out the `CrateDB Reference`_ for a complete dip-in-and-dip-out reference manual.
 
 
 .. _a list of available CrateDB clients and tools: https://crate.io/docs/crate/clients-tools/en/latest/
-.. _Admin UI: https://crate.io/docs/clients/admin-ui/en/latest/
 .. _aggregation: https://crate.io/docs/stable/sql/aggregation.html
 .. _client tools: https://crate.io/a/category/client-tools/
 .. _Crash: https://crate.io/docs/clients/crash/en/latest/
@@ -92,5 +99,4 @@ out the `CrateDB Reference`_ for a complete dip-in-and-dip-out reference manual.
 .. _regular SQL: https://crate.io/docs/crate/reference/en/latest/appendices/sql-compliance.html
 .. _scalar: https://crate.io/docs/stable/sql/scalar.html
 .. _schema: https://crate.io/docs/crate/reference/en/latest/general/ddl/create-table.html#schemas
-.. _The CrateDB Admin UI documentation: `Admin UI`_
 .. _the CrateDB query reference: https://crate.io/docs/crate/reference/en/latest/general/dql/index.html
