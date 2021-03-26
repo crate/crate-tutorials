@@ -31,12 +31,12 @@ CrateDB requires a `Java virtual machine`_ to run.
 
 .. NOTE::
 
-   Starting with CrateDB 4.2, a `Java virtual machine`_ is bundled with the
-   tarball and no extra installation is necessary.
+    Starting with CrateDB 4.2, a `Java virtual machine`_ is bundled with the
+    tarball and no extra installation is necessary. Versions starting from 3.0
+    to 4.1 required a separate `Java installation`_, version 11 was the minimum
+    requirement. Earlier versions required Java 8.
 
-Versions starting from 3.0 to 4.1 require a `Java installation`_. We
-recommend using `Oracle's Java`_ on macOS and OpenJDK_ on Linux Systems.
-Earlier versions required Java 8.
+    We recommend using `Oracle's Java`_ on macOS and OpenJDK_ on Linux Systems.
 
 
 .. _install-basic-download:

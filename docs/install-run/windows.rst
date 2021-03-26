@@ -41,12 +41,12 @@ Download and run
 
 .. NOTE::
 
-    CrateDB versions 4.2 and above include a JVM and do not require a separate
-    installation. For earlier versions, CrateDB requires a `Java virtual
-    machine`_ to run. Versions from 3.0 to 4.1 require a `Java installation`_
-    We recommend using `Oracle's Java`_ on Microsoft Windows. Earlier versions
-    required Java 8.
+    Starting with CrateDB 4.2, a `Java virtual machine`_ is bundled with the
+    tarball and no extra installation is necessary. Versions starting from 3.0
+    to 4.1 required a separate `Java installation`_, version 11 was the minimum
+    requirement. Earlier versions required Java 8.
 
+    We recommend using `Oracle's Java`_ on Microsoft Windows.
 
 
 .. _install-windows-next:
