@@ -7,28 +7,25 @@ CrateDB Tutorials
 CrateDB is a distributed SQL database that makes it simple to store and analyze
 massive amounts of machine data in real-time.
 
+.. rubric:: Table of contents
+
+.. toctree::
+    :maxdepth: 1
+    :titlesonly:
+
+    install
+    first-use
+    generate-time-series/index
+    normalize-intervals
+
 .. SEEALSO::
 
-    Check out the `CrateDB How-To Guides`_  or the `CrateDB Reference`_.
+    Check out the :ref:`howtos:index` and the :ref:`reference:index`.
 
 .. NOTE::
 
     This is an open source documentation project. You can view the source code,
     create pull requests, and report issues on `GitHub`_.
 
-.. rubric:: Table of contents
 
-.. toctree::
-    :maxdepth: 3
-    :titlesonly:
-
-
-    install-run/index
-    first-use
-    generate-time-series/index
-    normalize-intervals
-
-
-.. _CrateDB How-To Guides: https://crate.io/docs/crate/howtos/en/latest/
-.. _CrateDB Reference: https://crate.io/docs/crate/reference/en/latest/
 .. _GitHub: https://github.com/crate/crate-tutorials
