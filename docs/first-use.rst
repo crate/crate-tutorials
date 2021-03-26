@@ -38,7 +38,6 @@ You should see something like this:
 .. image:: _assets/img/first-use/admin-ui.png
 
 
-
 .. _use-crash:
 
 Introducing the CrateDB Shell
@@ -48,6 +47,11 @@ The CrateDB Shell (aka Crash) is an interactive command-line interface (CLI)
 program for working with CrateDB on your favorite terminal. For further
 information about it, please follow up on its documentation at
 :ref:`crash:index`.
+
+.. NOTE::
+
+    If you are running CrateDB on a remote machine, you will have to create a
+    dedicated user account for accessing the Admin UI. See :ref:`create-user`.
 
 
 .. _use-more-tutorials:
