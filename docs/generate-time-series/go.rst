@@ -434,4 +434,4 @@ will open up a map view showing the current position of the ISS:
 .. _struct: https://golang.org/ref/spec#Struct_types
 .. _The completed script source: https://play.golang.org/p/2HoBzpBn-iF
 .. _time: https://golang.org/pkg/time/
-.. _unmarshal: https://godoc.org/encoding/json#Unmarshal
+.. _unmarshal: https://pkg.go.dev/encoding/json#Unmarshal

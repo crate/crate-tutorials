@@ -41,9 +41,9 @@ Next steps
 Now you have CrateDB up and running, :ref:`take the guided tour <use>`.
 
 
-.. _bootstrap check: https://crate.io/docs/crate/guide/en/latest/admin/bootstrap-checks.html
+.. _bootstrap check: https://crate.io/docs/crate/howtos/en/latest/admin/bootstrap-checks.html
 .. _CrateDB Docker image: https://hub.docker.com/_/crate/
 .. _Docker: https://www.docker.com/
-.. _full guide to CrateDB and Docker: https://crate.io/docs/crate/guide/en/latest/deployment/containers/docker.html
-.. _resource constraints: https://crate.io/docs/crate/guide/en/latest/deployment/containers/docker.html#resource-constraints
-.. _troubleshooting guide: https://crate.io/docs/crate/guide/en/latest/deployment/containers/docker.html#docker-troubleshooting
+.. _full guide to CrateDB and Docker: https://crate.io/docs/crate/howtos/en/latest/deployment/containers/docker.html
+.. _resource constraints: https://crate.io/docs/crate/howtos/en/latest/deployment/containers/docker.html#resource-constraints
+.. _troubleshooting guide: https://crate.io/docs/crate/howtos/en/latest/deployment/containers/docker.html#troubleshooting

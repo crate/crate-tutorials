@@ -37,9 +37,9 @@ Next steps
 Now you have CrateDB up and running, :ref:`take the guided tour <use>`.
 
 
-.. _bootstrap checks: https://crate.io/docs/crate/guide/en/latest/admin/bootstrap-checks.html
-.. _Debian GNU/Linux: https://crate.io/docs/crate/guide/en/latest/deployment/linux/debian.html
+.. _bootstrap checks: https://crate.io/docs/crate/howtos/en/latest/admin/bootstrap-checks.html
+.. _Debian GNU/Linux: https://crate.io/docs/crate/howtos/en/latest/deployment/linux/debian.html
 .. _How-To Guides: https://crate.io/docs/crate/howtos/en/latest/
 .. _OpenJDK: https://openjdk.java.net/projects/jdk8/
-.. _RedHat Linux: https://crate.io/docs/crate/guide/en/latest/deployment/linux/red-hat.html
-.. _Ubuntu: https://crate.io/docs/crate/guide/en/latest/deployment/linux/ubuntu.html
+.. _RedHat Linux: https://crate.io/docs/crate/howtos/en/latest/deployment/linux/red-hat.html
+.. _Ubuntu: https://crate.io/docs/crate/howtos/en/latest/deployment/linux/ubuntu.html

@@ -235,12 +235,12 @@ will open up a map view showing the current position of the ISS:
     zooming out.
 
 
-.. _connect: https://crate.io/docs/clients/python/en/latest/connect.html
-.. _crate: https://crate.io/docs/clients/python/en/latest/
-.. _CrateDB Admin UI: https://crate.io/docs/clients/admin-ui/en/latest/
+.. _connect: https://crate.io/docs/python/en/latest/connect.html
+.. _crate: https://crate.io/docs/python/en/latest/
+.. _CrateDB Admin UI: https://crate.io/docs/crate/admin-ui/en/latest/
 .. _create a table: https://crate.io/docs/crate/reference/en/latest/general/ddl/create-table.html
-.. _cursor: https://crate.io/docs/clients/python/en/latest/query.html#using-a-cursor
-.. _fetch all: https://crate.io/docs/clients/python/en/latest/query.html#fetchmany
+.. _cursor: https://crate.io/docs/python/en/latest/query.html#using-a-cursor
+.. _fetch all: https://crate.io/docs/python/en/latest/query.html#fetchmany
 .. _ground point: https://en.wikipedia.org/wiki/Ground_track
 .. _INSERT: https://crate.io/docs/crate/reference/en/latest/general/dml.html#inserting-data
 .. _interactive mode: https://docs.python.org/3/tutorial/interpreter.html#interactive-mode
@@ -252,4 +252,4 @@ will open up a map view showing the current position of the ISS:
 .. _requests: https://requests.readthedocs.io/en/master/
 .. _SELECT: https://crate.io/docs/crate/reference/en/latest/general/dql/selects.html
 .. _standard Python interpreter: https://docs.python.org/3/tutorial/interpreter.html
-.. _WKT: https://en.wikipedia.org/wiki/Youll-known_text_representation_of_geometry
+.. _WKT: https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry
