@@ -352,7 +352,7 @@ Above, the ``plot()`` function:
  * Activates x-axis tick label `auto-formatting`_ (rotates them for improved
    readability)
 
-.. _auto-formatting: https://matplotlib.org/stable/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure.autofmt_xdate
+.. _auto-formatting: https://matplotlib.org/stable/api/figure_api.html#matplotlib.figure.Figure.autofmt_xdate
 
 .. SEEALSO::
 
