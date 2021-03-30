@@ -24,38 +24,19 @@ Introduction
 ============
 
 By installing CrateDB the way as outlined in this document, you will be able to
-quickly setup and run a single-node cluster.
+quickly setup and run a single-node cluster. The document describes different
+installation methods. While we recommend to use the package-based method by
+subscribing to the respective release channels, you can also download release
+archives and install CrateDB manually using the :ref:`install-adhoc` method.
 
-After the installation is finished, the CrateDB service should be up and
-running. Now, you can access the :ref:`Admin UI <admin-ui:index>` from your
+When the installation is finished, the CrateDB service should be up and
+running. Then, you can access the :ref:`Admin UI <admin-ui:index>` from your
 local machine by navigating to::
 
     http://localhost:4200/
 
-After successfully installing the software, you might want to follow up with
-:ref:`taking the guided tour <use>`.
-
-Also, you might enjoy to be guided into further information about how to
-quickly adjust the :ref:`configuration settings <configure>`, read more
-details about the :ref:`reference:config` of CrateDB, the background about
-:ref:`howtos:bootstrap-checks`, multi-node configuration within the section
-about :ref:`howtos:clustering` and :ref:`howtos:going-into-production`. When
-operating a CrateDB cluster in production, `performance tuning`_ will also be
-of interest.
-
-.. _performance tuning: https://crate.io/docs/crate/howtos/en/latest/performance/
-
-.. NOTE::
-
-    To add additional CrateDB nodes to this kind of cluster in order to make it
-    form a multi-node cluster, you will need to remove the cluster state after
-    changing the configuration.
-
-.. NOTE::
-
-    If you are interested to follow the development more closely, please check
-    out the :ref:`reference:release_notes` for more specific information about
-    each CrateDB release. `Other releases of CrateDB`_ are also available.
+After successfully installing CrateDB, please also consider reading the
+:ref:`post-install-notes`.
 
 
 Prerequisites
@@ -66,72 +47,13 @@ CrateDB requires a `Java virtual machine`_ to run.
 - Starting with CrateDB 4.2, a `Java virtual machine`_ is bundled with CrateDB
   and no extra installation is necessary.
 
-- CrateDB version 3.0 to 4.1 required a separate Java installation, version
-  11 was the minimum requirement. Earlier versions required Java 8.
-  We recommend using OpenJDK_ on Linux Systems and `Oracle Java`_ on
-  Microsoft Windows and macOS.
+- CrateDB versions before 4.2 required a separate Java installation. For
+  CrateDB 3.0 to 4.1, Java 11 is the minimum requirement. CrateDB versions
+  before 3.0 require Java 8. We recommend using OpenJDK_ on Linux Systems and
+  `Oracle Java`_ on Microsoft Windows and macOS.
 
 
-Basic setup
-===========
-
-This section of the documentation outlines how to use the release archives to
-install CrateDB.
-
-
-Automatic installation
-----------------------
-
-CrateDB has an effortless installer suitable for all `Unix-like`_ systems
-running ``bash``::
-
-    bash -c "$(curl -L https://try.crate.io/)"
-
-
-Manual installation
--------------------
-
-This walkthrough is suitable to install and run CrateDB on both `Unix-like`_
-systems as well as on Microsoft Windows.
-
-#. Download the latest `CrateDB release archive`_. Please make sure to select
-   the right release archive matching your system.
-
-#. Once downloaded, extract the archive either using your favorite terminal or
-   command line shell or by using a GUI tool like `7-Zip`_::
-
-       tar -xzf crate-*.tar.gz
-
-#. On the terminal, change into the extracted ``crate`` directory::
-
-       cd crate-*
-
-#. Run a CrateDB single-node instance on the local network interface::
-
-       ./bin/crate
-
-#. In order to stop CrateDB again, use :kbd:`ctrl-c`.
-
-.. SEEALSO::
-
-      Consult the :ref:`reference:cli` documentation for further information
-      about the ``./bin/crate`` command.
-
-
-Notes about Microsoft Windows
------------------------------
-
-If you are installing CrateDB on a recent `Windows Server`_ edition, setting
-up the latest *Microsoft Visual C++ 2019 Redistributable* package is required.
-You can download it at `msvcrt x86-64`_, `msvcrt x86-32`_ or `msvcrt ARM64`_.
-
-Within the terminal, as a Windows user, the prompt after `starting PowerShell`_
-will look like this.
-
-.. code-block:: doscon
-
-    PS> ./bin/crate
-
+.. _install-deb:
 
 Debian and Ubuntu
 =================
@@ -193,6 +115,7 @@ Replace ``COMMAND`` with ``start``, ``stop``, ``restart``, ``status`` and
 so on.
 
 
+.. _install-rpm:
 
 Red Hat Linux and CentOS
 ========================
@@ -290,7 +213,60 @@ official `CrateDB Docker image`_, use::
     disk volumes.
 
 
-.. _configure:
+.. _install-adhoc:
+
+Ad-hoc installation
+===================
+
+This section of the documentation outlines how to use the release archives to
+install CrateDB. The walkthrough is suitable to install and run CrateDB on both
+`Unix-like`_ systems as well as on Microsoft Windows.
+
+#. Download the latest `CrateDB release archive`_. Please make sure to select
+   the right release archive matching your system.
+
+#. Once downloaded, extract the archive either using your favorite terminal or
+   command line shell or by using a GUI tool like `7-Zip`_::
+
+       # Extract tarball on Unix-like systems
+       tar -xzf crate-*.tar.gz
+
+       # Extract Zip archive on Windows systems
+       unzip -o crate-*.zip
+
+#. On the terminal, change into the extracted ``crate`` directory::
+
+       cd crate-*
+
+#. Run a CrateDB single-node instance on the local network interface::
+
+       ./bin/crate
+
+#. In order to stop CrateDB again, use :kbd:`ctrl-c`.
+
+.. SEEALSO::
+
+      Consult the :ref:`reference:cli` documentation for further information
+      about the ``./bin/crate`` command.
+
+
+Notes about Microsoft Windows
+-----------------------------
+
+If you are installing CrateDB on a recent `Windows Server`_ edition, setting
+up the latest *Microsoft Visual C++ 2019 Redistributable* package is required.
+You can download it at `msvcrt x86-64`_, `msvcrt x86-32`_ or `msvcrt ARM64`_.
+
+Within the terminal, as a Windows user, the prompt after `starting PowerShell`_
+will look like this.
+
+.. code-block:: doscon
+
+    PS> ./bin/crate
+
+
+
+.. _install-configure:
 
 Basic configuration
 ===================
@@ -328,6 +304,35 @@ The CrateDB startup script uses :ref:`reference:conf-env` from the
 
     # Force the JVM to use IPv4 only.
     CRATE_USE_IPV4=true
+
+
+.. _post-install-notes:
+
+Post-install notes
+==================
+
+After successfully installing the software, you might want to follow up with
+:ref:`taking the guided tour <use>`.
+
+Also, you might enjoy to be guided into further information about how to
+quickly adjust the :ref:`configuration settings <install-configure>`, read more
+details about the :ref:`reference:config` of CrateDB, the background about
+:ref:`howtos:bootstrap-checks`, multi-node configuration within the section
+about :ref:`howtos:clustering` and :ref:`howtos:going-into-production`. When
+operating a CrateDB cluster in production, `performance tuning`_ will also be
+of interest.
+
+.. _performance tuning: https://crate.io/docs/crate/howtos/en/latest/performance/
+
+.. NOTE::
+
+    As noted within the introductory section, this kind of installation flavor
+    will let you quickly setup and run a single-node cluster.
+
+    To add additional CrateDB nodes to this kind of cluster in order to make it
+    form a multi-node cluster, you will need to remove the cluster state after
+    changing the configuration.
+
 
 
 .. _7-Zip: https://www.7-zip.org/
