@@ -118,7 +118,7 @@ First, import the `node-postgres`_ client:
 
     > const { Client } = require('pg')
 
-Then `connect`_ to CrateDB, using the `Postgres Wire Protocol`_ port
+Then `connect`_ to CrateDB, using the :ref:`reference:postgres_wire_protocol` port
 (``5432``):
 
 .. code-block:: js
@@ -129,7 +129,8 @@ Then `connect`_ to CrateDB, using the `Postgres Wire Protocol`_ port
 
     > await client.connect()
 
-Finally, `create a table`_ suitable for writing ISS position coordinates:
+Finally, :ref:`create a table <reference:sql_ddl_create>` suitable for writing
+ISS position coordinates.
 
 .. code-block:: js
 
@@ -167,7 +168,7 @@ Finally, `create a table`_ suitable for writing ISS position coordinates:
 
 Success!
 
-In the `CrateDB Admin UI`_, you should see the new table when you navigate to
+In the :ref:`admin-ui:index`, you should see the new table when you navigate to
 the *Tables* screen using the left-hand navigation menu:
 
 .. image:: ../_assets/img/generate-time-series/table.png
@@ -178,8 +179,8 @@ Record the ISS position
 
 With the table in place, you can start recording the position of the ISS.
 
-The following command calls your ``position`` function and will `INSERT`_ the
-result into the ``iss`` table:
+The following command calls your ``position`` function and will :ref:`insert
+<reference:inserting_data>` the result into the ``iss`` table.
 
 .. code-block:: js
 
@@ -211,7 +212,8 @@ result into the ``iss`` table:
 Press the up arrow on your keyboard and hit *Enter* to run the same command a
 few more times.
 
-When you're done, you can `SELECT`_ that data back out of CrateDB:
+When you're done, you can :ref:`select <reference:sql_dql_queries>` that data
+back out of CrateDB.
 
 .. code-block:: js
 
@@ -342,18 +344,15 @@ will open up a map view showing the current position of the ISS:
 .. _connect: https://node-postgres.com/features/connecting
 .. _Connection Pool: https://node-postgres.com/api/pool
 .. _CrateDB Admin UI: https://crate.io/docs/clients/admin-ui/en/latest/
-.. _create a table: https://crate.io/docs/crate/reference/en/latest/general/ddl/create-table.html
 .. _detailed guide: https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Promises
 .. _ground point: https://en.wikipedia.org/wiki/Ground_track
 .. _input values: https://node-postgres.com/features/queries#Parameterized%20query
-.. _INSERT: https://crate.io/docs/crate/reference/en/latest/general/dml.html#inserting-data
 .. _interactive REPL mode: https://www.oreilly.com/library/view/learning-node-2nd/9781491943113/ch04.html
 .. _International Space Station: https://www.nasa.gov/mission_pages/station/main/index.html
 .. _node-postgres: https://www.npmjs.com/package/pg
 .. _Node.js: https://nodejs.org/en/
 .. _npm: https://www.npmjs.com/
 .. _open notify: http://open-notify.org/
-.. _Postgres Wire Protocol: https://crate.io/docs/crate/reference/en/latest/interfaces/postgres.html
 .. _promise chaining: https://javascript.info/promise-chaining
 .. _promises: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
 .. _SELECT: https://crate.io/docs/crate/reference/en/latest/general/dql/selects.html

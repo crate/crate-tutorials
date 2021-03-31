@@ -134,7 +134,8 @@ keys which don't have a corresponding struct field are ignored.
     }
 
 Now, create a function that makes an HTTP GET request to the Open Notify API
-endpoint and returns longitude and latitude as a `geo_point`_ declaration.
+endpoint and returns longitude and latitude as a
+:ref:`reference:geo_point_data_type` declaration.
 
 .. code-block:: go
 
@@ -229,9 +230,10 @@ client:
         "github.com/jackc/pgx/v4"
     )
 
-Then, in your main function, connect to CrateDB using the `Postgres Wire
-Protocol`_ port (``5432``) and `create a table`_ suitable for writing ISS
-position coordinates:
+Then, in your main function, connect to CrateDB using the
+:ref:`reference:postgres_wire_protocol` port (``5432``) and
+:ref:`create a table <reference:sql_ddl_create>` suitable for writing ISS
+position coordinates.
 
 .. code-block:: go
 
@@ -263,8 +265,8 @@ Save your changes and run the code:
 When you run the script this time, the ``go`` command will look up the module
 containing the `pgx`_ package and add it to ``go.mod``.
 
-In the `CrateDB Admin UI`_, you should see the new table when you navigate to
-the *Tables* screen using the left-hand navigation menu:
+In the :ref:`admin-ui:index`, you should see the new table when you navigate
+to the *Tables* screen using the left-hand navigation menu:
 
 .. image:: ../_assets/img/generate-time-series/table.png
 
@@ -274,8 +276,8 @@ Record the ISS position
 
 With the table in place, you can start recording the position of the ISS.
 
-Create some logic that calls your ``getISSPosition`` function and `INSERT`_ the
-result into the ``iss`` table:
+Create some logic that calls your ``getISSPosition`` function and :ref:`insert
+<reference:inserting_data>` the result into the ``iss`` table.
 
 .. code-block:: go
 
@@ -307,8 +309,8 @@ Save your changes and run the code:
 Press the up arrow on your keyboard and hit *Enter* to run the same command a
 few more times.
 
-When you're done, you can `SELECT`_ that data back out of CrateDB with this
-query:
+When you're done, you can :ref:`select <reference:sql_dql_queries>` that data
+back out of CrateDB with this query:
 
 .. code-block:: psql
 
@@ -396,8 +398,8 @@ Run the script from the command line:
     INSERT OK
     Sleeping for 10 seconds...
 
-As the script runs, you should see the table filling up in the `CrateDB Admin
-UI`_:
+As the script runs, you should see the table filling up in the
+:ref:`admin-ui:index`.
 
 .. image:: ../_assets/img/generate-time-series/rows.png
 
@@ -416,20 +418,13 @@ will open up a map view showing the current position of the ISS:
 
 .. _compilation: https://www.geeksforgeeks.org/difference-between-compiled-and-interpreted-language/
 .. _context: https://golang.org/pkg/context/
-.. _CrateDB Admin UI: https://crate.io/docs/clients/admin-ui/en/latest/
-.. _create a table: https://crate.io/docs/crate/reference/en/latest/general/ddl/create-table.html
-.. _geo_point: https://crate.io/docs/crate/reference/en/latest/general/ddl/data-types.html#geo-point
 .. _Go: https://golang.org/
 .. _ground point: https://en.wikipedia.org/wiki/Ground_track
-.. _INSERT: https://crate.io/docs/crate/reference/en/latest/general/dml.html#inserting-data
 .. _International Space Station: https://www.nasa.gov/mission_pages/station/main/index.html
 .. _modules: https://blog.golang.org/migrating-to-go-modules
 .. _net/http: https://golang.org/pkg/net/http/
 .. _open notify: http://open-notify.org/
 .. _pgx: https://github.com/jackc/pgx/tree/v4
-.. _Postgres Wire Protocol: https://crate.io/docs/crate/reference/en/latest/interfaces/postgres.html
-.. _SELECT: https://crate.io/docs/crate/reference/en/latest/general/dql/selects.html
-.. _SQL Console: https://crate.io/docs/crate/admin-ui/en/latest/console.html#sql-console
 .. _standard library: https://golang.org/pkg/
 .. _struct: https://golang.org/ref/spec#Struct_types
 .. _The completed script source: https://play.golang.org/p/2HoBzpBn-iF
