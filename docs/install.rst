@@ -272,23 +272,28 @@ will look like this.
 Basic configuration
 ===================
 
-In order to configure CrateDB, take note of the configuration file location and
-the available environment variables.
+In order to configure CrateDB, please take note of the configuration file
+locations and the available environment variables.
 
 
 Configuration files
 -------------------
 
-The main CrateDB configuration files are located within the ``/etc/crate``
-directory.
-
+When using the package-based setup flavor for :ref:`install-deb` or
+:ref:`install-rpm`, the main CrateDB configuration files are located within the
+``/etc/crate`` directory.
+When using the :ref:`install-adhoc` setup, the configuration files are located
+within the ``config/`` directory.
 
 Environment variables
 ---------------------
 
-The CrateDB startup script uses :ref:`reference:conf-env` from the
-``/etc/default/crate`` file. When using the :ref:`install-adhoc` setup, the
-configuration file is ``config/crate.yml``. Here is an example::
+When using the package-based setup flavor for :ref:`install-deb` or
+:ref:`install-rpm`, the CrateDB startup script uses :ref:`reference:conf-env`
+from the ``/etc/default/crate`` file. When using the :ref:`install-adhoc`
+setup, the environment variables will be set by ``bin/crate{.sh,.bat}``.
+
+Here is an example::
 
     # Configure heap size (defaults to 256m min, 1g max).
     CRATE_HEAP_SIZE=2g
