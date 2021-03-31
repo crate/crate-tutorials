@@ -2,9 +2,9 @@
 
 .. _install:
 
-==================
-Quick installation
-==================
+============
+Installation
+============
 
 .. contents::
    :local:
@@ -25,9 +25,10 @@ Introduction
 
 By installing CrateDB the way as outlined in this document, you will be able to
 quickly setup and run a single-node cluster. The document describes different
-installation methods. While we recommend to use the package-based method by
-subscribing to the respective release channels, you can also download release
-archives and install CrateDB manually using the :ref:`install-adhoc` method.
+installation methods. While we recommend to use the package-based methods
+for :ref:`install-deb` or :ref:`install-rpm` by subscribing to the respective
+release channels, you can also download release archives and install CrateDB
+manually using the :ref:`install-adhoc` method.
 
 When the installation is finished, the CrateDB service should be up and
 running. Then, you can access the :ref:`Admin UI <admin-ui:index>` from your
@@ -215,8 +216,8 @@ official `CrateDB Docker image`_, use::
 
 .. _install-adhoc:
 
-Ad-hoc installation
-===================
+Ad-hoc installation (Unix, Windows)
+===================================
 
 This section of the documentation outlines how to use the release archives to
 install CrateDB. The walkthrough is suitable to install and run CrateDB on both
@@ -286,7 +287,8 @@ Environment variables
 ---------------------
 
 The CrateDB startup script uses :ref:`reference:conf-env` from the
-``/etc/default/crate`` file. Here is an example::
+``/etc/default/crate`` file. When using the :ref:`install-adhoc` setup, the
+configuration file is ``config/crate.yml``. Here is an example::
 
     # Configure heap size (defaults to 256m min, 1g max).
     CRATE_HEAP_SIZE=2g
