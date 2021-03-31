@@ -17,8 +17,8 @@ If you followed one of the tutorials in the :ref:`previous section <gen-ts>`,
 you should have some mock time series data about the position, or `ground
 point`_, of `International Space Station`_ (ISS).
 
-It is common to want to visualize time series data by graphing values over
-time. However, you may run into the following issues:
+It is common to visualize time series data by graphing values over time.
+However, you may run into the following issues:
 
 1. The resolution of your data does not match the resolution you want for your
    visualization.
@@ -39,10 +39,9 @@ using SQL.
 
 .. NOTE::
 
-    This tutorial focuses on the use of SQL. Code examples use the CrateDB
-    Python client for demonstration purposes. However, *the following
-    techniques will work with any language that allows for the execution of
-    SQL*.
+    This tutorial focuses on the use of SQL. Code examples demonstrate the use
+    of the CrateDB Python client. However, the following guidelines will work
+    with any language that allows for the execution of SQL.
 
 .. SEEALSO::
 
@@ -82,8 +81,8 @@ You should be using the latest stable version of `Python`_.
 You must have the following Python libraries installed:
 
 - `pandas`_ -- querying and data manipulation
-- `SQLAlchemy`_ -- a database engine for pandas
-- The `CrateDB Python Client`_ -- CrateDB support for SQLAlchemy
+- `SQLAlchemy`_ -- a powerful database abstraction layer
+- The :ref:`crate-python:index` -- SQLAlchemy support for CrateDB
 - `Matplotlib`_ -- data visualization
 
 You can install (or upgrade) the necessary libraries with `Pip`_:
@@ -183,8 +182,8 @@ To get started, import the ``pandas`` library:
 
     import pandas
 
-Pandas uses `SQLAlchemy`_ and the `CrateDB Python Client`_ to provide support
-for ``crate://`` style `connection strings`_.
+Pandas uses `SQLAlchemy`_ and the :ref:`crate-python:index` to provide support
+for ``crate://`` style :ref:`connection strings <crate-python:database-urls>`.
 
 Then, query the raw data:
 
@@ -198,8 +197,8 @@ Then, query the raw data:
 
     Edit the connection string as needed.
 
-If you evaluate the `read_sql()`_ call above, Jupyter should (eventually)
-display a table like this:
+If you evaluate the :py:func:`read_sql() <pandas.read_sql>` call above, the
+Jupyter notebook should eventually display a table like this:
 
 .. csv-table::
     :header: "", "timestamp", "position"
@@ -228,11 +227,12 @@ Here are a few ways to improve this result:
  * The ``timestamp`` column isn't human-readable. It would be easier to
    understand the results if this value was as a human-readable time.
 
- * The ``position`` column is a `geo_point`_. This data type isn't easy to plot
-   on a traditional graph. However, you can use the `distance()`_ function to
-   calculate the distance between two ``geo_point`` values. If you compare
-   ``position`` to a fixed place, you can plot distance over time for a
-   graph showing you how far away the ISS is from some location of interest.
+ * The ``position`` column is a :ref:`reference:geo_point_data_type`. This data
+   type isn't easy to plot on a traditional graph. However, you can use the
+   :ref:`distance() <reference:scalar_distance>` function to calculate the
+   distance between two ``geo_point`` values. If you compare ``position`` to a
+   fixed place, you can plot distance over time for a graph showing you how far
+   away the ISS is from some location of interest.
 
 Here's an improvement that wraps the code in a function named ``raw_data()`` so
 that you can execute this query multiple times:
@@ -265,12 +265,14 @@ Specifically:
    (using ``{}`` as a placeholder) to calculate the ``distance()`` of the ISS
    ground point in kilometers.
 
- * You can use `CURRENT_TIMESTAMP`_ with an interval `value expression`_
+ * You can use :ref:`CURRENT_TIMESTAMP <reference:current_timestamp>` with an
+   interval :ref:`value expression <reference:sql-value-expressions>`
    (``INTERVAL '1' DAY``) to calculate a timestamp that is 24 hours in the
-   past. You can then use a `WHERE`_  clause to filter out records with a
-   ``timestamp`` older than one day.
+   past. You can then use a :ref:`WHERE clause <reference:sql-select-where>`
+   to filter out records with a ``timestamp`` older than one day.
 
-   An `ORDER BY`_ clause sorts the results by ``timestamp``, oldest first.
+   An :ref:`ORDER BY clause <reference:sql-select-order-by>` sorts the results
+   by ``timestamp``, oldest first.
 
  * You can use the ``parse_dates`` argument to specify which columns
    ``read_sql()`` should parse as datetimes. Here, a dictionary with the value
@@ -340,19 +342,20 @@ Here's an example function that plots the data:
 
 Above, the ``plot()`` function:
 
- * Generates a `figure`_ that measures 12 × 6 (inches)
- * Plots ``data`` as a `scatter`_ diagram (distance over time)
- * Sets the `axes`_ labels and title
- * Sets up the x-axis to `handle datetimes`_
- * Configures major `tick locations`_ every `hour`_
- * Configures major `tick formatting`_ with a `time string`_ (``%H:00``)
+ * Generates a :py:func:`figure <matplotlib.pyplot.figure>` that measures 12 × 6 (inches)
+ * Plots ``data`` as a :py:meth:`scatter <matplotlib.axes.Axes.scatter>` diagram (distance over time)
+ * Sets the :py:class:`axes <matplotlib.axes.Axes>` labels and title
+ * Sets up the x-axis to :py:meth:`handle datetimes <matplotlib.axes.Axes.xaxis_date>`
+ * Configures major :py:meth:`tick locations <matplotlib.axis.Axis.set_major_locator>`
+   every :py:class:`hour <matplotlib.dates.HourLocator>`
+ * Configures major :py:meth:`tick formatting <matplotlib.axis.Axis.set_major_formatter>`
+   with a :py:class:`time string <matplotlib.dates.DateFormatter>` (``%H:00``)
  * Forces Matplotlib to plot the whole data set, including null ``time``
-   values, by manually setting the `limits of the x-axis`_ (which are trimmed by
-   default)
- * Activates x-axis tick label `auto-formatting`_ (rotates them for improved
-   readability)
+   values, by manually setting the :py:meth:`limits of the x-axis <matplotlib.axes.Axes.set_xlim>`
+   (which are trimmed by default)
+ * Activates x-axis tick label :py:meth:`auto-formatting <matplotlib.figure.Figure.autofmt_xdate>`
+   (rotates them for improved readability)
 
-.. _auto-formatting: https://matplotlib.org/stable/api/figure_api.html#matplotlib.figure.Figure.autofmt_xdate
 
 .. SEEALSO::
 
@@ -371,7 +374,8 @@ Jupyter should display a plot like this:
 
 Above, notice that:
 
- * This plot looks more like a `line chart`_ than a `scatter diagram`_. That's
+ * This plot looks more like a :py:func:`line chart <matplotlib.pyplot.plot>`
+   than a :py:func:`scatter diagram <matplotlib.pyplot.scatter>`. That's
    because the raw data appears in intervals of 10 seconds. At this
    resolution, such a high sampling frequency produces so many data points that
    they appear to be a continuous line.
@@ -396,19 +400,21 @@ Resample the data
 Here's the basic approach to resampling data at a lower frequency:
 
  1. Truncate the ``time`` column to a less precise value (using
-    `trunc_date()`_).
+    :ref:`trunc_date() <reference:scalar-date-trunc>`).
 
     For example, truncate times to the nearest minute.
 
- 2. Group rows by date (using `GROUP BY`_).
+ 2. Group rows by date (using :ref:`GROUP BY <reference:sql_dql_group_by>`).
 
     If you have six data points per minute and you are rounding ``time`` to the
     nearest minute, ``GROUP BY time`` will group six rows into one.
 
- 3. Calculate an `aggregate`_ value across the grouped rows.
+ 3. Calculate an :ref:`aggregate <reference:aggregation>` value across the
+    grouped rows.
 
     For example, if you have six rows with six distances, you can calculate the
-    average distance (using `AVG()`_) and return a single value.
+    average distance (using :ref:`reference:aggregation-avg`) and return a
+    single value.
 
 .. TIP::
 
@@ -442,7 +448,7 @@ above and resamples the raw data by the minute:
 
 .. NOTE::
 
-    `COUNT(*)`_ can be used for debug purposes.
+    :ref:`COUNT(*) <reference:aggregation-count-star>` can be used for debug purposes.
 
     The ``records`` column produced by this query will tell you how many source
     rows have been grouped by the query per result row.
@@ -526,15 +532,15 @@ You can perform null interpolation like so:
     of a join. You should resample this data at the same frequency as your null
     data.
 
- 3. Join both tables with a left `inner join`_ on ``time`` to pull across any
-    non-null values from the right-hand table.
+ 3. Join both tables with a left :ref:`inner join <reference:inner-joins>` on
+    ``time`` to pull across any non-null values from the right-hand table.
 
 The result is a row set that has one row per interval for a fixed period with
 null values filling in for missing data.
 
 .. SEEALSO::
 
-    Read more about `how joins work`_
+    Read more about `how joins work`_.
 
 
 .. _ni-brief-example:
@@ -572,8 +578,9 @@ If you generate null data for the same period, it will look like this:
 
 .. NOTE::
 
-    A column full of null values will be `cast`_ to `None`_ values by Pandas.
-    That's why this table displays "None" instead of "NULL."
+    A column full of null values will be :py:meth:`cast
+    <pandas.DataFrame.astype>` to `None`_ values by pandas.
+    That's why this table displays ``None`` instead of ``NULL``.
 
 If you perform a left inner join with those two result sets (on the ``time``
 column), you will end up with the following:
@@ -595,12 +602,13 @@ Here, notice that:
  * There is one result row per minute interval, even when there are no
    corresponding ``records``.
 
- * Missing data results in a ``distance`` value of `NaN`_ (Not a Number).
-   Pandas will cast null values to ``NaN`` when a column contains numeric data.
+ * Missing data results in a ``distance`` value of :py:obj:`NaN
+   <numpy:numpy.nan>` (Not a Number). Pandas will cast ``NULL`` values to
+   ``NaN`` when a column contains numeric data.
 
 .. SEEALSO::
 
-    Read more about `working with missing data`_ using Pandas
+    Read more about :ref:`pandas:missing_data` using pandas.
 
 
 .. _ni-null-data:
@@ -608,8 +616,10 @@ Here, notice that:
 Generate continuous null data for the past 24 hours
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can generate continuous null data with the `generate_series()`_ *table
-function*. A `table function`_ is a function that produces a set of rows.
+You can generate continuous null data with the :ref:`generate_series()
+<reference:table-functions-generate-series>` *table function*. A :ref:`table
+function <reference:table-functions>` is a function that produces a set
+of rows.
 
 For example, this query generates null values for every minute in the past 24
 hours:
@@ -672,8 +682,8 @@ Bring it all together
 ~~~~~~~~~~~~~~~~~~~~~
 
 To combine the null data with your resampled data, you can write a new query
-that performs a left `inner join`_, as per the previous :ref:`introductions
-<ni-interpolate>`:
+that performs a left :ref:`reference:inner-joins`, as per the previous
+:ref:`introductions <ni-interpolate>`.
 
 .. code-block:: python
 
@@ -684,7 +694,7 @@ that performs a left `inner join`_, as per the previous :ref:`introductions
         sql = '''
             SELECT
                 "time",
-                count(*) - 1 AS "records",
+                COUNT(*) - 1 AS "records",
                 AVG(distance("iss"."position", {}) / 1000) AS "distance"
             FROM
                 generate_series(
@@ -707,22 +717,25 @@ In the code above:
 
 .. rst-class:: open
 
- * The `generate_series()`_ table function creates a row set called ``time``
-   that has one row per minute for the past 24 hours.
+ * The :ref:`generate_series() <reference:table-functions-generate-series>`
+   table function creates a row set called ``time`` that has one row per minute
+   for the past 24 hours.
 
  * The ``iss`` table can be joined to the ``time`` series by truncating the
-   ``iss.timestamp`` column to the minute for the `join condition`_.
+   ``iss.timestamp`` column to the minute for the :ref:`join condition
+   <reference:sql_joins>`.
 
- * Like before, a `GROUP BY`_ clause can be used to collapse multiple rows per
-   minute into a single row per minute.
+ * Like before, a :ref:`GROUP BY <reference:sql_dql_group_by>` clause can be
+   used to collapse multiple rows per minute into a single row per minute.
 
-   Similarly, an `AVG()`_ function can be used to compute an aggregate
-   ``distance`` value across multiple rows. There is no need to check for null
-   values here because the `AVG()`_ function discards null values.
+   Similarly, the :ref:`reference:aggregation-avg` function can be used to
+   compute an aggregate ``distance`` value across multiple rows. There is no
+   need to check for null values here because the ``avg()`` function discards
+   null values.
 
  * To calculate the number of ``records``, you must subtract one from
-   `count(*)`_ to account for guaranteed presence of one null value per minute
-   interval.
+   :ref:`COUNT(*) <reference:aggregation-count-star>` to account for guaranteed
+   presence of one null value per minute interval.
 
 Test the function:
 
@@ -772,56 +785,23 @@ This visualization resolves both original issues:
    data for some intervals. You will need to fill in the missing values.*
 
 
-.. _aggregate: https://crate.io/docs/crate/reference/en/latest/general/builtins/aggregation.html
-.. _AVG(): https://crate.io/docs/crate/reference/en/latest/general/builtins/aggregation.html#avg-column
-.. _axes: https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.axes.html#matplotlib.pyplot.axes
-.. _cast: https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.astype.html
-.. _connection strings: https://crate.io/docs/python/en/latest/sqlalchemy.html#database-urls
-.. _COUNT(*): https://crate.io/docs/crate/reference/en/latest/general/builtins/aggregation.html?highlight=count#aggregation-count-star
-.. _CrateDB Python Client: https://crate.io/docs/clients/python/en/latest/
-.. _CURRENT_TIMESTAMP: https://crate.io/docs/crate/reference/en/latest/general/builtins/scalar.html#current-timestamp
 .. _data binning: https://en.wikipedia.org/wiki/Data_binning
-.. _definition: https://crate.io/docs/crate/reference/en/latest/general/ddl/create-table.html
-.. _distance(): https://crate.io/docs/crate/reference/en/latest/general/builtins/scalar.html#scalar-distance
-.. _figure: https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.figure.html#matplotlib.pyplot.figure
-.. _generate_series(): https://crate.io/docs/crate/reference/en/latest/general/builtins/table-functions.html#pg-catalog-generate-series-start-stop-step
-.. _geo_point: https://crate.io/docs/crate/reference/en/latest/general/ddl/data-types.html#geo-point
 .. _ground point: https://en.wikipedia.org/wiki/Ground_track
-.. _GROUP BY: https://crate.io/docs/crate/reference/en/latest/general/dql/selects.html#group-by
-.. _handle datetimes: https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.xaxis_date.html
-.. _hour: https://matplotlib.org/stable/api/dates_api.html#matplotlib.dates.HourLocator
 .. _how joins work: https://crate.io/docs/crate/reference/en/latest/concepts/joins.html
-.. _inner join: https://crate.io/docs/crate/reference/en/latest/general/dql/joins.html#inner-joins
 .. _interactive mode: https://docs.python.org/3/tutorial/interpreter.html#interactive-mode
 .. _International Space Station: https://www.nasa.gov/mission_pages/station/main/index.html
 .. _Internet of Things: https://en.wikipedia.org/wiki/Internet_of_things
 .. _interpolate: https://en.wikipedia.org/wiki/Interpolation
 .. _IPython: https://ipython.org/
-.. _join condition: https://crate.io/docs/crate/reference/en/latest/sql/statements/select.html#joined-relation
 .. _Jupyter Notebook basics: https://nbviewer.jupyter.org/github/jupyter/notebook/blob/master/docs/source/examples/Notebook/Notebook%20Basics.ipynb
 .. _Jupyter Notebook: https://jupyter.org/
-.. _limits of the x-axis: https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_xlim.html
-.. _line chart: https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html
 .. _location: https://www.latlong.net/
-.. _Matplotlib documentation: https://matplotlib.org/stable/contents.html
+.. _Matplotlib documentation: https://matplotlib.org/stable/
 .. _Matplotlib: https://matplotlib.org/
-.. _NaN: https://numpy.org/doc/1.18/reference/constants.html?highlight=nan#numpy.nan
 .. _None: https://docs.python.org/3/library/constants.html#None
-.. _ORDER BY: https://crate.io/docs/crate/reference/en/latest/sql/statements/select.html#order-by
 .. _pandas: https://pandas.pydata.org/
 .. _Pip: https://pypi.org/project/pip/
 .. _Python: https://www.python.org/
-.. _read_sql(): https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_sql.html
-.. _scatter diagram: https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.scatter.html
-.. _scatter: https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.scatter.html
 .. _SQLAlchemy: https://www.sqlalchemy.org/
 .. _standard Python interpreter: https://docs.python.org/3/tutorial/interpreter.html
 .. _system load: https://en.wikipedia.org/wiki/Load_(computing)
-.. _table function: https://crate.io/docs/crate/reference/en/latest/general/builtins/table-functions.html
-.. _tick formatting: https://matplotlib.org/stable/api/_as_gen/matplotlib.axis.Axis.set_major_formatter.html
-.. _tick locations: https://matplotlib.org/stable/api/_as_gen/matplotlib.axis.Axis.set_major_locator.html
-.. _time string: https://matplotlib.org/stable/api/dates_api.html#matplotlib.dates.DateFormatter
-.. _trunc_date(): https://crate.io/docs/crate/reference/en/latest/general/builtins/scalar.html#date-trunc-interval-timezone-timestamp
-.. _value expression:  https://crate.io/docs/crate/reference/en/latest/sql/general/value-expressions.html
-.. _WHERE: https://crate.io/docs/crate/reference/en/latest/general/dql/selects.html#where-clause
-.. _working with missing data: https://pandas.pydata.org/pandas-docs/stable/user_guide/missing_data.html

@@ -5,8 +5,8 @@ Generate time series data from the command line
 ===============================================
 
 This tutorial will show you how to generate :ref:`mock time series data
-<gen-ts>` about the `International Space Station`_ (ISS) using the `CrateDB
-Shell`_ (aka *Crash*) and a little bit of `shell scripting`_.
+<gen-ts>` about the `International Space Station`_ (ISS) using the
+:ref:`crash:index` and a little bit of `shell scripting`_.
 
 .. SEEALSO::
 
@@ -23,7 +23,8 @@ Prerequisites
 
 CrateDB must be :ref:`installed and running <install>`.
 
-Crash is available as `Pip`_ package. `Install`_ it like this:
+Crash is available as `pip`_ package. :ref:`Install <crash:getting-started>` it
+like this:
 
 .. code-block:: console
 
@@ -152,7 +153,8 @@ Start an interactive Crash session:
     Modify the argument if you wish to connect to a CrateDB node on a different
     host or port number.
 
-Then, `create a table`_ suitable for writing load averages:
+Then, :ref:`create a table <reference:sql_ddl_create>` suitable for writing
+load averages.
 
 .. code-block:: psql
 
@@ -163,8 +165,8 @@ Then, `create a table`_ suitable for writing load averages:
 
     CREATE OK, 1 row affected  (0.726 sec)
 
-In the `CrateDB Admin UI`_, you should see the new table when you navigate to
-the *Tables* screen using the left-hand navigation menu:
+In the :ref:`admin-ui:index`, you should see the new table when you navigate
+to the *Tables* screen using the left-hand navigation menu:
 
 .. image:: ../_assets/img/generate-time-series/table.png
 
@@ -178,8 +180,8 @@ Crash provides a non-interactive mode that you can use to execute SQL
 statements directly from the command line.
 
 First, exit from the interactive Crash session (or open a new terminal). Then,
-use ``crash`` with the ``--command`` argument to execute an `INSERT`_ query,
-like this:
+use ``crash`` with the ``--command`` argument to execute an :ref:`INSERT
+<reference:inserting_data>` query.
 
 .. code-block:: console
 
@@ -197,7 +199,8 @@ like this:
 Press the up arrow on your keyboard and hit *Enter* to run the same command a
 few more times.
 
-When you're done, you can `SELECT`_ that data back out of CrateDB, like so:
+When you're done, you can :ref:`select <reference:sql_dql_queries>` that data
+back out of CrateDB.
 
 .. code-block:: console
 
@@ -282,21 +285,15 @@ will open up a map view showing the current position of the ISS:
 
 
 .. _command line: https://en.wikipedia.org/wiki/Command-line_interface
-.. _CrateDB Admin UI: https://crate.io/docs/clients/admin-ui/en/latest/
-.. _CrateDB Shell: https://crate.io/docs/clients/crash/en/latest/
-.. _create a table: https://crate.io/docs/crate/reference/en/latest/general/ddl/create-table.html
 .. _curl: https://curl.se/
 .. _data sanitization: https://xkcd.com/327/
 .. _ground point: https://en.wikipedia.org/wiki/Ground_track
-.. _INSERT: https://crate.io/docs/crate/reference/en/latest/general/dml.html#inserting-data
-.. _install: https://crate.io/docs/clients/crash/en/latest/getting-started.html#installation
 .. _International Space Station: https://www.nasa.gov/mission_pages/station/main/index.html
 .. _jq: https://stedolan.github.io/jq/
 .. _let us know: https://github.com/crate/crate-tutorials/issues/new
 .. _open notify: http://open-notify.org/
-.. _Pip: https://pypi.org/project/pip/
+.. _pip: https://pypi.org/project/pip/
 .. _pipe: https://www.geeksforgeeks.org/piping-in-unix-or-linux/
-.. _SELECT: https://crate.io/docs/crate/reference/en/latest/general/dql/selects.html
 .. _shell function: https://www.gnu.org/software/bash/manual/html_node/Shell-Functions.html
 .. _shell scripting: https://en.wikipedia.org/wiki/Shell_script
 .. _WKT: https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry

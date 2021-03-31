@@ -75,8 +75,8 @@ Start building with CrateDB clients and tools
 =============================================
 
 If you'd like to skip the tutorials and start building with CrateDB, you can
-find `a list of available CrateDB clients and tools`_ in a different section of
-the documentation.
+find a list of :ref:clients-tools:index` in a different section of the
+documentation.
 
 
 .. _use-dive-in:
@@ -84,23 +84,5 @@ the documentation.
 Dive into CrateDB
 =================
 
-Check out the `How-to Guides`_ for goal oriented topics. Alternatively, check
-out the `CrateDB Reference`_ for a complete dip-in-and-dip-out reference manual.
-
-
-.. _a list of available CrateDB clients and tools: https://crate.io/docs/crate/clients-tools/en/latest/
-.. _aggregation: https://crate.io/docs/stable/sql/aggregation.html
-.. _client tools: https://crate.io/a/category/client-tools/
-.. _Crash: https://crate.io/docs/clients/crash/en/latest/
-.. _CrateDB Reference: https://crate.io/docs/crate/reference/
-.. _fulltext search: https://crate.io/docs/crate/reference/en/latest/general/dql/fulltext.html
-.. _geospatial: https://crate.io/docs/stable/sql/data_types.html#geo-point
-.. _How-to Guides: https://crate.io/docs/crate/howtos/
-.. _HTTP endpoint: https://crate.io/docs/crate/reference/en/latest/interfaces/http.html
-.. _HTTPie: https://httpie.org/
-.. _install Crash: https://crate.io/docs/clients/crash/en/latest/getting-started.html#install
-.. _object: https://crate.io/docs/crate/reference/en/latest/general/ddl/data-types.html#object
-.. _regular SQL: https://crate.io/docs/crate/reference/en/latest/appendices/sql-compliance.html
-.. _scalar: https://crate.io/docs/stable/sql/scalar.html
-.. _schema: https://crate.io/docs/crate/reference/en/latest/general/ddl/create-table.html#schemas
-.. _the CrateDB query reference: https://crate.io/docs/crate/reference/en/latest/general/dql/index.html
+Check out the :ref:`howtos:index` for goal oriented topics. Alternatively,
+check out the :ref:`reference:index` for a complete reference manual.

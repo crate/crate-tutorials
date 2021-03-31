@@ -25,7 +25,7 @@ CrateDB must be :ref:`installed and running <install>`.
 Make sure you're running an up-to-date version of Python (we recommend 3.7 or
 higher).
 
-Then, use `Pip`_ to install the `requests`_ and  `crate`_ libraries:
+Then, use `pip`_ to install the `requests`_ and  :ref:`crate-python:index` libraries:
 
 .. code-block:: console
 
@@ -91,11 +91,11 @@ When you run this function, it should return your point string::
 Set up CrateDB
 ==============
 
-First, import the `crate`_ client:
+First, import the :ref:`crate-python:index` client:
 
     >>> from crate import client
 
-Then, `connect`_ to CrateDB:
+Then, :ref:`crate-python:connect`:
 
     >>> connection = client.connect("localhost:4200")
 
@@ -110,7 +110,8 @@ Get a `cursor`_:
 
     >>>  cursor = connection.cursor()
 
-Finally, `create a table`_ suitable for writing ISS position coordinates:
+Finally, :ref:`create a table <reference:sql_ddl_create>` suitable for writing
+ISS position coordinates.
 
     >>> cursor.execute(
     ...     """CREATE TABLE iss (
@@ -118,7 +119,7 @@ Finally, `create a table`_ suitable for writing ISS position coordinates:
     ...            position GEO_POINT)"""
     ... )
 
-In the `CrateDB Admin UI`_, you should see the new table when you navigate to
+In the :ref:`admin-ui:index`, you should see the new table when you navigate to
 the *Tables* screen using the left-hand navigation menu:
 
 .. image:: ../_assets/img/generate-time-series/table.png
@@ -129,15 +130,16 @@ Record the ISS position
 
 With the table in place, you can start recording the position of the ISS.
 
-The following command calls your ``position`` function and will `INSERT`_ the
-result into the ``iss`` table:
+The following command calls your ``position`` function and will :ref:`insert
+<reference:inserting_data>` the result into the ``iss`` table:
 
     >>> cursor.execute("INSERT INTO iss (position) VALUES (?)", [position()])
 
 Press the up arrow on your keyboard and hit *Enter* to run the same command a
 few more times.
 
-When you're done, you can `SELECT`_ that data back out of CrateDB, like so:
+When you're done, you can :ref:`select <reference:sql_dql_queries>` that data
+back out of CrateDB.
 
     >>> cursor.execute('SELECT * FROM iss ORDER BY timestamp DESC')
 
@@ -235,21 +237,15 @@ will open up a map view showing the current position of the ISS:
     zooming out.
 
 
-.. _connect: https://crate.io/docs/python/en/latest/connect.html
-.. _crate: https://crate.io/docs/python/en/latest/
-.. _CrateDB Admin UI: https://crate.io/docs/crate/admin-ui/en/latest/
-.. _create a table: https://crate.io/docs/crate/reference/en/latest/general/ddl/create-table.html
 .. _cursor: https://crate.io/docs/python/en/latest/query.html#using-a-cursor
 .. _fetch all: https://crate.io/docs/python/en/latest/query.html#fetchmany
 .. _ground point: https://en.wikipedia.org/wiki/Ground_track
-.. _INSERT: https://crate.io/docs/crate/reference/en/latest/general/dml.html#inserting-data
 .. _interactive mode: https://docs.python.org/3/tutorial/interpreter.html#interactive-mode
 .. _International Space Station: https://www.nasa.gov/mission_pages/station/main/index.html
 .. _IPython: https://ipython.org/
 .. _open notify: http://open-notify.org/
-.. _Pip: https://pypi.org/project/pip/
+.. _pip: https://pypi.org/project/pip/
 .. _Python: https://www.python.org/
-.. _requests: https://requests.readthedocs.io/en/master/
-.. _SELECT: https://crate.io/docs/crate/reference/en/latest/general/dql/selects.html
+.. _requests: https://docs.python-requests.org/en/master/
 .. _standard Python interpreter: https://docs.python.org/3/tutorial/interpreter.html
 .. _WKT: https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry
