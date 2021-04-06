@@ -773,7 +773,7 @@ This visualization resolves both original issues:
 
 
 .. _aggregate: https://crate.io/docs/crate/reference/en/latest/general/builtins/aggregation.html
-.. _AVG(): https://crate.io/docs/crate/reference/en/latest/general/builtins/aggregation.html?highlight=avg#avg-and-mean
+.. _AVG(): https://crate.io/docs/crate/reference/en/latest/general/builtins/aggregation.html#avg-column
 .. _axes: https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.axes.html#matplotlib.pyplot.axes
 .. _cast: https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.astype.html
 .. _connection strings: https://crate.io/docs/python/en/latest/sqlalchemy.html#database-urls
