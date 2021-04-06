@@ -343,7 +343,6 @@ will open up a map view showing the current position of the ISS:
 .. _Client: https://node-postgres.com/api/client
 .. _connect: https://node-postgres.com/features/connecting
 .. _Connection Pool: https://node-postgres.com/api/pool
-.. _CrateDB Admin UI: https://crate.io/docs/clients/admin-ui/en/latest/
 .. _detailed guide: https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Promises
 .. _ground point: https://en.wikipedia.org/wiki/Ground_track
 .. _input values: https://node-postgres.com/features/queries#Parameterized%20query
@@ -355,5 +354,4 @@ will open up a map view showing the current position of the ISS:
 .. _open notify: http://open-notify.org/
 .. _promise chaining: https://javascript.info/promise-chaining
 .. _promises: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
-.. _SELECT: https://crate.io/docs/crate/reference/en/latest/general/dql/selects.html
 .. _WKT: https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry

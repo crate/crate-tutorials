@@ -106,7 +106,7 @@ Then, :ref:`crate-python:connect`:
     Modify the argument if you wish to connect to a CrateDB node on a different
     host or port number.
 
-Get a `cursor`_:
+Get a :ref:`cursor <crate-python:cursor>`:
 
     >>>  cursor = connection.cursor()
 
@@ -143,7 +143,7 @@ back out of CrateDB.
 
     >>> cursor.execute('SELECT * FROM iss ORDER BY timestamp DESC')
 
-Then, `fetch all`_ the result rows at once:
+Then, :ref:`fetch all <crate-python:fetchall>` the result rows at once:
 
     >>> cursor.fetchall()
     [[1582295967721, [-8.0689, 25.8967]],
@@ -237,8 +237,6 @@ will open up a map view showing the current position of the ISS:
     zooming out.
 
 
-.. _cursor: https://crate.io/docs/python/en/latest/query.html#using-a-cursor
-.. _fetch all: https://crate.io/docs/python/en/latest/query.html#fetchmany
 .. _ground point: https://en.wikipedia.org/wiki/Ground_track
 .. _interactive mode: https://docs.python.org/3/tutorial/interpreter.html#interactive-mode
 .. _International Space Station: https://www.nasa.gov/mission_pages/station/main/index.html
