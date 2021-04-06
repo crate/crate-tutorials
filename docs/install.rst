@@ -195,10 +195,10 @@ official `CrateDB Docker image`_, use::
 
 .. TIP::
 
-    If this command aborts with an error, please consult the `Docker
-    troubleshooting guide`_. You are also welcome learn more about
-    :ref:`howtos:resource_constraints` with respect to running CrateDB within
-    containers.
+    If this command aborts with an error, please consult the :ref:`Docker
+    troubleshooting guide <howtos:docker-troubleshooting>`. You are also
+    welcome learn more about :ref:`howtos:resource_constraints` with respect
+    to running CrateDB within containers.
 
 .. CAUTION::
 
@@ -326,10 +326,8 @@ quickly adjust the :ref:`configuration settings <install-configure>`, read more
 details about the :ref:`reference:config` of CrateDB, the background about
 :ref:`howtos:bootstrap-checks`, multi-node configuration within the section
 about :ref:`howtos:clustering` and :ref:`howtos:going-into-production`. When
-operating a CrateDB cluster in production, `performance tuning`_ will also be
-of interest.
-
-.. _performance tuning: https://crate.io/docs/crate/howtos/en/latest/performance/
+operating a CrateDB cluster in production, :ref:`performance tuning
+<howtos:performance>` will also be of interest.
 
 .. NOTE::
 
@@ -348,7 +346,6 @@ of interest.
 .. _CrateDB release archive: https://crate.io/download/
 .. _deb: https://en.wikipedia.org/wiki/Deb_(file_format)
 .. _Docker: https://www.docker.com/
-.. _Docker troubleshooting guide: https://crate.io/docs/crate/howtos/en/latest/deployment/containers/docker.html#troubleshooting
 .. _Java virtual machine: https://en.wikipedia.org/wiki/Java_virtual_machine
 .. _msvcrt ARM64: https://aka.ms/vs/16/release/VC_redist.arm64.exe
 .. _msvcrt x86-32: https://aka.ms/vs/16/release/vc_redist.x86.exe

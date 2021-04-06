@@ -540,7 +540,7 @@ null values filling in for missing data.
 
 .. SEEALSO::
 
-    Read more about `how joins work`_.
+    Read more about :ref:`how joins work <reference:concept-joins>`.
 
 
 .. _ni-brief-example:
@@ -787,7 +787,6 @@ This visualization resolves both original issues:
 
 .. _data binning: https://en.wikipedia.org/wiki/Data_binning
 .. _ground point: https://en.wikipedia.org/wiki/Ground_track
-.. _how joins work: https://crate.io/docs/crate/reference/en/latest/concepts/joins.html
 .. _interactive mode: https://docs.python.org/3/tutorial/interpreter.html#interactive-mode
 .. _International Space Station: https://www.nasa.gov/mission_pages/station/main/index.html
 .. _Internet of Things: https://en.wikipedia.org/wiki/Internet_of_things
