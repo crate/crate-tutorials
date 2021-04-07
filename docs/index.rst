@@ -16,6 +16,7 @@ massive amounts of machine data in real-time.
     install
     first-use
     create-user
+    create-sharded-table
     generate-time-series/index
     normalize-intervals
 
