@@ -54,17 +54,22 @@ CrateDB requires a `Java virtual machine`_ to run.
   `Oracle Java`_ on Microsoft Windows and macOS.
 
 
+.. _install-linux:
+
+Linux
+=====
+
 .. _install-deb:
 
-Debian and Ubuntu
-=================
+Debian or Ubuntu
+----------------
 
 This section of the documentation outlines how to install CrateDB deb_ packages
 using the apt_ package manager.
 
 
 Configure package repository
-----------------------------
+""""""""""""""""""""""""""""
 
 You will need to configure your system to register with and trust packages from
 the CrateDB package repository::
@@ -98,7 +103,7 @@ You should see a success message. This indicates that the CrateDB package
 repository is correctly registered.
 
 Install CrateDB
----------------
+"""""""""""""""
 
 With everything set up, you can install CrateDB::
 
@@ -106,7 +111,7 @@ With everything set up, you can install CrateDB::
 
 
 Control CrateDB
----------------
+"""""""""""""""
 
 You can control the ``crate`` service with the ``systemctl`` utility program::
 
@@ -118,15 +123,15 @@ so on.
 
 .. _install-rpm:
 
-Red Hat Linux and CentOS
-========================
+Red Hat or CentOS
+-----------------
 
 This section of the documentation outlines how to install CrateDB RPM_ packages
 using the YUM_ package manager.
 
 
 Configure package repository
-----------------------------
+""""""""""""""""""""""""""""
 
 You will need to configure your system to register with and trust packages
 from the CrateDB package repository::
@@ -155,7 +160,7 @@ repository configuration file.
 
 
 Install CrateDB
----------------
+"""""""""""""""
 
 With everything set up, you can install CrateDB::
 
@@ -172,7 +177,7 @@ In order to make the service reboot-safe, invoke::
 
 
 Control CrateDB
----------------
+"""""""""""""""
 
 You can control the ``crate`` service with the ``systemctl`` utility program::
 
@@ -216,8 +221,8 @@ official `CrateDB Docker image`_, use::
 
 .. _install-adhoc:
 
-Ad-hoc installation (Unix, Windows)
-===================================
+Ad-hoc (Unix, Windows)
+======================
 
 This section of the documentation outlines how to use the release archives to
 install CrateDB. The walkthrough is suitable to install and run CrateDB on both
