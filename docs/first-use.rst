@@ -75,8 +75,10 @@ Start building with CrateDB clients and tools
 =============================================
 
 If you'd like to skip the tutorials and start building with CrateDB, you can
-find a list of :ref:clients-tools:index` in a different section of the
+find a list of `client tools`_ in a different section of the
 documentation.
+
+.. _client tools: https://crate.io/docs/crate/clients-tools/en/latest/
 
 
 .. _use-dive-in:
