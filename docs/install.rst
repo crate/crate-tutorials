@@ -11,23 +11,19 @@ Installation
    :depth: 1
 
 
-Preface
-=======
+Introduction
+============
 
 This part of the documentation covers the installation of CrateDB on Linux,
 macOS and Windows systems.
 The first step to using any software package is getting it properly installed.
 Please read this section carefully.
 
-
-Introduction
-============
-
 By installing CrateDB the way as outlined in this document, you will be able to
 quickly setup and run a single-node cluster. The document describes different
 installation methods. While we recommend to use the package-based methods
-for :ref:`install-deb` or :ref:`install-rpm` by subscribing to the respective
-release channels, you can also download release archives and install CrateDB
+for :ref:`install-deb` and :ref:`install-rpm` by subscribing to the respective
+release channels, you can also download release archives and run CrateDB
 manually using the :ref:`install-adhoc` method.
 
 When the installation is finished, the CrateDB service should be up and
@@ -40,18 +36,17 @@ After successfully installing CrateDB, please also consider reading the
 :ref:`post-install-notes`.
 
 
-Prerequisites
-=============
+.. note::
 
-CrateDB requires a `Java virtual machine`_ to run.
+    CrateDB requires a `Java virtual machine`_ to run.
 
-- Starting with CrateDB 4.2, a `Java virtual machine`_ is bundled with CrateDB
-  and no extra installation is necessary.
+    - Starting with CrateDB 4.2, Java is bundled with CrateDB and no extra
+      installation is necessary.
 
-- CrateDB versions before 4.2 required a separate Java installation. For
-  CrateDB 3.0 to 4.1, Java 11 is the minimum requirement. CrateDB versions
-  before 3.0 require Java 8. We recommend using OpenJDK_ on Linux Systems and
-  `Oracle Java`_ on Microsoft Windows and macOS.
+    - CrateDB versions before 4.2 required a separate Java installation. For
+      CrateDB 3.0 to 4.1, Java 11 is the minimum requirement. CrateDB versions
+      before 3.0 require Java 8. We recommend using OpenJDK_ on Linux Systems
+      and `Oracle Java`_ on Microsoft Windows and macOS.
 
 
 .. _install-linux:
