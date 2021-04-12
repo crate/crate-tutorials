@@ -15,7 +15,7 @@ This part of the documentation sheds some light on the topics of
 
 CrateDB ships with a superuser account called "``crate``", which has the
 privileges to perform any action. However, with the default configuration, this
-superuser can only access CreateDB from the local machine CrateDB has been
+superuser can only access CrateDB from the local machine CrateDB has been
 installed on. If you are trying to connect from another machine, you are
 prompted to enter a username and password.
 
