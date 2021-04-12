@@ -4,10 +4,12 @@
 Create sharded table
 ====================
 
-One core concept CrateDB uses to distribute data across a cluster is sharding. 
-CrateDB splits every table into a configured number of shards, which are 
-distributed evenly across the cluster. You can think of shards as sub-tables 
-with corresponding sub-indexes. If we create a table like the following:
+One core concept CrateDB uses to distribute data across a cluster is 
+:ref:`sharding <reference:ddl-sharding>`. CrateDB splits every table into a 
+configured number of shards, which are distributed evenly across the cluster. 
+You can think of shards as a self-contained part of a table, that includes both 
+a subset of records and corresponding indexing structures. If we 
+:ref:`create a table <reference:sql_ddl_create>` like the following:
 
 .. code-block:: psql
 
@@ -16,8 +18,8 @@ with corresponding sub-indexes. If we create a table like the following:
         val DOUBLE PRECISION
     );
 
-The table is by default is split into 4 shards on a single node cluster. You 
-can check this by running:
+The table is by default is split into several shards on a single node cluster. 
+You can check this by running:
 
 .. code-block:: psql
 
@@ -33,19 +35,19 @@ Which should output the following:
     )
     CLUSTERED INTO 4 SHARDS
 
-By default, ingested data is distributed evenly across all available shards. In 
-many cases you don't have to worry about specifying any sharding key or routing 
-column. 
-
+By default, ingested data is distributed evenly across all available shards. 
+Altough you can influence that distribution by specifying a routing column, in 
+many cases it is best to keep the default settings.
 
 
 Partitioning
 ============
 
 CrateDB also supports splitting up data across another dimension with 
-partitioning. You can think of a partition as a set of shards. For each 
-partition the number of shards defined by ``CLUSTERED INTO x SHARDS`` are 
-created, when a first row with a specific ``partition key`` is inserted.
+:ref:`partitioning <reference:partitioned-tables>`. You can think of a 
+partition as a set of shards. For each partition the number of shards defined 
+by ``CLUSTERED INTO x SHARDS`` are created, when a first row with a specific 
+``partition key`` is inserted.
 
 In the following example - which represents a very simple time-series use-case 
 - we added another column ``part`` which automatically generates the current 
@@ -97,6 +99,10 @@ cluster.
 
     **As a rule of thumb, a single shard should hold somewhere between 5 - 100 
     GB of data.**
+
+    To avoid oversharding, CrateDB by default limits the number of shards per 
+    node to 1000. Any operation that would exceed that limit, leads to an 
+    exception.
 
 
 
