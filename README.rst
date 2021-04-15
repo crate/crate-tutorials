@@ -2,6 +2,9 @@
 CrateDB Tutorials
 =================
 
+|ci| |rtd| |build|
+
+
 Tutorials for getting started with `CrateDB`_.
 
 
@@ -29,3 +32,18 @@ Looking for more help?
 .. _developer docs: DEVELOP.rst
 .. _live docs: https://crate.io/docs/crate/tutorials/en/latest/
 .. _support channels: https://crate.io/support/
+
+
+.. |ci| image:: https://github.com/crate/crate-tutorials/actions/workflows/docs.yml/badge.svg
+    :alt: CI status
+    :scale: 100%
+    :target: https://github.com/crate/crate-tutorials/actions/workflows/docs.yml
+
+.. |rtd| image:: https://readthedocs.org/projects/crate-tutorials/badge/?version=latest
+    :alt: Read The Docs status
+    :scale: 100%
+    :target: https://crate-tutorials.readthedocs.io/en/latest/?badge=latest
+
+.. |build| image:: https://img.shields.io/endpoint.svg?color=blue&url=https%3A%2F%2Fraw.githubusercontent.com%2Fcrate%2Fcrate-tutorials%2Fmaster%2Fdocs%2Fbuild.json
+    :alt: Build version
+    :target: https://github.com/crate/crate-tutorials/blob/master/docs/build.json
