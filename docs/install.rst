@@ -245,6 +245,12 @@ install CrateDB. The walkthrough is suitable to install and run CrateDB on both
 
 #. In order to stop CrateDB again, use :kbd:`ctrl-c`.
 
+.. CAUTION::
+
+    We do not yet officially support CrateDB on Windows for production use. If
+    you would like to deploy CrateDB on Windows, please feel free to `contact
+    us`_ so we can work with you on a solution.
+
 .. SEEALSO::
 
       Consult the :ref:`reference:cli` documentation for further information
@@ -342,6 +348,7 @@ operating a CrateDB cluster in production, :ref:`performance tuning
 
 .. _7-Zip: https://www.7-zip.org/
 .. _apt: https://en.wikipedia.org/wiki/APT_(software)
+.. _contact us: https://crate.io/contact/
 .. _CrateDB Docker image: https://hub.docker.com/_/crate/
 .. _CrateDB release archive: https://crate.io/download/
 .. _deb: https://en.wikipedia.org/wiki/Deb_(file_format)
