@@ -275,8 +275,9 @@ will look like this.
 Notes about Linux and macOS
 ---------------------------
 
-You can also install and run CrateDB on Linux and macOS with one simple command
-in your terminal application:
+If you want to try out CrateDB but would prefer to avoid the hassle of
+installation, you can get a fresh CrateDB node up and running in your current
+working directory with a single command:
 
 .. code-block:: console
 
