@@ -216,8 +216,8 @@ official `CrateDB Docker image`_, use::
 
 .. _install-adhoc:
 
-Ad-hoc (Unix, Windows)
-======================
+Ad-hoc (Unix, macOS, Windows)
+=============================
 
 This section of the documentation outlines how to use the release archives to
 install CrateDB. The walkthrough is suitable to install and run CrateDB on both
@@ -271,6 +271,16 @@ will look like this.
 
     PS> ./bin/crate
 
+
+Notes about Linux and macOS
+---------------------------
+
+You can also install and run CrateDB on Linux and macOS with one simple command
+in your terminal application:
+
+.. code-block:: console
+
+   sh$ bash -c "$(curl -L https://try.crate.io/)"
 
 
 .. _install-configure:
@@ -350,7 +360,7 @@ operating a CrateDB cluster in production, :ref:`performance tuning
 .. _apt: https://en.wikipedia.org/wiki/APT_(software)
 .. _contact us: https://crate.io/contact/
 .. _CrateDB Docker image: https://hub.docker.com/_/crate/
-.. _CrateDB release archive: https://crate.io/download/
+.. _CrateDB release archive: https://cdn.crate.io/downloads/releases/cratedb/
 .. _deb: https://en.wikipedia.org/wiki/Deb_(file_format)
 .. _Docker: https://www.docker.com/
 .. _Java virtual machine: https://en.wikipedia.org/wiki/Java_virtual_machine
