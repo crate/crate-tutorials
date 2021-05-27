@@ -49,6 +49,28 @@ After successfully installing CrateDB, please also consider reading the
       and `Oracle Java`_ on Microsoft Windows and macOS.
 
 
+.. _install-quick:
+
+Try CrateDB without installing
+==============================
+
+If you want to try out CrateDB on Linux or macOS but would prefer to avoid the
+hassle of manual installation or extracting release archives, you can get a
+fresh CrateDB node up and running in your current working directory with a
+single command:
+
+.. code-block:: console
+
+   sh$ bash -c "$(curl -L https://try.crate.io/)"
+
+
+.. NOTE::
+
+    This is a quick way to *try out* CrateDB. It is not the recommended method
+    to *install* CrateDB in a durable way. The following sections will outline
+    that method.
+
+
 .. _install-linux:
 
 Linux
@@ -270,18 +292,6 @@ will look like this.
 .. code-block:: doscon
 
     PS> ./bin/crate
-
-
-Notes about Linux and macOS
----------------------------
-
-If you want to try out CrateDB but would prefer to avoid the hassle of
-installation, you can get a fresh CrateDB node up and running in your current
-working directory with a single command:
-
-.. code-block:: console
-
-   sh$ bash -c "$(curl -L https://try.crate.io/)"
 
 
 .. _install-configure:
