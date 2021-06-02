@@ -22,7 +22,7 @@ massive amounts of machine data in real-time.
 
 .. SEEALSO::
 
-    Check out the :ref:`howtos:index` and the :ref:`reference:index`.
+    Check out the :ref:`crate-howtos:index` and the :ref:`crate-reference:index`.
 
 .. NOTE::
 

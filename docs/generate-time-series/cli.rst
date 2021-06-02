@@ -6,7 +6,7 @@ Generate time series data from the command line
 
 This tutorial will show you how to generate :ref:`mock time series data
 <gen-ts>` about the `International Space Station`_ (ISS) using the
-:ref:`crash:index` and a little bit of `shell scripting`_.
+:ref:`crate-crash:index` and a little bit of `shell scripting`_.
 
 .. SEEALSO::
 
@@ -23,7 +23,7 @@ Prerequisites
 
 CrateDB must be :ref:`installed and running <install>`.
 
-Crash is available as `pip`_ package. :ref:`Install <crash:getting-started>` it
+Crash is available as `pip`_ package. :ref:`Install <crate-crash:getting-started>` it
 like this:
 
 .. code-block:: console
@@ -153,7 +153,7 @@ Start an interactive Crash session:
     Modify the argument if you wish to connect to a CrateDB node on a different
     host or port number.
 
-Then, :ref:`create a table <reference:sql_ddl_create>` suitable for writing
+Then, :ref:`create a table <crate-reference:sql_ddl_create>` suitable for writing
 load averages.
 
 .. code-block:: psql
@@ -165,7 +165,7 @@ load averages.
 
     CREATE OK, 1 row affected  (0.726 sec)
 
-In the :ref:`admin-ui:index`, you should see the new table when you navigate
+In the :ref:`crate-admin-ui:index`, you should see the new table when you navigate
 to the *Tables* screen using the left-hand navigation menu:
 
 .. image:: ../_assets/img/generate-time-series/table.png
@@ -181,7 +181,7 @@ statements directly from the command line.
 
 First, exit from the interactive Crash session (or open a new terminal). Then,
 use ``crash`` with the ``--command`` argument to execute an :ref:`INSERT
-<reference:inserting_data>` query.
+<crate-reference:inserting_data>` query.
 
 .. code-block:: console
 
@@ -199,7 +199,7 @@ use ``crash`` with the ``--command`` argument to execute an :ref:`INSERT
 Press the up arrow on your keyboard and hit *Enter* to run the same command a
 few more times.
 
-When you're done, you can :ref:`select <reference:sql_dql_queries>` that data
+When you're done, you can :ref:`select <crate-reference:sql_dql_queries>` that data
 back out of CrateDB.
 
 .. code-block:: console

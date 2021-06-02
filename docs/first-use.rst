@@ -19,7 +19,7 @@ Introducing the Admin UI
 ========================
 
 CrateDB ships with a browser-based administration interface called
-:ref:`Admin UI <admin-ui:index>`.
+:ref:`Admin UI <crate-admin-ui:index>`.
 
 The CrateDB Admin UI runs on every CrateDB node, and you can use it to inspect
 and interact with the whole CrateDB cluster in a number of ways.
@@ -46,7 +46,7 @@ Introducing the CrateDB Shell
 The CrateDB Shell (aka Crash) is an interactive command-line interface (CLI)
 program for working with CrateDB on your favorite terminal. For further
 information about it, please follow up on its documentation at
-:ref:`crash:index`.
+:ref:`crate-crash:index`.
 
 .. NOTE::
 
@@ -75,7 +75,7 @@ Start building with CrateDB clients and tools
 =============================================
 
 If you'd like to skip the tutorials and start building with CrateDB, you can
-find a list of :ref:clients-tools:index` in a different section of the
+find a list of :ref:`crate-clients-tools:index` in a different section of the
 documentation.
 
 
@@ -84,5 +84,5 @@ documentation.
 Dive into CrateDB
 =================
 
-Check out the :ref:`howtos:index` for goal oriented topics. Alternatively,
-check out the :ref:`reference:index` for a complete reference manual.
+Check out the :ref:`crate-howtos:index` for goal oriented topics. Alternatively,
+check out the :ref:`crate-reference:index` for a complete reference manual.

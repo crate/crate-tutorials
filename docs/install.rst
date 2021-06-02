@@ -27,7 +27,7 @@ release channels, you can also download release archives and run CrateDB
 manually using the :ref:`install-adhoc` method.
 
 When the installation is finished, the CrateDB service should be up and
-running. Then, you can access the :ref:`Admin UI <admin-ui:index>` from your
+running. Then, you can access the :ref:`Admin UI <crate-admin-ui:index>` from your
 local machine by navigating to::
 
     http://localhost:4200/
@@ -218,8 +218,8 @@ official `CrateDB Docker image`_, use::
 .. TIP::
 
     If this command aborts with an error, please consult the :ref:`Docker
-    troubleshooting guide <howtos:docker-troubleshooting>`. You are also
-    welcome learn more about :ref:`howtos:resource_constraints` with respect
+    troubleshooting guide <crate-howtos:docker-troubleshooting>`. You are also
+    welcome learn more about :ref:`crate-howtos:resource_constraints` with respect
     to running CrateDB within containers.
 
 .. CAUTION::
@@ -231,7 +231,7 @@ official `CrateDB Docker image`_, use::
     container, all data will be lost.
 
     When you are ready to start using CrateDB for data you care about, please
-    consult the :ref:`full guide to CrateDB and Docker <howtos:cratedb-docker>`
+    consult the :ref:`full guide to CrateDB and Docker <crate-howtos:cratedb-docker>`
     in order to configure the Docker setup appropriately by using persistent
     disk volumes.
 
@@ -275,7 +275,7 @@ install CrateDB. The walkthrough is suitable to install and run CrateDB on both
 
 .. SEEALSO::
 
-      Consult the :ref:`reference:cli` documentation for further information
+      Consult the :ref:`crate-reference:cli` documentation for further information
       about the ``./bin/crate`` command.
 
 
@@ -316,7 +316,7 @@ Environment variables
 ---------------------
 
 When using the package-based setup flavor for :ref:`install-deb` or
-:ref:`install-rpm`, the CrateDB startup script uses :ref:`reference:conf-env`
+:ref:`install-rpm`, the CrateDB startup script uses :ref:`crate-reference:conf-env`
 from the ``/etc/default/crate`` file. When using the :ref:`install-adhoc`
 setup, the environment variables will be set by ``bin/crate{.sh,.bat}``.
 
@@ -350,11 +350,11 @@ After successfully installing the software, you might want to follow up with
 
 Also, you might enjoy to be guided into further information about how to
 quickly adjust the :ref:`configuration settings <install-configure>`, read more
-details about the :ref:`reference:config` of CrateDB, the background about
-:ref:`howtos:bootstrap-checks`, multi-node configuration within the section
-about :ref:`howtos:clustering` and :ref:`howtos:going-into-production`. When
+details about the :ref:`crate-reference:config` of CrateDB, the background about
+:ref:`crate-howtos:bootstrap-checks`, multi-node configuration within the section
+about :ref:`crate-howtos:clustering` and :ref:`crate-howtos:going-into-production`. When
 operating a CrateDB cluster in production, :ref:`performance tuning
-<howtos:performance>` will also be of interest.
+<crate-howtos:performance>` will also be of interest.
 
 .. NOTE::
 

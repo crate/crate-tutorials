@@ -118,7 +118,7 @@ First, import the `node-postgres`_ client:
 
     > const { Client } = require('pg')
 
-Then `connect`_ to CrateDB, using the :ref:`reference:postgres_wire_protocol` port
+Then `connect`_ to CrateDB, using the :ref:`crate-reference:postgres_wire_protocol` port
 (``5432``):
 
 .. code-block:: js
@@ -129,7 +129,7 @@ Then `connect`_ to CrateDB, using the :ref:`reference:postgres_wire_protocol` po
 
     > await client.connect()
 
-Finally, :ref:`create a table <reference:sql_ddl_create>` suitable for writing
+Finally, :ref:`create a table <crate-reference:sql_ddl_create>` suitable for writing
 ISS position coordinates.
 
 .. code-block:: js
@@ -168,7 +168,7 @@ ISS position coordinates.
 
 Success!
 
-In the :ref:`admin-ui:index`, you should see the new table when you navigate to
+In the :ref:`crate-admin-ui:index`, you should see the new table when you navigate to
 the *Tables* screen using the left-hand navigation menu:
 
 .. image:: ../_assets/img/generate-time-series/table.png
@@ -180,7 +180,7 @@ Record the ISS position
 With the table in place, you can start recording the position of the ISS.
 
 The following command calls your ``position`` function and will :ref:`insert
-<reference:inserting_data>` the result into the ``iss`` table.
+<crate-reference:inserting_data>` the result into the ``iss`` table.
 
 .. code-block:: js
 
@@ -212,7 +212,7 @@ The following command calls your ``position`` function and will :ref:`insert
 Press the up arrow on your keyboard and hit *Enter* to run the same command a
 few more times.
 
-When you're done, you can :ref:`select <reference:sql_dql_queries>` that data
+When you're done, you can :ref:`select <crate-reference:sql_dql_queries>` that data
 back out of CrateDB.
 
 .. code-block:: js

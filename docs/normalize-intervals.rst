@@ -227,9 +227,9 @@ Here are a few ways to improve this result:
  * The ``timestamp`` column isn't human-readable. It would be easier to
    understand the results if this value was as a human-readable time.
 
- * The ``position`` column is a :ref:`reference:geo_point_data_type`. This data
+ * The ``position`` column is a :ref:`crate-reference:geo_point_data_type`. This data
    type isn't easy to plot on a traditional graph. However, you can use the
-   :ref:`distance() <reference:scalar_distance>` function to calculate the
+   :ref:`distance() <crate-reference:scalar_distance>` function to calculate the
    distance between two ``geo_point`` values. If you compare ``position`` to a
    fixed place, you can plot distance over time for a graph showing you how far
    away the ISS is from some location of interest.
@@ -265,13 +265,13 @@ Specifically:
    (using ``{}`` as a placeholder) to calculate the ``distance()`` of the ISS
    ground point in kilometers.
 
- * You can use :ref:`CURRENT_TIMESTAMP <reference:current_timestamp>` with an
-   interval :ref:`value expression <reference:sql-value-expressions>`
+ * You can use :ref:`CURRENT_TIMESTAMP <crate-reference:current_timestamp>` with an
+   interval :ref:`value expression <crate-reference:sql-value-expressions>`
    (``INTERVAL '1' DAY``) to calculate a timestamp that is 24 hours in the
-   past. You can then use a :ref:`WHERE clause <reference:sql-select-where>`
+   past. You can then use a :ref:`WHERE clause <crate-reference:sql-select-where>`
    to filter out records with a ``timestamp`` older than one day.
 
-   An :ref:`ORDER BY clause <reference:sql-select-order-by>` sorts the results
+   An :ref:`ORDER BY clause <crate-reference:sql-select-order-by>` sorts the results
    by ``timestamp``, oldest first.
 
  * You can use the ``parse_dates`` argument to specify which columns
@@ -400,20 +400,20 @@ Resample the data
 Here's the basic approach to resampling data at a lower frequency:
 
  1. Truncate the ``time`` column to a less precise value (using
-    :ref:`trunc_date() <reference:scalar-date-trunc>`).
+    :ref:`trunc_date() <crate-reference:scalar-date-trunc>`).
 
     For example, truncate times to the nearest minute.
 
- 2. Group rows by date (using :ref:`GROUP BY <reference:sql_dql_group_by>`).
+ 2. Group rows by date (using :ref:`GROUP BY <crate-reference:sql_dql_group_by>`).
 
     If you have six data points per minute and you are rounding ``time`` to the
     nearest minute, ``GROUP BY time`` will group six rows into one.
 
- 3. Calculate an :ref:`aggregate <reference:aggregation>` value across the
+ 3. Calculate an :ref:`aggregate <crate-reference:aggregation>` value across the
     grouped rows.
 
     For example, if you have six rows with six distances, you can calculate the
-    average distance (using :ref:`reference:aggregation-avg`) and return a
+    average distance (using :ref:`crate-reference:aggregation-avg`) and return a
     single value.
 
 .. TIP::
@@ -448,7 +448,7 @@ above and resamples the raw data by the minute:
 
 .. NOTE::
 
-    :ref:`COUNT(*) <reference:aggregation-count-star>` can be used for debug purposes.
+    :ref:`COUNT(*) <crate-reference:aggregation-count-star>` can be used for debug purposes.
 
     The ``records`` column produced by this query will tell you how many source
     rows have been grouped by the query per result row.
@@ -532,7 +532,7 @@ You can perform null interpolation like so:
     of a join. You should resample this data at the same frequency as your null
     data.
 
- 3. Join both tables with a left :ref:`inner join <reference:inner-joins>` on
+ 3. Join both tables with a left :ref:`inner join <crate-reference:inner-joins>` on
     ``time`` to pull across any non-null values from the right-hand table.
 
 The result is a row set that has one row per interval for a fixed period with
@@ -540,7 +540,7 @@ null values filling in for missing data.
 
 .. SEEALSO::
 
-    Read more about :ref:`how joins work <reference:concept-joins>`.
+    Read more about :ref:`how joins work <crate-reference:concept-joins>`.
 
 
 .. _ni-brief-example:
@@ -617,8 +617,8 @@ Generate continuous null data for the past 24 hours
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can generate continuous null data with the :ref:`generate_series()
-<reference:table-functions-generate-series>` *table function*. A :ref:`table
-function <reference:table-functions>` is a function that produces a set
+<crate-reference:table-functions-generate-series>` *table function*. A :ref:`table
+function <crate-reference:table-functions>` is a function that produces a set
 of rows.
 
 For example, this query generates null values for every minute in the past 24
@@ -682,7 +682,7 @@ Bring it all together
 ~~~~~~~~~~~~~~~~~~~~~
 
 To combine the null data with your resampled data, you can write a new query
-that performs a left :ref:`reference:inner-joins`, as per the previous
+that performs a left :ref:`crate-reference:inner-joins`, as per the previous
 :ref:`introductions <ni-interpolate>`.
 
 .. code-block:: python
@@ -717,24 +717,24 @@ In the code above:
 
 .. rst-class:: open
 
- * The :ref:`generate_series() <reference:table-functions-generate-series>`
+ * The :ref:`generate_series() <crate-reference:table-functions-generate-series>`
    table function creates a row set called ``time`` that has one row per minute
    for the past 24 hours.
 
  * The ``iss`` table can be joined to the ``time`` series by truncating the
    ``iss.timestamp`` column to the minute for the :ref:`join condition
-   <reference:sql_joins>`.
+   <crate-reference:sql_joins>`.
 
- * Like before, a :ref:`GROUP BY <reference:sql_dql_group_by>` clause can be
+ * Like before, a :ref:`GROUP BY <crate-reference:sql_dql_group_by>` clause can be
    used to collapse multiple rows per minute into a single row per minute.
 
-   Similarly, the :ref:`reference:aggregation-avg` function can be used to
+   Similarly, the :ref:`crate-reference:aggregation-avg` function can be used to
    compute an aggregate ``distance`` value across multiple rows. There is no
    need to check for null values here because the ``avg()`` function discards
    null values.
 
  * To calculate the number of ``records``, you must subtract one from
-   :ref:`COUNT(*) <reference:aggregation-count-star>` to account for guaranteed
+   :ref:`COUNT(*) <crate-reference:aggregation-count-star>` to account for guaranteed
    presence of one null value per minute interval.
 
 Test the function:
