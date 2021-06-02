@@ -135,7 +135,7 @@ keys which don't have a corresponding struct field are ignored.
 
 Now, create a function that makes an HTTP GET request to the Open Notify API
 endpoint and returns longitude and latitude as a
-:ref:`reference:geo_point_data_type` declaration.
+:ref:`crate-reference:geo_point_data_type` declaration.
 
 .. code-block:: go
 
@@ -231,8 +231,8 @@ client:
     )
 
 Then, in your main function, connect to CrateDB using the
-:ref:`reference:postgres_wire_protocol` port (``5432``) and
-:ref:`create a table <reference:sql_ddl_create>` suitable for writing ISS
+:ref:`crate-reference:postgres_wire_protocol` port (``5432``) and
+:ref:`create a table <crate-reference:sql_ddl_create>` suitable for writing ISS
 position coordinates.
 
 .. code-block:: go
@@ -265,7 +265,7 @@ Save your changes and run the code:
 When you run the script this time, the ``go`` command will look up the module
 containing the `pgx`_ package and add it to ``go.mod``.
 
-In the :ref:`admin-ui:index`, you should see the new table when you navigate
+In the :ref:`crate-admin-ui:index`, you should see the new table when you navigate
 to the *Tables* screen using the left-hand navigation menu:
 
 .. image:: ../_assets/img/generate-time-series/table.png
@@ -277,7 +277,7 @@ Record the ISS position
 With the table in place, you can start recording the position of the ISS.
 
 Create some logic that calls your ``getISSPosition`` function and :ref:`insert
-<reference:inserting_data>` the result into the ``iss`` table.
+<crate-reference:inserting_data>` the result into the ``iss`` table.
 
 .. code-block:: go
 
@@ -309,7 +309,7 @@ Save your changes and run the code:
 Press the up arrow on your keyboard and hit *Enter* to run the same command a
 few more times.
 
-When you're done, you can :ref:`select <reference:sql_dql_queries>` that data
+When you're done, you can :ref:`select <crate-reference:sql_dql_queries>` that data
 back out of CrateDB with this query:
 
 .. code-block:: psql
@@ -399,7 +399,7 @@ Run the script from the command line:
     Sleeping for 10 seconds...
 
 As the script runs, you should see the table filling up in the
-:ref:`admin-ui:index`.
+:ref:`crate-admin-ui:index`.
 
 .. image:: ../_assets/img/generate-time-series/rows.png
 

@@ -110,7 +110,7 @@ Get a :ref:`cursor <crate-python:cursor>`:
 
     >>>  cursor = connection.cursor()
 
-Finally, :ref:`create a table <reference:sql_ddl_create>` suitable for writing
+Finally, :ref:`create a table <crate-reference:sql_ddl_create>` suitable for writing
 ISS position coordinates.
 
     >>> cursor.execute(
@@ -119,7 +119,7 @@ ISS position coordinates.
     ...            position GEO_POINT)"""
     ... )
 
-In the :ref:`admin-ui:index`, you should see the new table when you navigate to
+In the :ref:`crate-admin-ui:index`, you should see the new table when you navigate to
 the *Tables* screen using the left-hand navigation menu:
 
 .. image:: ../_assets/img/generate-time-series/table.png
@@ -131,14 +131,14 @@ Record the ISS position
 With the table in place, you can start recording the position of the ISS.
 
 The following command calls your ``position`` function and will :ref:`insert
-<reference:inserting_data>` the result into the ``iss`` table:
+<crate-reference:inserting_data>` the result into the ``iss`` table:
 
     >>> cursor.execute("INSERT INTO iss (position) VALUES (?)", [position()])
 
 Press the up arrow on your keyboard and hit *Enter* to run the same command a
 few more times.
 
-When you're done, you can :ref:`select <reference:sql_dql_queries>` that data
+When you're done, you can :ref:`select <crate-reference:sql_dql_queries>` that data
 back out of CrateDB.
 
     >>> cursor.execute('SELECT * FROM iss ORDER BY timestamp DESC')

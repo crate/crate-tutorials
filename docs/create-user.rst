@@ -10,8 +10,8 @@ Introduction
 ------------
 
 This part of the documentation sheds some light on the topics of
-:ref:`reference:administration_user_management` and
-:ref:`reference:administration-privileges`.
+:ref:`crate-reference:administration_user_management` and
+:ref:`crate-reference:administration-privileges`.
 
 CrateDB ships with a superuser account called "``crate``", which has the
 privileges to perform any action. However, with the default configuration, this
@@ -20,13 +20,13 @@ installed on. If you are trying to connect from another machine, you are
 prompted to enter a username and password.
 
 In order to create a user that can be used to authenticate from a remote
-machine, first :ref:`install crash <crash:getting-started>` or other
+machine, first :ref:`install crash <crate-crash:getting-started>` or other
 :ref:clients-tools:index` on the same machine you installed CrateDB on.
 Then, connect to CrateDB running on ``localhost``.
 
 While you can also perform the steps outlined below within
-:ref:`admin-ui:index` itself, the walkthrough will outline how to do it
-using the :ref:`crash:index` on the command line.
+:ref:`crate-admin-ui:index` itself, the walkthrough will outline how to do it
+using the :ref:`crate-crash:index` on the command line.
 
 
 -------
@@ -53,7 +53,7 @@ Grant all privileges to the newly created user:
 
 .. image:: _assets/img/create-user.png
 
-Now try navigating to the :ref:`admin-ui:index` in your browser. In the URL
+Now try navigating to the :ref:`crate-admin-ui:index` in your browser. In the URL
 below, please replace ``cratedb.example.org`` with the host name or IP address
 of the machine CreateDB is running on and sign in with your newly created user
 account::

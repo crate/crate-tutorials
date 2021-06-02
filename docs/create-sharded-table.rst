@@ -5,11 +5,11 @@ Create sharded table
 ====================
 
 One core concept CrateDB uses to distribute data across a cluster is 
-:ref:`sharding <reference:ddl-sharding>`. CrateDB splits every table into a 
+:ref:`sharding <crate-reference:ddl-sharding>`. CrateDB splits every table into a
 configured number of shards, which are distributed evenly across the cluster. 
 You can think of shards as a self-contained part of a table, that includes both 
 a subset of records and corresponding indexing structures. If we 
-:ref:`create a table <reference:sql_ddl_create>` like the following:
+:ref:`create a table <crate-reference:sql_ddl_create>` like the following:
 
 .. code-block:: psql
 
@@ -44,7 +44,7 @@ Partitioning
 ============
 
 CrateDB also supports splitting up data across another dimension with 
-:ref:`partitioning <reference:partitioned-tables>`. You can think of a 
+:ref:`partitioning <crate-reference:partitioned-tables>`. You can think of a
 partition as a set of shards. For each partition the number of shards defined 
 by ``CLUSTERED INTO x SHARDS`` are created, when a first row with a specific 
 ``partition key`` is inserted.
