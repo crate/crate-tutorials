@@ -153,7 +153,7 @@ Start an interactive Crash session:
     Modify the argument if you wish to connect to a CrateDB node on a different
     host or port number.
 
-Then, :ref:`create a table <crate-reference:sql_ddl_create>` suitable for writing
+Then, :ref:`create a table <crate-reference:ddl-create-table>` suitable for writing
 load averages.
 
 .. code-block:: psql
@@ -181,7 +181,7 @@ statements directly from the command line.
 
 First, exit from the interactive Crash session (or open a new terminal). Then,
 use ``crash`` with the ``--command`` argument to execute an :ref:`INSERT
-<crate-reference:inserting_data>` query.
+<crate-reference:dml-inserting-data>` query.
 
 .. code-block:: console
 
