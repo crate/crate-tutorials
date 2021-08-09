@@ -9,7 +9,7 @@ One core concept CrateDB uses to distribute data across a cluster is
 configured number of shards, which are distributed evenly across the cluster. 
 You can think of shards as a self-contained part of a table, that includes both 
 a subset of records and corresponding indexing structures. If we 
-:ref:`create a table <crate-reference:sql_ddl_create>` like the following:
+:ref:`create a table <crate-reference:ddl-create-table>` like the following:
 
 .. code-block:: psql
 

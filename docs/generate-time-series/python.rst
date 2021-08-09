@@ -110,7 +110,7 @@ Get a :ref:`cursor <crate-python:cursor>`:
 
     >>>  cursor = connection.cursor()
 
-Finally, :ref:`create a table <crate-reference:sql_ddl_create>` suitable for writing
+Finally, :ref:`create a table <crate-reference:ddl-create-table>` suitable for writing
 ISS position coordinates.
 
     >>> cursor.execute(
@@ -131,7 +131,7 @@ Record the ISS position
 With the table in place, you can start recording the position of the ISS.
 
 The following command calls your ``position`` function and will :ref:`insert
-<crate-reference:inserting_data>` the result into the ``iss`` table:
+<crate-reference:dml-inserting-data>` the result into the ``iss`` table:
 
     >>> cursor.execute("INSERT INTO iss (position) VALUES (?)", [position()])
 
