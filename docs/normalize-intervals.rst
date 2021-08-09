@@ -15,7 +15,7 @@ Normalize time series data intervals
 
 If you followed one of the tutorials in the :ref:`previous section <gen-ts>`,
 you should have some mock time series data about the position, or `ground
-point`_, of `International Space Station`_ (ISS).
+point`_, of the `International Space Station`_ (ISS).
 
 It is common to visualize time series data by graphing values over time.
 However, you may run into the following issues:
@@ -84,12 +84,13 @@ You must have the following Python libraries installed:
 - `SQLAlchemy`_ -- a powerful database abstraction layer
 - The :ref:`crate-python:index` -- SQLAlchemy support for CrateDB
 - `Matplotlib`_ -- data visualization
+- `geojson`_ -- Functions for encoding and decoding GeoJSON formatted data
 
 You can install (or upgrade) the necessary libraries with `Pip`_:
 
 .. code-block:: console
 
-    sh$ pip install --upgrade pandas sqlalchemy crate matplotlib
+    sh$ pip3 install --upgrade pandas sqlalchemy crate matplotlib geojson
 
 
 .. _ni-jupyter:
@@ -107,7 +108,7 @@ You can install Jupyter with Pip:
 
 .. code-block:: console
 
-    sh$ pip install --upgrade notebook
+    sh$ pip3 install --upgrade notebook
 
 Once installed, you can start a new Jupyter Notebook session, like this:
 
@@ -145,7 +146,7 @@ You can install IPython with Pip:
 
 .. code-block:: console
 
-    sh$ pip install  --upgrade ipython
+    sh$ pip3 install --upgrade ipython
 
 Once installed, you can start an interactive IPython session like this:
 
@@ -153,9 +154,9 @@ Once installed, you can start an interactive IPython session like this:
 
     sh$ ipython
 
-    Python 3.7.6 (default, Dec 27 2019, 09:51:21)
+    Python 3.9.10 (main, Jan 15 2022, 11:48:04)
     Type 'copyright', 'credits' or 'license' for more information
-    IPython 7.12.0 -- An enhanced Interactive Python. Type '?' for help.
+    IPython 8.0.1 -- An enhanced Interactive Python. Type '?' for help.
 
     In [1]:
 
@@ -189,7 +190,7 @@ Then, query the raw data:
 
 .. code-block:: python
 
-    pandas.read_sql('SELECT * FROM "doc"."iss"', 'crate://localhost:4200')
+    pandas.read_sql('SELECT * FROM doc.iss', 'crate://localhost:4200')
 
 .. NOTE::
 
@@ -239,31 +240,27 @@ that you can execute this query multiple times:
 
 .. code-block:: python
 
+    import pandas
+
     def raw_data():
         # From <https://www.latlong.net/>
         berlin_position = [52.520008, 13.404954]
         # Returns distance in kilometers (division by 1000)
-        sql = '''
-            SELECT
-                "iss"."timestamp" AS "time",
-                distance("iss"."position", {}) / 1000 AS "distance"
-            FROM
-                "doc"."iss" AS "iss"
-            WHERE
-                "iss"."timestamp" >= CURRENT_TIMESTAMP - INTERVAL '1' DAY
-            ORDER BY
-                "time" ASC
-        '''.format(berlin_position)
-        data = pandas.read_sql(sql, 'crate://localhost:4200', parse_dates={'time': 'ms'})
-        return data
+        sql = f'''
+            SELECT iss.timestamp AS time,
+                   DISTANCE(iss.position, {berlin_position}) / 1000 AS distance
+            FROM doc.iss
+            WHERE iss.timestamp >= CURRENT_TIMESTAMP - INTERVAL '1' DAY
+            ORDER BY time ASC
+        '''
+        return pandas.read_sql(sql, 'crate://localhost:4200', parse_dates={'time': 'ms'})
 
 Specifically:
 
 .. rst-class:: open
 
- * You can define `location`_ of Berlin and interpolate that into the query
-   (using ``{}`` as a placeholder) to calculate the ``distance()`` of the ISS
-   ground point in kilometers.
+ * You can define the `location`_ of Berlin and interpolate that into the query
+   to calculate the ``DISTANCE()`` of the ISS ground point in kilometers.
 
  * You can use :ref:`CURRENT_TIMESTAMP <crate-reference:current_timestamp>` with an
    interval :ref:`value expression <crate-reference:sql-value-expressions>`
@@ -397,17 +394,22 @@ Above, notice that:
 Resample the data
 ------------------
 
-Here's the basic approach to resampling data at a lower frequency:
+When plotting a longer timeframe, a sampling frequency of 10 seconds can be too
+high, creating an unnecessary large number of data points. Therefore, here is a
+basic approach to resample data at a lower frequency:
 
- 1. Truncate the ``time`` column to a less precise value (using
-    :ref:`trunc_date() <crate-reference:scalar-date-trunc>`).
+ 1. Place values of the ``time`` column into bins for a given interval (using
+    :ref:`DATE_BIN() <crate-reference:date_bin>`).
 
-    For example, truncate times to the nearest minute.
+    In this example, we are resampling the data per minute. This means that all
+    rows with an identical ``time`` value on minute-level are placed into the
+    same date bin.
 
- 2. Group rows by date (using :ref:`GROUP BY <crate-reference:sql_dql_group_by>`).
+ 2. Group rows per date bin (using
+    :ref:`GROUP BY <crate-reference:sql_dql_group_by>`).
 
-    If you have six data points per minute and you are rounding ``time`` to the
-    nearest minute, ``GROUP BY time`` will group six rows into one.
+    The position index ``1`` is a reference to the first column of the
+    ``SELECT`` clause so we don't need to repeat the whole ``DATE_BIN`` function call.
 
  3. Calculate an :ref:`aggregate <crate-reference:aggregation>` value across the
     grouped rows.
@@ -418,7 +420,8 @@ Here's the basic approach to resampling data at a lower frequency:
 
 .. TIP::
 
-    This technique is also known as `data binning`_ or *bucketing*
+    *Date bin* is short for *date binning*, or `data binning`_ in general.
+    It is sometimes also referred to as *time bucketing*.
 
 Here's a new function with a rewritten query that implements the three steps
 above and resamples the raw data by the minute:
@@ -429,26 +432,21 @@ above and resamples the raw data by the minute:
         # From <https://www.latlong.net/>
         berlin_position = [52.520008, 13.404954]
         # Returns distance in kilometers (division by 1000)
-        sql = '''
-            SELECT
-                date_trunc('minute', "iss"."timestamp") AS "time",
-                COUNT(*) AS "records",
-                AVG(distance("iss"."position", {}) / 1000.0) AS "distance"
-            FROM
-                "doc"."iss" AS "iss"
-            WHERE
-                "iss"."timestamp" >= CURRENT_TIMESTAMP - '1 day'::INTERVAL
-            GROUP BY
-                "time"
-            ORDER BY
-                "time" ASC
-         '''.format(berlin_position)
-        data = pandas.read_sql(sql, 'crate://localhost:4200', parse_dates={'time': 'ms'})
-        return data
+        sql = f'''
+            SELECT DATE_BIN('1 minute'::INTERVAL, iss.timestamp, 0) AS time,
+                   COUNT(*) AS records,
+                   AVG(DISTANCE(iss.position, {berlin_position}) / 1000.0) AS distance
+            FROM doc.iss
+            WHERE iss.timestamp >= CURRENT_TIMESTAMP - '1 day'::INTERVAL
+            GROUP BY 1
+            ORDER BY 1 ASC
+         '''
+        return pandas.read_sql(sql, 'crate://localhost:4200', parse_dates={'time': 'ms'})
 
 .. NOTE::
 
-    :ref:`COUNT(*) <crate-reference:aggregation-count-star>` can be used for debug purposes.
+    The ``DATE_BIN`` function is available in CrateDB versions >= 4.7.0. In
+    older versions, you can use ``DATE_TRUNC('minute', "timestamp")`` instead.
 
     The ``records`` column produced by this query will tell you how many source
     rows have been grouped by the query per result row.
@@ -505,11 +503,10 @@ Interpolate missing records
 ---------------------------
 
 The ``data_by_minute()`` function resamples data by the minute. However, the
-query used can only resample data for minute intervals with one or more
-corresponding ``records``.
+query used can only resample data for minutes with one or more records.
 
 If you want one data point per minute interval irrespective of the number of
-``records``, you must `interpolate`_ those values.
+ ``records``, you must `interpolate`_ those values.
 
 You can interpolate data in many ways, some more advanced than others. For this
 tutorial, we will show you how to achieve the simplest possible type of
@@ -542,7 +539,6 @@ null values filling in for missing data.
 
     Read more about :ref:`how joins work <crate-reference:concept-joins>`.
 
-
 .. _ni-brief-example:
 
 A brief example
@@ -557,9 +553,9 @@ Here's your resampled data:
     :header: "", "time", "records", "distance"
     :widths: auto
 
-    "0", "2020-06-11 11:00:00", "5", "11871.619396"
-    "1", "2020-06-11 11:02:00", "6", "12415.473163"
-    "2", "2020-06-11 11:03:00", "3", "13055.554924"
+    "0", "2020-06-11 07:00:00", "5", "11871.619396"
+    "1", "2020-06-11 07:02:00", "6", "12415.473163"
+    "2", "2020-06-11 07:03:00", "3", "13055.554924"
 
 Notice that rows for 07:01 and 07:04 are missing. Perhaps the data collection
 process ran into issues during those time windows.
@@ -570,11 +566,11 @@ If you generate null data for the same period, it will look like this:
     :header: "", "time", "distance"
     :widths: auto
 
-    "0", "2020-06-11 11:00:00", "None"
-    "1", "2020-06-11 11:01:00", "None"
-    "2", "2020-06-11 11:02:00", "None"
-    "3", "2020-06-11 11:03:00", "None"
-    "4", "2020-06-11 11:04:00", "None"
+    "0", "2020-06-11 07:00:00", "None"
+    "1", "2020-06-11 07:01:00", "None"
+    "2", "2020-06-11 07:02:00", "None"
+    "3", "2020-06-11 07:03:00", "None"
+    "4", "2020-06-11 07:04:00", "None"
 
 .. NOTE::
 
@@ -617,7 +613,7 @@ Generate continuous null data for the past 24 hours
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can generate continuous null data with the :ref:`generate_series()
-<crate-reference:table-functions-generate-series>` *table function*. A :ref:`table
+<crate-reference:table-functions-generate-series>` table function. A :ref:`table
 function <crate-reference:table-functions>` is a function that produces a set
 of rows.
 
@@ -628,17 +624,15 @@ hours:
 
     def null_by_minute_24h():
         sql = '''
-            SELECT
-                "time",
-                NULL as "distance"
-            FROM
-                generate_series(
-                    date_trunc('minute', CURRENT_TIMESTAMP) - INTERVAL '24 hours',
-                    date_trunc('minute', CURRENT_TIMESTAMP), '1 minute'::INTERVAL
-                ) AS series("time")
+            SELECT time,
+                   NULL AS distance
+            FROM generate_series(
+              DATE_TRUNC('minute', CURRENT_TIMESTAMP) - INTERVAL '24 hours',
+              DATE_TRUNC('minute', CURRENT_TIMESTAMP),
+              '1 minute'::INTERVAL
+            ) AS series(time)
          '''
-        data = pandas.read_sql(sql, 'crate://localhost:4200', parse_dates={'time': 'ms'})
-        return data
+        return pandas.read_sql(sql, 'crate://localhost:4200', parse_dates={'time': 'ms'})
 
 Test the function, like so:
 
@@ -650,17 +644,17 @@ Test the function, like so:
     :header: "", "time", "distance"
     :widths: auto
 
-    "0", "2020-06-10 11:09:00", "None"
-    "1", "2020-06-10 11:10:00", "None"
-    "2", "2020-06-10 11:11:00", "None"
-    "3", "2020-06-10 11:12:00", "None"
-    "4", "2020-06-10 11:13:00", "None"
+    "0", "2020-06-10 07:09:00", "None"
+    "1", "2020-06-10 07:10:00", "None"
+    "2", "2020-06-10 07:11:00", "None"
+    "3", "2020-06-10 07:12:00", "None"
+    "4", "2020-06-10 07:13:00", "None"
     "…", "…", "…"
-    "1436", "2020-06-11 11:05:00", "None"
-    "1437", "2020-06-11 11:06:00", "None"
-    "1438", "2020-06-11 11:07:00", "None"
-    "1439", "2020-06-11 11:08:00", "None"
-    "1440", "2020-06-11 11:09:00", "None"
+    "1436", "2020-06-11 07:05:00", "None"
+    "1437", "2020-06-11 07:06:00", "None"
+    "1438", "2020-06-11 07:07:00", "None"
+    "1439", "2020-06-11 07:08:00", "None"
+    "1440", "2020-06-11 07:09:00", "None"
 
 Plot the data:
 
@@ -691,27 +685,20 @@ that performs a left :ref:`crate-reference:inner-joins`, as per the previous
         # From <https://www.latlong.net/>
         berlin_position = [52.520008, 13.404954]
         # Returns distance in kilometers (division by 1000)
-        sql = '''
-            SELECT
-                "time",
-                COUNT(*) - 1 AS "records",
-                AVG(distance("iss"."position", {}) / 1000) AS "distance"
-            FROM
-                generate_series(
-                    date_trunc('minute', CURRENT_TIMESTAMP) - INTERVAL '24 hours',
-                    date_trunc('minute', CURRENT_TIMESTAMP), '1 minute'::INTERVAL
-                ) AS series("time")
-            LEFT JOIN
-                "doc"."iss" AS "iss"
-            ON
-                date_trunc('minute', "iss"."timestamp") = "time"
-            GROUP BY
-                "time"
-            ORDER BY
-                "time" ASC
-        '''.format(berlin_position)
-        data = pandas.read_sql(sql, 'crate://localhost:4200', parse_dates={'time': 'ms'})
-        return data
+        sql = f'''
+            SELECT time,
+                   COUNT(*) AS records,
+                   AVG(DISTANCE(iss.position, {berlin_position}) / 1000) AS distance
+            FROM generate_series(
+              DATE_TRUNC('minute', CURRENT_TIMESTAMP) - INTERVAL '24 hours',
+              DATE_TRUNC('minute', CURRENT_TIMESTAMP),
+              '1 minute'::INTERVAL
+            ) AS series(time)
+            LEFT JOIN doc.iss ON DATE_TRUNC('1 minute'::INTERVAL, iss.timestamp, 0) = time
+            GROUP BY time
+            ORDER BY time ASC
+        '''
+        return pandas.read_sql(sql, 'crate://localhost:4200', parse_dates={'time': 'ms'})
 
 In the code above:
 
@@ -729,13 +716,9 @@ In the code above:
    used to collapse multiple rows per minute into a single row per minute.
 
    Similarly, the :ref:`crate-reference:aggregation-avg` function can be used to
-   compute an aggregate ``distance`` value across multiple rows. There is no
-   need to check for null values here because the ``avg()`` function discards
+   compute an aggregate ``DISTANCE`` value across multiple rows. There is no
+   need to check for null values here because the ``AVG()`` function discards
    null values.
-
- * To calculate the number of ``records``, you must subtract one from
-   :ref:`COUNT(*) <crate-reference:aggregation-count-star>` to account for guaranteed
-   presence of one null value per minute interval.
 
 Test the function:
 
@@ -771,8 +754,8 @@ And here's what it looks like if you wait a few more hours:
 
 .. image:: _assets/img/normalize-intervals/data-24h-more.png
 
-The finished result is a visualization that uses time series normalization at
-resample raw data to regular interval with null interpolation.
+The finished result is a visualization that uses time series normalization and
+resamples raw data to regular intervals with the interpolation of missing values.
 
 This visualization resolves both original issues:
 
@@ -783,7 +766,6 @@ This visualization resolves both original issues:
 
 2. *You want to plot every minute for the past 24 hours, but you are missing
    data for some intervals. You will need to fill in the missing values.*
-
 
 .. _data binning: https://en.wikipedia.org/wiki/Data_binning
 .. _ground point: https://en.wikipedia.org/wiki/Ground_track
@@ -804,3 +786,4 @@ This visualization resolves both original issues:
 .. _SQLAlchemy: https://www.sqlalchemy.org/
 .. _standard Python interpreter: https://docs.python.org/3/tutorial/interpreter.html
 .. _system load: https://en.wikipedia.org/wiki/Load_(computing)
+.. _geojson: https://github.com/jazzband/geojson
