@@ -102,7 +102,7 @@ the CrateDB package repository::
     [[ $(lsb_release --id --short) = "Debian" ]] && repository="apt"
     [[ $(lsb_release --id --short) = "Ubuntu" ]] && repository="deb"
     distribution=$(lsb_release --codename --short)
-    sudo add-apt-repository "deb https://cdn.crate.io/downloads/${repository}/stable/ ${distribution} main"
+    sudo add-apt-repository "deb [arch=amd64] https://cdn.crate.io/downloads/${repository}/stable/ ${distribution} main"
 
 
 .. NOTE::
