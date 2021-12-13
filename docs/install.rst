@@ -11,6 +11,16 @@ Installation
    :depth: 1
 
 
+Security and upgrade notes
+==========================
+
+.. WARNING::
+
+    CrateDB versions prior to 4.6.6 are suspicable to the `Log4Shell issue`_
+    published on December 12, 2021. Please consider upgrading to the most
+    recent version and follow up reading `CrateDB Log4Shell mitigations`_.
+
+
 Introduction
 ============
 
@@ -371,10 +381,12 @@ operating a CrateDB cluster in production, :ref:`performance tuning
 .. _apt: https://en.wikipedia.org/wiki/APT_(software)
 .. _contact us: https://crate.io/contact/
 .. _CrateDB Docker image: https://hub.docker.com/_/crate/
+.. _CrateDB Log4Shell mitigations: https://community.crate.io/t/security-vulnerability-log4shell-rce-0-day-exploit/935
 .. _CrateDB release archive: https://cdn.crate.io/downloads/releases/cratedb/
 .. _deb: https://en.wikipedia.org/wiki/Deb_(file_format)
 .. _Docker: https://www.docker.com/
 .. _Java virtual machine: https://en.wikipedia.org/wiki/Java_virtual_machine
+.. _Log4Shell issue: https://www.lunasec.io/docs/blog/log4j-zero-day/
 .. _msvcrt ARM64: https://aka.ms/vs/16/release/VC_redist.arm64.exe
 .. _msvcrt x86-32: https://aka.ms/vs/16/release/vc_redist.x86.exe
 .. _msvcrt x86-64: https://aka.ms/vs/16/release/vc_redist.x64.exe
