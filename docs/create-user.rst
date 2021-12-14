@@ -21,7 +21,7 @@ prompted to enter a username and password.
 
 In order to create a user that can be used to authenticate from a remote
 machine, first :ref:`install crash <crate-crash:getting-started>` or other
-:ref:clients-tools:index` on the same machine you installed CrateDB on.
+:ref:`clients-tools:index` on the same machine you installed CrateDB on.
 Then, connect to CrateDB running on ``localhost``.
 
 While you can also perform the steps outlined below within
