@@ -118,7 +118,7 @@ First, import the `node-postgres`_ client:
 
     > const { Client } = require('pg')
 
-Then `connect`_ to CrateDB, using the :ref:`crate-reference:postgres_wire_protocol` port
+Then `connect`_ to CrateDB, using the :ref:`crate-reference:interface-postgresql` port
 (``5432``):
 
 .. code-block:: js

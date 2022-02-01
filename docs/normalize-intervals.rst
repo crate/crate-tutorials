@@ -228,9 +228,9 @@ Here are a few ways to improve this result:
  * The ``timestamp`` column isn't human-readable. It would be easier to
    understand the results if this value was as a human-readable time.
 
- * The ``position`` column is a :ref:`crate-reference:geo_point_data_type`. This data
+ * The ``position`` column is a :ref:`crate-reference:data-types-geo`. This data
    type isn't easy to plot on a traditional graph. However, you can use the
-   :ref:`distance() <crate-reference:scalar_distance>` function to calculate the
+   :ref:`distance() <crate-reference:scalar-distance>` function to calculate the
    distance between two ``geo_point`` values. If you compare ``position`` to a
    fixed place, you can plot distance over time for a graph showing you how far
    away the ISS is from some location of interest.
@@ -262,7 +262,7 @@ Specifically:
  * You can define the `location`_ of Berlin and interpolate that into the query
    to calculate the ``DISTANCE()`` of the ISS ground point in kilometers.
 
- * You can use :ref:`CURRENT_TIMESTAMP <crate-reference:current_timestamp>` with an
+ * You can use :ref:`CURRENT_TIMESTAMP <crate-reference:scalar-current_timestamp>` with an
    interval :ref:`value expression <crate-reference:sql-value-expressions>`
    (``INTERVAL '1' DAY``) to calculate a timestamp that is 24 hours in the
    past. You can then use a :ref:`WHERE clause <crate-reference:sql-select-where>`
@@ -399,7 +399,7 @@ high, creating an unnecessary large number of data points. Therefore, here is a
 basic approach to resample data at a lower frequency:
 
  1. Place values of the ``time`` column into bins for a given interval (using
-    :ref:`DATE_BIN() <crate-reference:date_bin>`).
+    :ref:`DATE_BIN() <crate-reference:date-bin>`).
 
     In this example, we are resampling the data per minute. This means that all
     rows with an identical ``time`` value on minute-level are placed into the

@@ -135,7 +135,7 @@ keys which don't have a corresponding struct field are ignored.
 
 Now, create a function that makes an HTTP GET request to the Open Notify API
 endpoint and returns longitude and latitude as a
-:ref:`crate-reference:geo_point_data_type` declaration.
+:ref:`crate-reference:data-types-geo` declaration.
 
 .. code-block:: go
 
@@ -231,7 +231,7 @@ client:
     )
 
 Then, in your main function, connect to CrateDB using the
-:ref:`crate-reference:postgres_wire_protocol` port (``5432``) and
+:ref:`crate-reference:interface-postgresql` port (``5432``) and
 :ref:`create a table <crate-reference:ddl-create-table>` suitable for writing ISS
 position coordinates.
 
