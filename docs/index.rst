@@ -13,7 +13,7 @@ massive amounts of machine data in real-time.
     :maxdepth: 1
     :titlesonly:
 
-    install
+    install/index
     tutorial/index
 
 .. SEEALSO::
