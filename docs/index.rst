@@ -1,8 +1,8 @@
 .. _index:
 
-=================
-CrateDB Tutorials
-=================
+============================
+Getting started with CrateDB
+============================
 
 CrateDB is a distributed SQL database that makes it simple to store and analyze
 massive amounts of machine data in real-time.
@@ -14,11 +14,7 @@ massive amounts of machine data in real-time.
     :titlesonly:
 
     install
-    first-use
-    create-user
-    create-sharded-table
-    generate-time-series/index
-    normalize-intervals
+    tutorial/index
 
 .. SEEALSO::
 
