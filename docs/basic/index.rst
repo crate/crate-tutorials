@@ -1,10 +1,10 @@
 .. highlight:: bash
 
-.. _install:
+.. _install_basic:
 
-============
-Installation
-============
+===============
+Getting started
+===============
 
 .. contents::
    :local:
