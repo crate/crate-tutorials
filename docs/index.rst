@@ -1,6 +1,6 @@
 .. highlight:: bash
 
-.. _install:
+.. _index:
 
 ============
 Installation
