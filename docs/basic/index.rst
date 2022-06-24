@@ -29,9 +29,9 @@ macOS and Windows systems.
 The first step to using any software package is getting it properly installed.
 Please read this section carefully.
 
-By installing CrateDB the way as outlined in this document, you will be able to
-quickly setup and run a single-node cluster. The document describes different
-installation methods. While we recommend to use the package-based methods
+By installing CrateDB the way outlined in this document, you will be able to
+quickly set up and run a single-node cluster. The document describes different
+installation methods. While we recommend using the package-based methods
 for :ref:`install-deb` and :ref:`install-rpm` by subscribing to the respective
 release channels, you can also download release archives and run CrateDB
 manually using the :ref:`install-adhoc` method.
@@ -229,7 +229,7 @@ official `CrateDB Docker image`_, use::
 
     If this command aborts with an error, please consult the :ref:`Docker
     troubleshooting guide <docker-troubleshooting>`. You are also
-    welcome learn more about :ref:`resource_constraints` with respect
+    welcome to learn more about :ref:`resource_constraints` with respect
     to running CrateDB within containers.
 
 .. CAUTION::
@@ -355,21 +355,20 @@ Here is an example::
 Post-install notes
 ==================
 
-After successfully installing the software, you might want to follow up with
+After successfully installing the software, you might want to follow up by
 :ref:`taking the guided tour <use>`.
 
-Also, you might enjoy to be guided into further information about how to
-quickly adjust the :ref:`configuration settings <install-configure>`, read more
-details about the :ref:`crate-reference:config` of CrateDB, the background about
-:ref:`crate-howtos:bootstrap-checks`, multi-node configuration within the section
-about :ref:`crate-howtos:clustering` and :ref:`crate-howtos:going-into-production`. When
-operating a CrateDB cluster in production, :ref:`performance tuning
-<crate-howtos:performance>` will also be of interest.
+Also, you might enjoy being guided through further information:
+
+* Read more details about the :ref:`crate-reference:config` of CrateDB
+* The background about :ref:`crate-howtos:bootstrap-checks`
+* Multi-node configuration within the section about :ref:`crate-howtos:clustering` and :ref:`crate-howtos:going-into-production`
+* When operating a CrateDB cluster in production, :ref:`performance tuning <crate-howtos:performance>` will also be of interest
 
 .. NOTE::
 
     As noted within the introductory section, this kind of installation flavor
-    will let you quickly setup and run a single-node cluster.
+    will let you quickly set up and run a single-node cluster.
 
     To add additional CrateDB nodes to this kind of cluster in order to make it
     form a multi-node cluster, you will need to remove the cluster state after
