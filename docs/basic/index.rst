@@ -228,8 +228,8 @@ official `CrateDB Docker image`_, use::
 .. TIP::
 
     If this command aborts with an error, please consult the :ref:`Docker
-    troubleshooting guide <crate-howtos:docker-troubleshooting>`. You are also
-    welcome learn more about :ref:`crate-howtos:resource_constraints` with respect
+    troubleshooting guide <docker-troubleshooting>`. You are also
+    welcome learn more about :ref:`resource_constraints` with respect
     to running CrateDB within containers.
 
 .. CAUTION::
@@ -241,7 +241,7 @@ official `CrateDB Docker image`_, use::
     container, all data will be lost.
 
     When you are ready to start using CrateDB for data you care about, please
-    consult the :ref:`full guide to CrateDB and Docker <crate-howtos:cratedb-docker>`
+    consult the :ref:`full guide to CrateDB and Docker <cratedb-docker>`
     in order to configure the Docker setup appropriately by using persistent
     disk volumes.
 
