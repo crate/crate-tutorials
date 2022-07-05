@@ -24,8 +24,8 @@ Security and upgrade notes
 Introduction
 ============
 
-This part of the documentation covers the installation of CrateDB on Linux,
-macOS and Windows systems.
+This part of the documentation covers the installation of CrateDB on Linux and
+macOS systems.
 The first step to using any software package is getting it properly installed.
 Please read this section carefully.
 
@@ -55,8 +55,7 @@ After successfully installing CrateDB, please also consider reading the
 
     - CrateDB versions before 4.2 required a separate Java installation. For
       CrateDB 3.0 to 4.1, Java 11 is the minimum requirement. CrateDB versions
-      before 3.0 require Java 8. We recommend using OpenJDK_ on Linux Systems
-      and `Oracle Java`_ on Microsoft Windows and macOS.
+      before 3.0 require Java 8. We recommend using OpenJDK_ on Linux Systems.
 
 
 .. _install-quick:
@@ -248,12 +247,12 @@ official `CrateDB Docker image`_, use::
 
 .. _install-adhoc:
 
-Ad-hoc (Unix, macOS, Windows)
-=============================
+Ad-hoc (Unix, macOS)
+====================
 
 This section of the documentation outlines how to use the release archives to
-install CrateDB. The walkthrough is suitable to install and run CrateDB on both
-`Unix-like`_ systems as well as on Microsoft Windows.
+install CrateDB. The walkthrough is suitable to install and run CrateDB on
+`Unix-like`_ systems.
 
 #. Download the latest `CrateDB release archive`_. Please make sure to select
    the right release archive matching your system.
@@ -263,9 +262,6 @@ install CrateDB. The walkthrough is suitable to install and run CrateDB on both
 
        # Extract tarball on Unix-like systems
        tar -xzf crate-*.tar.gz
-
-       # Extract Zip archive on Windows systems
-       unzip -o crate-*.zip
 
 #. On the terminal, change into the extracted ``crate`` directory::
 
@@ -277,32 +273,10 @@ install CrateDB. The walkthrough is suitable to install and run CrateDB on both
 
 #. In order to stop CrateDB again, use :kbd:`ctrl-c`.
 
-.. CAUTION::
-
-    We do not yet officially support CrateDB on Windows for production use. If
-    you would like to deploy CrateDB on Windows, please feel free to `contact
-    us`_ so we can work with you on a solution.
-
 .. SEEALSO::
 
       Consult the :ref:`crate-reference:cli` documentation for further information
       about the ``./bin/crate`` command.
-
-
-Notes about Microsoft Windows
------------------------------
-
-If you are installing CrateDB on a recent `Windows Server`_ edition, setting
-up the latest *Microsoft Visual C++ 2019 Redistributable* package is required.
-You can download it at `msvcrt x86-64`_, `msvcrt x86-32`_ or `msvcrt ARM64`_.
-
-Within the terminal, as a Windows user, the prompt after `starting PowerShell`_
-will look like this.
-
-.. code-block:: doscon
-
-    PS> ./bin/crate
-
 
 .. _install-configure:
 
@@ -319,8 +293,9 @@ Configuration files
 When using the package-based setup flavor for :ref:`install-deb` or
 :ref:`install-rpm`, the main CrateDB configuration files are located within the
 ``/etc/crate`` directory.
-When using the :ref:`install-adhoc` setup, the configuration files are located
-within the ``config/`` directory.
+When using the :ref:`install-adhoc` setup or the 
+:ref:`Microsoft Windows <windows-install>` setup, the configuration files are
+located within the ``config/`` directory.
 
 Environment variables
 ---------------------
@@ -328,7 +303,8 @@ Environment variables
 When using the package-based setup flavor for :ref:`install-deb` or
 :ref:`install-rpm`, the CrateDB startup script uses :ref:`crate-reference:conf-env`
 from the ``/etc/default/crate`` file. When using the :ref:`install-adhoc`
-setup, the environment variables will be set by ``bin/crate{.sh,.bat}``.
+setup or the :ref:`Microsoft Windows <windows-install>` setup, the
+environment variables will be set by ``bin/crate{.sh,.bat}``.
 
 Here is an example::
 
@@ -378,7 +354,6 @@ Also, you might enjoy being guided through further information:
 
 .. _7-Zip: https://www.7-zip.org/
 .. _apt: https://en.wikipedia.org/wiki/APT_(software)
-.. _contact us: https://crate.io/contact/
 .. _CrateDB Docker image: https://hub.docker.com/_/crate/
 .. _CrateDB Log4Shell mitigations: https://community.crate.io/t/security-vulnerability-log4shell-rce-0-day-exploit/935
 .. _CrateDB release archive: https://cdn.crate.io/downloads/releases/cratedb/
@@ -386,15 +361,10 @@ Also, you might enjoy being guided through further information:
 .. _Docker: https://www.docker.com/
 .. _Java virtual machine: https://en.wikipedia.org/wiki/Java_virtual_machine
 .. _Log4Shell issue: https://www.lunasec.io/docs/blog/log4j-zero-day/
-.. _msvcrt ARM64: https://aka.ms/vs/16/release/VC_redist.arm64.exe
-.. _msvcrt x86-32: https://aka.ms/vs/16/release/vc_redist.x86.exe
-.. _msvcrt x86-64: https://aka.ms/vs/16/release/vc_redist.x64.exe
 .. _OpenJDK: https://openjdk.java.net/projects/jdk/
-.. _Oracle Java: https://www.oracle.com/java/technologies/javase-downloads.html
 .. _Other releases of CrateDB: https://cdn.crate.io/downloads/releases/
 .. _release workflow: https://github.com/crate/crate/blob/master/devs/docs/release.rst
 .. _RPM: https://en.wikipedia.org/wiki/RPM_Package_Manager
 .. _starting PowerShell: https://docs.microsoft.com/en-us/powershell/scripting/learn/ps101/01-getting-started?view=powershell-7.1#how-do-i-launch-powershell
 .. _Unix-like: https://en.wikipedia.org/wiki/Unix-like
-.. _Windows Server: https://www.microsoft.com/en-us/windows-server
 .. _YUM: https://en.wikipedia.org/wiki/Yum_(software)

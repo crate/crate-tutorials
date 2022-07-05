@@ -1,8 +1,8 @@
 .. _red-hat:
 
-============================
-Run CrateDB on Red Hat Linux
-============================
+=============
+Red Hat Linux
+=============
 
 CrateDB maintains the official RPM repositories for:
 
