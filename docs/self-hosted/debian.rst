@@ -1,8 +1,8 @@
 .. _debian:
 
-===============================
-Run CrateDB on Debian GNU/Linux
-===============================
+================
+Debian GNU/Linux
+================
 
 CrateDB actively maintains packages for the following Debian versions:
 

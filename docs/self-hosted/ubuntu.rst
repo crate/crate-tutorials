@@ -1,8 +1,8 @@
 .. _ubuntu:
 
-=====================
-Run CrateDB on Ubuntu
-=====================
+======
+Ubuntu
+======
 
 CrateDB maintains packages for the following Ubuntu versions:
 

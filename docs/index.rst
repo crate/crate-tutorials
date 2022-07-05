@@ -64,7 +64,7 @@ environments.
    :titlesonly:
 
    basic/index
-   linux/index
+   self-hosted/index
    containers/index
    cloud/index
 
