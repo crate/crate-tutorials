@@ -74,7 +74,8 @@ You can then create your first CrateDB container and node, like this::
                 -Cnode.name=crate01 \
                 -Cdiscovery.seed_hosts=crate02,crate03 \
                 -Ccluster.initial_master_nodes=crate01,crate02 \
-                -Cgateway.expected_nodes=3  -Cgateway.recover_after_nodes=3
+                -Cgateway.expected_data_nodes=3 \
+                -Cgateway.recover_after_data_nodes=3
 
 Breaking the command down:
 
@@ -105,9 +106,9 @@ Breaking the command down:
       (first bootstrap). If this parameter is not defined, then it is expected
       that the node will join an already formed cluster. This parameter is only
       relevant for the first election.
-    * ``gateway.expected_nodes`` and ``gateway.recover_after_nodes``: Specifies
-      how many nodes you expect in the cluster and how many nodes must be
-      discovered before the cluster state is recovered.
+    * ``gateway.expected_data_nodes`` and ``gateway.recover_after_data_nodes``:
+      Specifies how many nodes you expect in the cluster and how many nodes must
+      be discovered before the cluster state is recovered.
 
 .. NOTE::
 
@@ -152,7 +153,8 @@ Now add the second node, ``crate02``, to the cluster::
                 -Cnode.name=crate02 \
                 -Cdiscovery.seed_hosts=crate01,crate03 \
                 -Ccluster.initial_master_nodes=crate01,crate02 \
-                -Cgateway.expected_nodes=3 -Cgateway.recover_after_nodes=2
+                -Cgateway.expected_data_nodes=3 \
+                -Cgateway.recover_after_data_nodes=2
 
 Notice here that:
 
@@ -177,7 +179,8 @@ You can now add ``crate03`` like this::
           crate -Cnetwork.host=_site_ \
                 -Cnode.name=crate03 \
                 -Cdiscovery.seed_hosts=crate01,crate02 \
-                -Cgateway.expected_nodes=3 -Cgateway.recover_after_nodes=2
+                -Cgateway.expected_data_nodes=3 \
+                -Cgateway.recover_after_data_nodes=2
 
 Notice here that:
 
@@ -292,8 +295,8 @@ define your services like this:
                   "-Cnetwork.host=_site_",
                   "-Cdiscovery.seed_hosts=cratedb02,cratedb03",
                   "-Ccluster.initial_master_nodes=cratedb01,cratedb02,cratedb03",
-                  "-Cgateway.expected_nodes=3",
-                  "-Cgateway.recover_after_nodes=2"]
+                  "-Cgateway.expected_data_nodes=3",
+                  "-Cgateway.recover_after_data_nodes=2"]
         deploy:
           replicas: 1
           restart_policy:
@@ -314,8 +317,8 @@ define your services like this:
                   "-Cnetwork.host=_site_",
                   "-Cdiscovery.seed_hosts=cratedb01,cratedb03",
                   "-Ccluster.initial_master_nodes=cratedb01,cratedb02,cratedb03",
-                  "-Cgateway.expected_nodes=3",
-                  "-Cgateway.recover_after_nodes=2"]
+                  "-Cgateway.expected_data_nodes=3",
+                  "-Cgateway.recover_after_data_nodes=2"]
         deploy:
           replicas: 1
           restart_policy:
@@ -336,8 +339,8 @@ define your services like this:
                   "-Cnetwork.host=_site_",
                   "-Cdiscovery.seed_hosts=cratedb01,cratedb02",
                   "-Ccluster.initial_master_nodes=cratedb01,cratedb02,cratedb03",
-                  "-Cgateway.expected_nodes=3",
-                  "-Cgateway.recover_after_nodes=2"]
+                  "-Cgateway.expected_data_nodes=3",
+                  "-Cgateway.recover_after_data_nodes=2"]
         deploy:
           replicas: 1
           restart_policy:

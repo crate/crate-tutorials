@@ -259,8 +259,8 @@ CrateDB 3.0.5 cluster:
               - -Ccluster.initial_master_nodes=crate-0,crate-1,crate-2
               - -Cdiscovery.seed_providers=srv
               - -Cdiscovery.srv.query=_crate-internal._tcp.crate-internal-service.${NAMESPACE}.svc.cluster.local
-              - -Cgateway.recover_after_nodes=2
-              - -Cgateway.expected_nodes=${EXPECTED_NODES}
+              - -Cgateway.recover_after_data_nodes=2
+              - -Cgateway.expected_data_nodes=${EXPECTED_NODES}
               - -Cpath.data=/data
             volumeMounts:
                   # Mount the `/data` directory as a volume named `data`.
