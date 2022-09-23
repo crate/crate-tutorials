@@ -23,12 +23,13 @@ with at least one master node and one worker node.
 Method 1 - Classic kubernetes
 -----------------------------
 
-Brief overview of this method
+Install the resources to run your CrateDB.
 
 Method 2 - Kubernetes operator
 ------------------------------
 
-Brief overview of this method, mention main differences
+You can also use the CrateDB custom resource and the Crate Operator to quickly
+install your CrateDB.
 
 .. rubric:: Table of contents
 
