@@ -50,7 +50,7 @@ A minimal custom resource for a three-node CrateDB cluster may look like this:
      cluster:
        imageRegistry: crate
        name: crate-dev
-       version: 4.3.1
+       version: 5.0.1
      nodes:
        data:
        - name: default
