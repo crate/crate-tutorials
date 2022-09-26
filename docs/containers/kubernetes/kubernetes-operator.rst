@@ -4,7 +4,7 @@
 Run CrateDB with Kubernetes Operator
 ====================================
 
-The `CrateDB Kubernetes Operator`_ provides convenient way to run `CrateDB`_
+The `CrateDB Kubernetes Operator`_ provides a convenient way to run `CrateDB`_
 clusters inside Kubernetes.
 
 
@@ -35,7 +35,7 @@ Install the crate-operator chart:
 Run CrateDB
 ===========
 
-A minimal custom resource for a 3 node CrateDB cluster may look like this:
+A minimal custom resource for a three-node CrateDB cluster may look like this:
 
 ``dev-cluster.yaml``:
 
