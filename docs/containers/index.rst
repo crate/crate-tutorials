@@ -11,4 +11,4 @@ takes minutes and your valuable data is always in sync and available.
    :maxdepth: 1
 
    docker
-   kubernetes
+   kubernetes/index

@@ -1,8 +1,8 @@
 .. _cratedb-kubernetes:
 
-=========================
-Run CrateDB on Kubernetes
-=========================
+======================
+CrateDB and Kubernetes
+======================
 
 CrateDB and `Docker`_ are a great match thanks to CrateDB’s `horizontally
 scalable`_ `shared-nothing architecture`_ that lends itself well to
@@ -33,23 +33,6 @@ Together, Docker and Kubernetes are a fantastic way to deploy and scale CrateDB.
 
 .. contents::
    :local:
-
-
-Prerequisites
-=============
-
-This document assumes `familiarity with Kubernetes`_.
-
-Before continuing you should already have a Kubernetes cluster up-and-running
-with at least one master node and one worker node.
-
-.. SEEALSO::
-
-   You can use `kubeadm`_ to bootstrap a Kubernetes cluster by hand.
-
-   Alternatively, cloud services such as `Azure Kubernetes Service`_ or the
-   `Amazon Kubernetes Service`_ can do this for you.
-
 
 Managing Kubernetes
 ===================
@@ -384,19 +367,14 @@ You can then use this in your controller configuration with something like this:
               requests:
                 storage: 100g
 
-
-.. _Amazon Kubernetes Service: https://aws.amazon.com/eks/
-.. _Azure Kubernetes Service: https://azure.microsoft.com/en-us/services/kubernetes-service/
 .. _Azure Managed Disks: https://azure.microsoft.com/en-us/pricing/details/managed-disks/
 .. _configuration via command-line options: https://crate.io/docs/crate/reference/en/latest/config/index.html
 .. _configuration: https://kubernetes.io/docs/concepts/configuration/overview/
 .. _containerization: https://www.docker.com/resources/what-container
 .. _CrateDB Docker image: https://hub.docker.com/_/crate/
 .. _Docker: https://www.docker.com/
-.. _familiarity with Kubernetes: https://kubernetes.io/docs/tutorials/kubernetes-basics/
 .. _horizontally scalable: https://en.wikipedia.org/wiki/Scalability#Horizontal_(scale_out)_and_vertical_scaling_(scale_up)
 .. _Ingress: https://kubernetes.io/docs/concepts/services-networking/ingress/
-.. _kubeadm: https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/
 .. _Kubernetes: https://kubernetes.io/
 .. _LoadBalancer: https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer
 .. _managed: https://kubernetes.io/docs/concepts/cluster-administration/manage-deployment/
