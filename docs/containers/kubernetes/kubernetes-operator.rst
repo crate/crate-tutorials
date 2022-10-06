@@ -16,13 +16,21 @@ Once Helm is set up properly, add the repo as follows:
 
 .. code-block:: console
 
-    helm repo add crate-operator https://crate.github.io/crate-operator
+    $ helm repo add crate-operator https://crate.github.io/crate-operator
 
 Install the crate-operator chart:
 
 .. code-block:: console
 
-    helm install crate-operator crate-operator/crate-operator
+    $ kubectl create namespace crate-operator
+
+    $ helm install crate-operator crate-operator/crate-operator --namespace crate-operator --set env.CRATEDB_OPERATOR_DEBUG_VOLUME_STORAGE_CLASS=<YOUR-STORAGE-CLASS>
+
+.. NOTE::
+
+    ``kubectl get storageclass`` gives you an list of the available StorageClasses
+    on your setup. Be careful with what you choose!
+
 
 .. NOTE::
 
@@ -53,7 +61,7 @@ A minimal custom resource for a three-node CrateDB cluster may look like this:
        version: 5.0.1
      nodes:
        data:
-       - name: default
+       - name: my-cluster
          replicas: 3
          resources:
            limits:
@@ -62,10 +70,12 @@ A minimal custom resource for a three-node CrateDB cluster may look like this:
            disk:
              count: 1
              size: 128GiB
-             storageClass: default
-           heapRatio: 0.5
+             storageClass: <YOUR-STORAGE-CLASS>
+           heapRatio: 0.25
 
 .. code-block:: console
+
+   $ kubectl create namespace dev
 
    $ kubectl --namespace dev create -f dev-cluster.yaml
    ...
@@ -73,6 +83,19 @@ A minimal custom resource for a three-node CrateDB cluster may look like this:
    $ kubectl --namespace dev get cratedbs
    NAMESPACE   NAME         AGE
    dev         my-cluster   36s
+
+
+If everything went well, you have a CrateDB cluster running. Congratulations!
+The operator created a user named ``system`` for you and a Loadbalancer to access the cluster.
+
+.. code-block:: console
+
+   $ kubectl get secret user-system-my-cluster -o json | jq -r '.data.password' | base64 -D
+
+   $ kubectl get service crate-my-cluster -o json | jq -r '.status.loadBalancer.ingress[0].ip'
+
+As an alternative you can access the cluster via ``kubectl port-forwarding`` to port ``4200``. Which
+allows you to authenticate with the `crate` user.
 
 .. NOTE::
 
