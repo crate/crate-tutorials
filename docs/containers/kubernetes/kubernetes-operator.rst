@@ -7,6 +7,9 @@ Run CrateDB with Kubernetes Operator
 The `CrateDB Kubernetes Operator`_ provides a convenient way to run `CrateDB`_
 clusters inside Kubernetes.
 
+Using the operator we can just deploy a ``CrateDB`` resource without having to
+deal with services, persistent volumes, persistent volume claims, and stateful
+sets. The only prerequisite is to have a suitable storage class.
 
 Installation
 ============
@@ -73,6 +76,17 @@ A minimal custom resource for a three-node CrateDB cluster may look like this:
              storageClass: <YOUR-STORAGE-CLASS>
            heapRatio: 0.25
 
+.. NOTE::
+
+   The operator imposes an affinity constraint of 1 CrateDB node per Kubernetes node.
+   To deploy a CrateDB cluster with multiple nodes on a single machine for
+   testing purposes, :ref:`manually deploy a StatefulSet <cratedb-kubernetes>`.
+
+
+.. WARNING::
+
+    Specifying a `cpu` number under `limits` is mandatory.
+    
 .. code-block:: console
 
    $ kubectl create namespace dev
@@ -84,18 +98,32 @@ A minimal custom resource for a three-node CrateDB cluster may look like this:
    NAMESPACE   NAME         AGE
    dev         my-cluster   36s
 
-
-If everything went well, you have a CrateDB cluster running. Congratulations!
-The operator created a user named ``system`` for you and a Loadbalancer to access the cluster.
+We can check the status of the deployment by looking at the latest events:
 
 .. code-block:: console
 
-   $ kubectl get secret user-system-my-cluster -o json | jq -r '.data.password' | base64 -D
+   $ kubectl get events --sort-by='.lastTimestamp' -n dev
+   
+and the status of the pods:
+  
+.. code-block:: console
+
+   $ kubectl get pods --namespace dev 
+
+Once we have a pod running for each CrateDB node, the cluster
+is ready. Congratulations!
+
+The operator created a user named ``system`` for you and a Loadbalancer
+to access the cluster.
+
+.. code-block:: console
+
+   $ kubectl get secret user-system-my-cluster -o json | jq -r '.data.password' | base64 -d
 
    $ kubectl get service crate-my-cluster -o json | jq -r '.status.loadBalancer.ingress[0].ip'
 
-As an alternative you can access the cluster via ``kubectl port-forwarding`` to port ``4200``. Which
-allows you to authenticate with the `crate` user.
+As an alternative you can access the cluster via ``kubectl port-forwarding``
+to port ``4200``. Which allows you to authenticate with the `crate` user.
 
 .. NOTE::
 
