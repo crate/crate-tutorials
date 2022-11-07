@@ -62,11 +62,6 @@ site-local address::
 
   network.host: _site_
 
-.. NOTE::
-
-   The requirement to explicitly configure CrateDB to bind to and publish the
-   site-local address is new in `1.2.0`_.
-
 .. _ec2_authentication:
 
 Authentication
@@ -206,7 +201,6 @@ discovery by availability zone::
 
 See also `discovery.ec2.availability_zones`_.
 
-.. _1.2.0: https://crate.io/docs/crate/reference/en/latest/appendices/release-notes/1.2.0.html
 .. _3.3: https://crate.io/docs/crate/reference/en/3.3/config/cluster.html#discovery
 .. _Amazon EC2: https://aws.amazon.com/ec2/
 .. _AWS CLI: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#launch-instance-with-role-cli
