@@ -191,7 +191,7 @@ For this reason, we use the `StatefulSet`_ controller to define our cluster,
 which ensures that CrateDB nodes retain state across restarts or rescheduling.
 
 The following configuration snippet defines a controller for a three-node
-CrateDB 3.0.5 cluster:
+CrateDB 5.0.3 cluster:
 
 .. code-block:: yaml
 
@@ -228,8 +228,8 @@ CrateDB 3.0.5 cluster:
           # It defines the container to run in each pod.
           containers:
           - name: crate
-            # Use the CrateDB 4.2.4 Docker image.
-            image: crate:4.2.4
+            # Use the CrateDB 5.0.3 Docker image.
+            image: crate: 5.0.3
             # Pass in configuration to CrateDB via command-line options.
             # We are setting the name of the node's explicitly, which is
             # needed to determine the initial master nodes. These are set to
@@ -295,7 +295,7 @@ CrateDB 3.0.5 cluster:
 
 .. CAUTION::
 
-   If you are not running CrateDB 3.0.5, you must adapt this example
+   If you are not running CrateDB 5.0.3, you must adapt this example
    configuration to your specific CrateDB version.
 
    Specifically, the ``discovery.zen.minimum_master_nodes`` setting is :ref:`no
