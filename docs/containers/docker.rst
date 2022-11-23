@@ -213,13 +213,13 @@ The most common issue when running CrateDB on Docker is a failing
 is too low. This can be :ref:`adjusted on the host system <bootstrap-checks>`.
 
 If the limit cannot be adjusted on the host system, the memory map limit check
-can be bypassed by passing the ``-Cnode.store.allow_mmapfs=false`` option to
+can be bypassed by passing the ``-Cnode.store.allow_mmap=false`` option to
 the ``crate`` command::
 
     sh$ docker run -d --name=crate01 \
           --net=crate -p 4201:4200 --env CRATE_HEAP_SIZE=2g \
           crate -Cnetwork.host=_site_ \
-                -Cnode.store.allow_mmapfs=false
+                -Cnode.store.allow_mmap=false
 
 .. CAUTION::
 
