@@ -229,7 +229,7 @@ CrateDB 5.1.1 cluster:
           containers:
           - name: crate
             # Use the CrateDB 5.1.1 Docker image.
-            image: crate: 5.1.1
+            image: crate:5.1.1
             # Pass in configuration to CrateDB via command-line options.
             # We are setting the name of the node's explicitly, which is
             # needed to determine the initial master nodes. These are set to
