@@ -298,9 +298,6 @@ CrateDB 5.1.1 cluster:
    If you are not running CrateDB 5.1.1, you must adapt this example
    configuration to your specific CrateDB version.
 
-   Specifically, the ``discovery.zen.minimum_master_nodes`` setting is :ref:`no
-   longer used <node-discovery>` in CrateDB versions 4.x and above.
-
 .. SEEALSO::
 
    CrateDB supports `configuration via command-line options`_ and `node
