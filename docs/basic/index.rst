@@ -11,16 +11,6 @@ Getting started
    :depth: 1
 
 
-Security and upgrade notes
-==========================
-
-.. WARNING::
-
-    CrateDB versions prior to 4.6.6 are suspicable to the `Log4Shell issue`_
-    published on December 12, 2021. Please consider upgrading to the most
-    recent version and follow up reading `CrateDB Log4Shell mitigations`_.
-
-
 Introduction
 ============
 
