@@ -60,6 +60,4 @@ environments.
 
 
 
-.. _CrateDB Log4Shell mitigations: https://community.crate.io/t/security-vulnerability-log4shell-rce-0-day-exploit/935
-.. _Log4Shell issue: https://www.lunasec.io/docs/blog/log4j-zero-day/
 .. _sign up page: https://crate.io/lp-free-trial

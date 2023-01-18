@@ -345,12 +345,10 @@ Also, you might enjoy being guided through further information:
 .. _7-Zip: https://www.7-zip.org/
 .. _apt: https://en.wikipedia.org/wiki/APT_(software)
 .. _CrateDB Docker image: https://hub.docker.com/_/crate/
-.. _CrateDB Log4Shell mitigations: https://community.crate.io/t/security-vulnerability-log4shell-rce-0-day-exploit/935
 .. _CrateDB release archive: https://cdn.crate.io/downloads/releases/cratedb/
 .. _deb: https://en.wikipedia.org/wiki/Deb_(file_format)
 .. _Docker: https://www.docker.com/
 .. _Java virtual machine: https://en.wikipedia.org/wiki/Java_virtual_machine
-.. _Log4Shell issue: https://www.lunasec.io/docs/blog/log4j-zero-day/
 .. _OpenJDK: https://openjdk.java.net/projects/jdk/
 .. _Other releases of CrateDB: https://cdn.crate.io/downloads/releases/
 .. _release workflow: https://github.com/crate/crate/blob/master/devs/docs/release.rst
