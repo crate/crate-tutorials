@@ -95,7 +95,7 @@ the CrateDB package repository::
     sudo apt install --yes apt-transport-https apt-utils curl gnupg lsb-release
 
     # Import the public GPG key for verifying the package signatures.
-    sudo curl -sS https://cdn.crate.io/downloads/deb/DEB-GPG-KEY-crate > /etc/apt/trusted.gpg.d/cratedb.asc
+    curl -sS https://cdn.crate.io/downloads/deb/DEB-GPG-KEY-crate | sudo tee /etc/apt/trusted.gpg.d/cratedb.asc
 
     # Compute CrateDB package repository location.
     [[ $(lsb_release --id --short) = "Debian" ]] && repository="apt"
@@ -103,8 +103,8 @@ the CrateDB package repository::
     distribution=$(lsb_release --codename --short)
 
     # Register with the CrateDB package repository.
-    sudo echo "deb [signed-by=/etc/apt/trusted.gpg.d/cratedb.asc arch=amd64] https://cdn.crate.io/downloads/${repository}/stable/ ${distribution} main" \
-        > /etc/apt/sources.list.d/cratedb.list
+    echo "deb [signed-by=/etc/apt/trusted.gpg.d/cratedb.asc arch=amd64] https://cdn.crate.io/downloads/${repository}/stable/ ${distribution} main" \
+        | sudo tee /etc/apt/sources.list.d/cratedb.list
 
 .. NOTE::
 
