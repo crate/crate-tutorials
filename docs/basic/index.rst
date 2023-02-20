@@ -91,8 +91,7 @@ You will need to configure your system to register with and trust packages from
 the CrateDB package repository::
 
     # Install prerequisites.
-    apt update
-    apt install --yes sudo
+    sudo apt update
     sudo apt install --yes apt-transport-https apt-utils curl gnupg lsb-release
 
     # Import the public GPG key for verifying the package signatures.
@@ -107,15 +106,16 @@ the CrateDB package repository::
     sudo echo "deb [signed-by=/etc/apt/trusted.gpg.d/cratedb.asc arch=amd64] https://cdn.crate.io/downloads/${repository}/stable/ ${distribution} main" \
         > /etc/apt/sources.list.d/cratedb.list
 
-
 .. NOTE::
 
     CrateDB provides both *stable release* and *testing release* channels. To
     use the testing channel, replace ``stable`` with ``testing`` in the command
     line above. You can read more about the `release workflow`_.
 
+    The walkthrough is based on the ``sudo`` program. If it is not installed on
+    your machine, run ``apt update; apt install --yes sudo`` as a ``root`` user.
 
-Now update the package sources::
+Now, update the package sources::
 
     sudo apt update
 
