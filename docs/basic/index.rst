@@ -91,17 +91,21 @@ You will need to configure your system to register with and trust packages from
 the CrateDB package repository::
 
     # Install prerequisites.
-    apt-get install sudo
-    sudo apt-get install curl gnupg software-properties-common apt-transport-https apt-utils
+    apt update
+    apt install --yes sudo
+    sudo apt install --yes apt-transport-https apt-utils curl gnupg lsb-release
 
     # Import the public GPG key for verifying the package signatures.
-    curl -sS https://cdn.crate.io/downloads/deb/DEB-GPG-KEY-crate | sudo apt-key add -
+    sudo curl -sS https://cdn.crate.io/downloads/deb/DEB-GPG-KEY-crate > /etc/apt/trusted.gpg.d/cratedb.asc
 
-    # Register with the CrateDB package repository.
+    # Compute CrateDB package repository location.
     [[ $(lsb_release --id --short) = "Debian" ]] && repository="apt"
     [[ $(lsb_release --id --short) = "Ubuntu" ]] && repository="deb"
     distribution=$(lsb_release --codename --short)
-    sudo add-apt-repository "deb [arch=amd64] https://cdn.crate.io/downloads/${repository}/stable/ ${distribution} main"
+
+    # Register with the CrateDB package repository.
+    sudo echo "deb [signed-by=/etc/apt/trusted.gpg.d/cratedb.asc arch=amd64] https://cdn.crate.io/downloads/${repository}/stable/ ${distribution} main" \
+        > /etc/apt/sources.list.d/cratedb.list
 
 
 .. NOTE::
