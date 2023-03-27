@@ -14,14 +14,14 @@ macOS and Windows systems.
 The first step to using any software package is getting it properly installed.
 Please read this section carefully.
 
-Try CrateDB Cloud
+CrateDB Cloud
 =================
 
 The easiest way to get started with CrateDB is to use a 30 day free CrateDB
 Cloud cluster, no credit card requrired. Visit the `sign up page`_ to start your
 CrateDB cluster today.
 
-Try CrateDB locally
+CrateDB locally
 ===================
 
 If you want to try out CrateDB locally on Linux or macOS but would prefer to
