@@ -15,7 +15,7 @@ The first step to using any software package is getting it properly installed.
 Please read this section carefully.
 
 CrateDB Cloud
-=================
+=============
 
 The easiest way to get started with CrateDB is to use a 30 day free CrateDB
 Cloud cluster, no credit card requrired. Visit the `sign up page`_ to start your
