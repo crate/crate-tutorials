@@ -22,7 +22,7 @@ Cloud cluster, no credit card requrired. Visit the `sign up page`_ to start your
 CrateDB cluster today.
 
 CrateDB locally
-===================
+===============
 
 If you want to try out CrateDB locally on Linux or macOS but would prefer to
 avoid the hassle of manual installation or extracting release archives, you can
