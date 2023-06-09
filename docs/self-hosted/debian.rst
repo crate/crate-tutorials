@@ -8,7 +8,6 @@ CrateDB actively maintains packages for the following Debian versions:
 
 - `Bullseye`_ (11.x)
 - `Buster`_ (10.x)
-- `Stretch`_ (9.x)
 
 This guide will show you how to install, control, and configure a single-node
 CrateDB on a local Debian system.
