@@ -498,7 +498,7 @@ example::
 .. _containerization: https://www.docker.com/resources/what-container
 .. _CRATE_HEAP_SIZE: https://crate.io/docs/crate/reference/en/latest/config/environment.html#conf-env-heap-size
 .. _CrateDB Docker image: https://hub.docker.com/_/crate/
-.. _default bridge network: https://docs.docker.com/network/#network-drivers
+.. _default bridge network: https://docs.docker.com/network/drivers/bridge/#use-the-default-bridge-network
 .. _Discovery: https://crate.io/docs/crate/reference/en/latest/config/cluster.html#discovery
 .. _Docker Stack YAML file: https://docs.docker.com/docker-cloud/apps/stack-yaml-reference/
 .. _Docker Swarm: https://docs.docker.com/engine/swarm/
