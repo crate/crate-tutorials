@@ -6,6 +6,7 @@ Debian GNU/Linux
 
 CrateDB actively maintains packages for the following Debian versions:
 
+- `Bookworm`_ (12.x)
 - `Bullseye`_ (11.x)
 - `Buster`_ (10.x)
 
@@ -153,6 +154,7 @@ your system, we recommend that you go with a `basic tarball installation`_.
 
 .. _Apt: https://wiki.debian.org/Apt
 .. _basic tarball installation: https://crate.io/docs/crate/tutorials/en/latest/install.html#install-adhoc
+.. _Bookworm: https://www.debian.org/releases/bookworm/
 .. _Bullseye: https://www.debian.org/releases/bullseye/
 .. _Buster: https://www.debian.org/releases/buster/
 .. _configuration files: https://crate.io/docs/crate/reference/en/latest/config/index.html
