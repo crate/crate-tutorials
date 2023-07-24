@@ -6,6 +6,7 @@ Debian GNU/Linux
 
 CrateDB actively maintains packages for the following Debian versions:
 
+- `Bookworm`_ (12.x)
 - `Bullseye`_ (11.x)
 - `Buster`_ (10.x)
 
