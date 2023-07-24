@@ -154,6 +154,7 @@ your system, we recommend that you go with a `basic tarball installation`_.
 
 .. _Apt: https://wiki.debian.org/Apt
 .. _basic tarball installation: https://crate.io/docs/crate/tutorials/en/latest/install.html#install-adhoc
+.. _Bookworm: https://www.debian.org/releases/bookworm/
 .. _Bullseye: https://www.debian.org/releases/bullseye/
 .. _Buster: https://www.debian.org/releases/buster/
 .. _configuration files: https://crate.io/docs/crate/reference/en/latest/config/index.html
