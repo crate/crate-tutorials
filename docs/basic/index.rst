@@ -229,7 +229,7 @@ official `CrateDB Docker image`_, use::
 
     This type of invoking CrateDB will get you up and running quickly.
 
-    Please note, by default, the CreateDB Docker container is ephemeral, so
+    Please note, by default, the CrateDB Docker container is ephemeral, so
     data will not be stored in a persistent manner. When stopping the
     container, all data will be lost.
 
