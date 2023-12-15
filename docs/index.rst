@@ -18,7 +18,7 @@ CrateDB Cloud
 =============
 
 The easiest way to get started with CrateDB is to use a 30 day free CrateDB
-Cloud cluster, no credit card requrired. Visit the `sign up page`_ to start your
+Cloud cluster, no credit card required. Visit the `sign up page`_ to start your
 CrateDB cluster today.
 
 CrateDB locally
