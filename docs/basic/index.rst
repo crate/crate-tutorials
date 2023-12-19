@@ -97,23 +97,15 @@ the CrateDB package repository::
     # Import the public GPG key for verifying the package signatures.
     curl -sS https://cdn.crate.io/downloads/deb/DEB-GPG-KEY-crate | sudo tee /etc/apt/trusted.gpg.d/cratedb.asc
 
-    # Compute CrateDB package repository location.
-    [[ $(lsb_release --id --short) = "Debian" ]] && repository="apt"
-    [[ $(lsb_release --id --short) = "Ubuntu" ]] && repository="deb"
-    distribution=$(lsb_release --codename --short)
-
-    # Register with the CrateDB package repository.
-    echo "deb [signed-by=/etc/apt/trusted.gpg.d/cratedb.asc arch=amd64] https://cdn.crate.io/downloads/${repository}/stable/ ${distribution} main" \
-        | sudo tee /etc/apt/sources.list.d/cratedb.list
+   # Add CrateDB repository to Apt
+   sh$ echo "deb https://cdn.crate.io/downloads/debian/stable/ default main" |
+      sudo tee /etc/apt/sources.list.d/crate-stable.list
 
 .. NOTE::
 
-    CrateDB provides both *stable release* and *testing release* channels. To
-    use the testing channel, replace ``stable`` with ``testing`` in the command
-    line above. You can read more about the `release workflow`_.
-
-    The walkthrough is based on the ``sudo`` program. If it is not installed on
-    your machine, run ``apt update; apt install --yes sudo`` as a ``root`` user.
+    CrateDB provides two repositories. A *stable* and a *testing* repository. To use
+    the testing repository, replace ``stable`` with ``testing`` in the command
+    above. You can read more about our `release workflow`_.
 
 Now, update the package sources::
 
