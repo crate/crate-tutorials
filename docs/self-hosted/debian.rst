@@ -27,25 +27,16 @@ CrateDB repositories:
 
 .. code-block:: sh
 
-   # Add HTTPS support
-   sh$ sudo apt install apt-transport-https
+   # Add the CrateDB GPG key
+   sh$ wget -qO- https://cdn.crate.io/downloads/apt/DEB-GPG-KEY-crate | sudo tee /etc/apt/trusted.gpg.d/crate.asc
 
-   # Download the CrateDB GPG key
-   sh$ wget https://cdn.crate.io/downloads/apt/DEB-GPG-KEY-crate
-
-   # Add the key to Apt
-   sh$ sudo apt-key add DEB-GPG-KEY-crate
-
-   # Add CrateDB repositories to Apt
-   # `lsb_release -cs` returns the codename of your OS
-   echo "deb https://cdn.crate.io/downloads/apt/stable/ $(lsb_release -cs) main" |
-     sudo tee /etc/apt/sources.list.d/crate-stable.list
-
+   # Add CrateDB repository to Apt
+   sh$ echo "deb https://cdn.crate.io/downloads/debian/stable/ default main" | sudo tee /etc/apt/sources.list.d/crate-stable.list
 
 .. NOTE::
 
-   CrateDB provides a *stable release* and a *testing release* channel. To use
-   the testing channel, replace ``stable`` with ``testing`` in the command
+   CrateDB provides two repositories. A *stable* and a *testing* repository. To use
+   the testing repository, replace ``stable`` with ``testing`` in the command
    above. You can read more about our `release workflow`_.
 
 Now update Apt:
@@ -68,10 +59,12 @@ You can now install CrateDB:
 
    sh$ sudo apt install crate
 
-After the installation is finished, the ``crate`` service should be
-up-and-running.
+After the installation is finished, you can start the ``crate`` service::
 
-You should be able to access it by visiting::
+   sh$ sudo systemctl start crate
+
+Once the service is up and running, you can access CrateDB by visiting::
+
 
   http://localhost:4200/
 
