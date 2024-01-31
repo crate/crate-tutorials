@@ -97,9 +97,8 @@ the CrateDB package repository::
     # Import the public GPG key for verifying the package signatures.
     curl -sS https://cdn.crate.io/downloads/deb/DEB-GPG-KEY-crate | sudo tee /etc/apt/trusted.gpg.d/cratedb.asc
 
-   # Add CrateDB repository to Apt
-   sh$ echo "deb https://cdn.crate.io/downloads/debian/stable/ default main" |
-      sudo tee /etc/apt/sources.list.d/crate-stable.list
+    # Add CrateDB repository to Apt
+    echo "deb https://cdn.crate.io/downloads/debian/stable/ default main" | sudo tee /etc/apt/sources.list.d/crate-stable.list
 
 .. NOTE::
 
