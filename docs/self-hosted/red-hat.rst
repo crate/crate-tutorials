@@ -111,7 +111,12 @@ Environment
 -----------
 
 The CrateDB startup script `sources`_ environment variables from the
-``/etc/sysconfig/crate`` file.
+``/etc/default/crate`` file.
+
+.. Note::
+
+    RPM packages of CrateDB versions up to `5.2.11`_, `5.3.8`_, `5.4.7`_
+    and `5.5.2`_ are using the ``/etc/sysconfig/crate`` file instead.
 
 You can use this mechanism to configure CrateDB.
 
@@ -147,9 +152,12 @@ A full list of package files can be obtained with this command::
 If you want to deviate from the way that the ``crate`` package integrates with
 your system, we recommend that you go with a `basic tarball installation`_.
 
-
 .. _basic tarball installation: https://crate.io/docs/crate/tutorials/en/latest/install.html#install-adhoc
 .. _first use: https://crate.io/docs/crate/tutorials/en/latest/first-use.html
 .. _Red Hat Enterprise Linux: https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux
 .. _sources: https://en.wikipedia.org/wiki/Source_(command)
 .. _YUM: https://access.redhat.com/solutions/9934
+.. _5.2.11: https://cratedb.com/docs/crate/reference/en/latest/appendices/release-notes/5.2.11.html
+.. _5.3.8: https://cratedb.com/docs/crate/reference/en/latest/appendices/release-notes/5.3.8.html
+.. _5.4.7: https://cratedb.com/docs/crate/reference/en/latest/appendices/release-notes/5.4.7.html
+.. _5.5.2: https://cratedb.com/docs/crate/reference/en/latest/appendices/release-notes/5.5.2.html
