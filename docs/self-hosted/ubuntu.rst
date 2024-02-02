@@ -27,14 +27,15 @@ CrateDB repositories:
 
 .. code-block:: sh
 
-   # Download the CrateDB GPG key
-   sh$ wget https://cdn.crate.io/downloads/deb/DEB-GPG-KEY-crate
+    # Install prerequisites.
+    sudo apt update
+    sudo apt install --yes apt-transport-https apt-utils curl gnupg lsb-release
 
-   # Add the key to Apt
-   sh$ sudo apt-key add DEB-GPG-KEY-crate
+    # Import the public GPG key for verifying the package signatures.
+    curl -sS https://cdn.crate.io/downloads/deb/DEB-GPG-KEY-crate | sudo tee /etc/apt/trusted.gpg.d/cratedb.asc
 
-   # Add CrateDB repository to Apt
-   sh$ sudo add-apt-repository "deb https://cdn.crate.io/downloads/debian/stable/ default main"
+    # Add CrateDB repository to Apt
+    echo "deb https://cdn.crate.io/downloads/debian/stable/ default main" | sudo tee /etc/apt/sources.list.d/crate-stable.list
 
 
 .. NOTE::
